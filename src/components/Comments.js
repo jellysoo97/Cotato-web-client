@@ -1,48 +1,73 @@
-import React from 'react'
+import React from 'react';
+import CommentsForm from './CommentsForm'
 
-function Comments() {
-  return (
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            {/* <li><hr class="dropdown-divider"></li> */}
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+class Comments extends React.Component{
+  constructor(props){
+    super(props);
+    // 댓글 하드코딩 부분
+    this.state={
+      tweets:[
+        {
+          uuid: 1,
+          writer: "김감자",
+          date: "2022-01-24",
+          content: "김감자 댓글입니다."
+        },
+        {
+          uuid: 2,
+          writer: "이감자",
+          date: "2022-01-25",
+          content: "이감자 댓글입니다."
+        }
+      ]
+    }
+    this.addTweet = this.addTweet.bind(this);
+  }
+  addTweet(){
+    let value = document.querySelector('#new-tweet-content').value;
+    this.setState({tweets: [...this.state.tweets, {
+      uuid: this.state.tweets.length+1,
+      writer: 'userID',
+      date: new Date().toISOString().slice(0,10),
+      content: value
+    }]})
+  }
+  render(){
+    return(
+      <div>
+        <div>
+          {/* 댓글 작성 부분 */}
+          <ul>
+              {
+                this.state.tweets.map(tweet => {
+                  return <CommentsForm key={tweet.uuid} tweet={tweet}/>
+                })
+              }
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        {/* <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> */}
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-    </div>
-  )
+          {/* 글쓴이 */}
+          <h3 style={{textAlign:"left", width:"300px", height:"50px", margin:"0"}}>작성자: userID
+          </h3>
+
+          {/* <div>
+      <h3 style={{textAlign:"left", width:"300px", height:"50px", margin:"0"}}>
+        {tweet.writer}
+        <h6 style={{display:"inline"}}>{tweet.date}</h6>
+      </h3>
+    </div> */}
+          {/* 댓글작성 area */}
+            <div>
+            <div class="col-sm-5" style={{float:"left"}}>
+              <textarea class="form-control" placeholder="댓글을 입력하세요" id="floatingTextarea2" id="new-tweet-content"></textarea>
+            </div>
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-warning" style={{width:"100px", height:"60px", marginLeft: "20px", fontSize:"15px"}} onClick={this.addTweet}>등록</button>
+            </div>
+            </div>
+            
+        </div>
+      </div>
+    )
+  }
 }
 
-export default Comments
-
-
+export default Comments;
