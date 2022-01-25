@@ -1,16 +1,11 @@
 import React from "react"
-import NavBar from "./NavBar"
 import PageName from "./PageName"
 import Category from "./Category"
 import PostTable from "./PostTable"
-import Footer from "./Footer"
 
 function PostList() {
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
       <main>
         <div className="container">
           <PageName />
@@ -22,9 +17,6 @@ function PostList() {
           </div>
         </div>
       </main>
-      <footer>
-        <Footer />
-      </footer>
     </>
   )
 }

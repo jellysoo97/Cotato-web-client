@@ -20,8 +20,7 @@ export default function CommentsForm({tweet}){
       {/* <button type="button" class="btn btn-outline-warning">좋아요</button> */}
       <button type="button" class="btn btn-outline-warning" style={{float: "right"}}>답글달기</button> <br /> <br />
       <hr />
-    </div>   
-     
+    </div>
     </div>
   )
 }

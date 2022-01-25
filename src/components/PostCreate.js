@@ -48,7 +48,7 @@ const onSubmit=(e)=>{
   }
   console.log(variable)
 
-  axios.post('http://localhost:3000/createPost ', variable)
+  axios.post('http://localhost:3000/createPost', variable)
   .then(response=>{
     if (response.data.success) {
       console.log(response.data)

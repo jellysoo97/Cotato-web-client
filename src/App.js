@@ -13,7 +13,6 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
-
         <div style={{ paddingTop: "69px", minHeight: "calc(100vh - 80px)" }}>
           <BrowserRouter>
             <Routes>
@@ -25,7 +24,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </div>
-        
+
       <Footer />
     </Suspense>
   );
