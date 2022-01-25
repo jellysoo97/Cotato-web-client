@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react"
+import Navbar from "./NavBar"
 
 function LandingPage() {
-  return (
-    <div>
-      LandingPage 채은
-    </div>
-  )
+  return <Navbar />
 }
 
 export default LandingPage
