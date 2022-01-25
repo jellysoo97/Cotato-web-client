@@ -2,6 +2,7 @@ import React, { Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LandingPage from "./components/LandingPage"
 import PostList from "./components/PostList"
+import Comments from './components/Comments'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/postlist" element={<PostList />} />
+            <Route exact path="/comments" element={<Comments />}/>
           </Routes>
         </BrowserRouter>
       </div>
