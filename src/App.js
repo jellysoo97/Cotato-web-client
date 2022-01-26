@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import LandingPage from "./components/LandingPage"
 import PostList from "./components/Postlist/PostList"
-import Comments from "./components/Postcrud/Comments"
+import Comments from "./components/comments/Comments"
 import NavBar from "./components/Basic/NavBar"
 import PostPage from "./components/Postlist/PostPage"
 import PostCreate from "./components/Postcrud/PostCreate"
