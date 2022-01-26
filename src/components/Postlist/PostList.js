@@ -1,6 +1,6 @@
 import React from "react"
-import PageName from "./PageName"
-import Category from "./Category"
+import PageName from "../Basic/PageName"
+import Category from "../Basic/Category"
 import PostTable from "./PostTable"
 
 function PostList() {
