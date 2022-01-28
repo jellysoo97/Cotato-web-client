@@ -48,21 +48,15 @@ class Comments extends React.Component {
             })}
           </ul>
           {/* 글쓴이 */}
-          <h3 style={{ textAlign: "left", width: "300px", height: "50px", margin: "0" }}>작성자: userID</h3>
+          <h3 style={{ textAlign: "left", width: "300px", height: "50px", margin:"30px 0px 0px 30px" }}>작성자: userID</h3>
 
-          {/* <div>
-      <h3 style={{textAlign:"left", width:"300px", height:"50px", margin:"0"}}>
-        {tweet.writer}
-        <h6 style={{display:"inline"}}>{tweet.date}</h6>
-      </h3>
-    </div> */}
           {/* 댓글작성 area */}
           <div>
-            <div class="col-sm-5" style={{ float: "left" }}>
-              <textarea class="form-control" placeholder="댓글을 입력하세요" id="floatingTextarea2" id="new-tweet-content"></textarea>
+            <div class="col-sm-10" style={{ float: "left" , margin:"0px 0px 0px 30px"}}>
+              <textarea class="form-control" placeholder="댓글을 입력하세요" id="floatingTextarea2" id="new-tweet-content" style={{ height: "100px", fontSize: "15px" }}></textarea>
             </div>
-            <div class="d-grid gap-2">
-              <button type="button" class="btn btn-warning" style={{ width: "100px", height: "60px", marginLeft: "20px", fontSize: "15px" }} onClick={this.addTweet}>
+            <div class="col-sm-2" style={{display:"inline"}}>
+              <button type="button" class="btn btn-warning" style={{ width: "100px", height: "100px", marginLeft: "30px", fontSize: "15px" }} onClick={this.addTweet}>
                 등록
               </button>
             </div>
