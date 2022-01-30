@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import PageName from "../Basic/PageName"
 import Category from "../Basic/Category"
-import PostTable from "./PostTable"
+import countriesData from "./PostData"
+import Table from "./PostTable"
 
 function PostList() {
+  const [countries] = useState([...countriesData])
   return (
     <>
       <main>
@@ -12,7 +14,7 @@ function PostList() {
           <div className="container" style={{ height: "auto", minHeight: "100%", paddingBottom: "20px" }}>
             <div className="row">
               <Category />
-              <PostTable />
+              <Table data={countries} rowsPerPage={10} />
             </div>
           </div>
         </div>
