@@ -8,6 +8,7 @@ import NavBar from "./components/Basic/NavBar"
 import PostPage from "./components/Postlist/PostPage"
 import PostCreate from "./components/Postcrud/PostCreate"
 import Footer from "./components/Basic/Footer"
+import PostPageView from "./components/Postlist/PostPageView"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/board" element={<PostPage />} />
             <Route exact path="/createPost" element={<PostCreate />} />
+            <Route exact path="/postPageView" element={<PostPageView />} />
           </Routes>
         </BrowserRouter>
       </div>
