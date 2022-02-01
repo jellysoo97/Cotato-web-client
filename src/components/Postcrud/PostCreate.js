@@ -2,7 +2,7 @@ import React, {useState, useMemo} from 'react'
 import axios from 'axios'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import CustomToolbar from './CustomToolbar'
+import CustomToolbar from './CustomToolbar';
 
 function PostCreate(props) {
   const [PostTitle, setPostTitle] = useState('')
@@ -13,8 +13,8 @@ function PostCreate(props) {
     setPostTitle(e.currentTarget.value)
   }
 
-  const onDescChange=(e)=>{
-    setPostDesc(e.currentTarget.value)
+  const onDescChange=(value)=>{
+    setPostDesc(value)
   }
 
   const onSubmit=(e)=>{
@@ -24,22 +24,22 @@ function PostCreate(props) {
       desc: PostDesc,
     }
     //console.log(variable)
-
+    
+    //https://jsonplaceholder.typicode.com/posts
     axios.post('http://localhost:3000/createPost', variable)
-    .catch(function(err){
-      if(err.response){
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
-      }else if(err.request){
-        console.log(err.request)
-      }
-      
-    })
-    .then((response)=>{
+    // .catch(function(err){
+    //   if(err.response){
+    //     console.log(err.response.data);
+    //     console.log(err.response.status);
+    //     console.log(err.response.headers);
+    //   }else if(err.request){
+    //     console.log(err.request)
+    //   }
+    // })
+    .then((response) => {
       console.log(response)
-      // if (response.data.success) {
-      //   //
+      // if (response.data) {
+      //   console.log('여기가 이프문 콘솔')
       // } else {
       //   alert('게시물 등록 실패')
       // }
@@ -75,7 +75,7 @@ function PostCreate(props) {
       toolbar: {
         container: "#toolbar",
         handlers: {
-          //이미지 처리는 우리가 직접 imageHandler라는 함수로 처리할 것이다.
+          //이미지 처리는 우리가 직접 imageHandler 함수로 처리할 것이다
           image: imageHandler,
         },
       },
@@ -88,10 +88,6 @@ function PostCreate(props) {
     "bullet", "align", "color", "background", "image",
   ];
 
-  const handleDesc = (value) => {
-    //console.log(value);
-    setPostDesc(value);
-  };
   //////////////////////////// react-quill ////////////////////////////
 
 
@@ -111,10 +107,9 @@ function PostCreate(props) {
           <div className="text-editor">
             <CustomToolbar />
             <ReactQuill modules={modules} formats={formats} 
-            value={PostDesc} onChange={handleDesc} name='desc'/>
+            value={PostDesc} onChange={onDescChange} name='desc'/>
           </div>
         </div>
-
 
         <div>image_image_image TAT</div>
         <br/>
@@ -130,5 +125,5 @@ function PostCreate(props) {
 
 export default PostCreate;
 
-//그러니까 내가 모르는 걸 정리해보자 axios 사용해서 delete 요청을 보내야 하는데!, url parameter를 query string으로! 
-//어떻게 코드를 짜야 하는가?, id 어떻게 받아오는가.
+// 디렉토리 구조 리팩토링?
+// 게시글 리스트 요청하는 api는 없어도 되나
