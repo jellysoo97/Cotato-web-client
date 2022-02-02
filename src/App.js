@@ -4,10 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LandingPage from "./components/LandingPage"
 import PostList from "./components/Postlist/PostList"
 import Comments from "./components/comments/Comments"
-import NavBar from "./components/Basic/NavBar"
+import NavBar from "./components/Common/NavBar"
 import PostPage from "./components/Postcrud/PostPage"
 import PostCreate from "./components/Postcrud/PostCreate"
-import Footer from "./components/Basic/Footer"
+import Footer from "./components/Common/Footer"
 import PostPageView from "./components/Postlist/PostPageView"
 
 function App() {
