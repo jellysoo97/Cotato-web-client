@@ -7,9 +7,9 @@ export default function CommentsForm({tweet}){
 
     {/* 글쓴이 + 날짜 */}
     <div>
-      <h3 style={{textAlign:"left", width:"300px", height:"50px", margin:"0"}}>
+      <h3 style={{textAlign:"left", width:"300px", height:"50px"}}>
         {tweet.writer}
-        <h6 style={{display:"inline"}}>{tweet.date}</h6>
+        <h6 style={{display:"inline", margin:"0px 0px 0px 0px"}}>{tweet.date}</h6>
       </h3>
     </div>
 

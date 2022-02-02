@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import PostCard from "../Postcrud/PostCard"
+import PostCard from "./PostCard"
 
 function PostPage(props) {
   //url parameter 맞겠찌

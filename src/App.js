@@ -5,15 +5,16 @@ import LandingPage from "./components/LandingPage"
 import PostList from "./components/Postlist/PostList"
 import Comments from "./components/comments/Comments"
 import NavBar from "./components/Basic/NavBar"
-import PostPage from "./components/Postlist/PostPage"
+import PostPage from "./components/Postcrud/PostPage"
 import PostCreate from "./components/Postcrud/PostCreate"
 import Footer from "./components/Basic/Footer"
+import PostPageView from "./components/Postlist/PostPageView"
 
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
-      <div style={{ paddingTop: "69px", minHeight: "calc(100vh - 80px)" }}>
+      <div style={{ paddingTop: "10px", minHeight: "calc(100vh - 80px)" }}>
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/board" element={<PostPage />} />
             <Route exact path="/createPost" element={<PostCreate />} />
+            <Route exact path="/postPageView" element={<PostPageView />} />
           </Routes>
         </BrowserRouter>
       </div>
