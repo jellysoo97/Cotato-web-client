@@ -1,5 +1,5 @@
 import React from "react"
-import Category from "../Basic/Category"
+import Category from "../Common/Category"
 import PostEach from "./PostEach"
 import Comments from "../comments/Comments"
 
