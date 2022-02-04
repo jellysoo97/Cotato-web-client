@@ -13,7 +13,9 @@ function PostList() {
           <PageName />
           <div className="container" style={{ height: "auto", minHeight: "100%", paddingBottom: "20px" }}>
             <div className="row">
-              <div className="col-3"><Category /> </div>
+              <div className="col-3">
+                <Category />{" "}
+              </div>
               <Table data={countries} rowsPerPage={10} />
             </div>
           </div>
