@@ -12,6 +12,7 @@ import PostPage from "./components/Postcrud/PostPage"
 import PostCreate from "./components/Postcrud/PostCreate"
 import Footer from "./components/Common/Footer"
 import PostPageView from "./components/Postlist/PostPageView"
+import MyPage from "./components/Auth/MyPage"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/board" element={<PostPage />} />
             <Route exact path="/createPost" element={<PostCreate />} />
             <Route exact path="/postPageView" element={<PostPageView />} />
+            <Route exact path="/myPage" element={<MyPage />} />
           </Routes>
         </BrowserRouter>
       </div>
