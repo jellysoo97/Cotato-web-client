@@ -2,11 +2,13 @@ import React from "react"
 import Category from "../Common/Category"
 import PostEach from "./PostEach"
 import Comments from "../comments/Comments"
+import PageName from '../Common/PageName';
 
 function PostPageView() {
   return (
     <>
       <div className="container">
+        <PageName />
         {/* <div className="container" style={{ backgroundColor: "black"}}>  */}
         <div>
           <div className="row">
@@ -34,6 +36,6 @@ function PostPageView() {
         </div>
       </div>
     </>
-  )
+  );
 }
 export default PostPageView
