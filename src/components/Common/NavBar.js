@@ -47,8 +47,8 @@ function NavBar() {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Project
+                <a className="nav-link" href="/mypage">
+                  My Page
                 </a>
               </li>
             </ul>
