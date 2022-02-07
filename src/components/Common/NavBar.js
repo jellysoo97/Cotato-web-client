@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 function NavBar() {
   return (
@@ -52,12 +52,21 @@ function NavBar() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
+            <a href="/login" className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
+              Log in
+            </a>
+            <a href="/register" className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
+              Register
+            </a>
+            <a href="/edit" className="btn btn-outline-primary" style={{ padding: "0.375rem 1.5rem" }}>
+              회원정보 수정
+            </a>
+            {/* <form className="d-flex">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>

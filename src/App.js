@@ -2,6 +2,9 @@ import React, { Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import LandingPage from "./components/LandingPage"
+import Login from "./components/Auth/Login"
+import Register from "./components/Auth/Register"
+import Edit from "./components/Auth/Edit"
 import PostList from "./components/Postlist/PostList"
 import Comments from "./components/comments/Comments"
 import NavBar from "./components/Common/NavBar"
@@ -14,10 +17,13 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
-      <div style={{ paddingTop: "10px", minHeight: "calc(100vh - 80px)" }}>
+      <div style={{ paddingTop: "10px", paddingBottom: "10px", minHeight: "calc(100vh - 80px)" }}>
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/edit" element={<Edit />} />
             <Route exact path="/postlist" element={<PostList />} />
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/board" element={<PostPage />} />

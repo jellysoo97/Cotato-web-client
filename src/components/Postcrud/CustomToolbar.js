@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 function CustomToolbar() {
   return (
@@ -22,7 +22,7 @@ function CustomToolbar() {
       <button className="ql-link"></button>
       <button className="ql-image"></button>
     </div>
-  );
+  )
 }
 
-export default CustomToolbar;
+export default CustomToolbar
