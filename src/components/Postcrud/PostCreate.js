@@ -5,9 +5,9 @@ import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
 
 function PostCreate(props) {
-  const [PostTitle, setPostTitle] = useState("")
-  const [PostDesc, setPostDesc] = useState("")
-  //const [FilePath, setFilePath] = useState('')
+  const [PostTitle, setPostTitle] = useState('')
+  const [PostDesc, setPostDesc] = useState('')
+  const [FileName, setFileName] = useState('')
 
   const onTitleChange = (e) => {
     setPostTitle(e.currentTarget.value)
@@ -17,36 +17,7 @@ function PostCreate(props) {
     setPostDesc(value)
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const variable = {
-      title: PostTitle,
-      desc: PostDesc,
-    }
-    //console.log(variable)
-
-    //https://jsonplaceholder.typicode.com/posts
-    axios
-      .post("http://localhost:3000/createPost", variable)
-      // .catch(function(err){
-      //   if(err.response){
-      //     console.log(err.response.data);
-      //     console.log(err.response.status);
-      //     console.log(err.response.headers);
-      //   }else if(err.request){
-      //     console.log(err.request)
-      //   }
-      // })
-      .then((response) => {
-        console.log(response)
-        // if (response.data) {
-        //   console.log('여기가 이프문 콘솔')
-        // } else {
-        //   alert('게시물 등록 실패')
-        // }
-      })
-  }
-
+  
   //////////////////////////// react-quill ////////////////////////////
   const imageHandler = () => {
     const input = document.createElement("input")
@@ -62,8 +33,8 @@ function PostCreate(props) {
 
         formData.append("image", file)
 
-        var fileName = file.name
-
+        FileName = file.name
+        console.log(file.name)
         console.log(formData)
       }
     }
@@ -84,6 +55,34 @@ function PostCreate(props) {
   const formats = ["header", "font", "size", "bold", "italic", "underline", "list", "bullet", "align", "color", "background", "image"]
 
   //////////////////////////// react-quill ////////////////////////////
+
+    const onSubmit=(e)=>{
+    e.preventDefault()
+    const variable={
+      title: PostTitle,
+      desc: PostDesc,
+      fileName: FileName,
+    }
+    //console.log(variable)
+    
+    axios.post('http://localhost:8080/createPost', variable)
+    .then((response) => {
+      console.log(response)
+      // if (response.data) {
+      //   console.log('여기가 이프문 콘솔')
+      // } else {
+      //   alert('게시물 등록 실패')
+      // }
+    })
+    .catch(function(err){
+      if(err.response){
+        console.log(err.response.data);
+      }else if(err.request){
+        console.log(err.request)
+      }
+    })
+  }
+
 
   return (
     <div className="container">
