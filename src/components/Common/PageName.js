@@ -10,9 +10,16 @@ function PageName() {
   }
 
   return (
-    <div className="col-sm-12" onLoad={changePageName} style={{ height: "70px", marginBottom: "20px", padding: "10px 30px 10px", fontSize: "30px", fontWeight: "bold" }}>
-      {pagename[0]}
-    </div>
+    <>
+      <div className="col-sm-9" onLoad={changePageName} style={{ fontSize: "30px", fontWeight: "bold" }}>
+        {pagename[0]}
+      </div>
+      <div className="col-sm-3">
+        <a className="btn btn-warning" href="/createPost" role="button" style={{ float: "right" }}>
+          글쓰기
+        </a>
+      </div>
+    </>
   )
 }
 

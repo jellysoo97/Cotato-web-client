@@ -6,18 +6,14 @@ import Table from "./PostTable"
 function PostList() {
   const [countries] = useState([...countriesData])
   return (
-    <>
-      <main>
-        <div className="container">
-          <PageName />
-          <div className="container" style={{ height: "auto", minHeight: "100%", paddingBottom: "20px" }}>
-            <div className="row">
-              <Table data={countries} rowsPerPage={10} />
-            </div>
-          </div>
-        </div>
-      </main>
-    </>
+    <div className="container">
+      <div className="row m-2 p-2 align-items-center">
+        <PageName />
+      </div>
+      <div className="row m-2">
+        <Table data={countries} rowsPerPage={10} />
+      </div>
+    </div>
   )
 }
 
