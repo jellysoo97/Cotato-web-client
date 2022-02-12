@@ -3,12 +3,12 @@ import PageName from "../Common/PageName"
 import countriesData from "./PostData"
 import Table from "./PostTable"
 
-function PostList() {
+function PostList({ pagename }) {
   const [countries] = useState([...countriesData])
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
-        <PageName />
+        <PageName pagename={pagename} />
       </div>
       <div className="row m-2">
         <Table data={countries} rowsPerPage={10} />

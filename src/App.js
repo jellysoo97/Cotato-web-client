@@ -2,17 +2,22 @@ import React, { Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import LandingPage from "./components/LandingPage"
+import NavBar from "./components/Common/NavBar"
+import Footer from "./components/Common/Footer"
+
 import Login from "./components/Auth/Login"
 import Register from "./components/Auth/Register"
 import Edit from "./components/Auth/Edit"
-import PostList from "./components/Postlist/PostList"
-import Comments from "./components/comments/Comments"
-import NavBar from "./components/Common/NavBar"
-
-import PostCreate from "./components/Postcrud/PostCreate"
-import Footer from "./components/Common/Footer"
-import PostPageView from "./components/Postlist/PostPageView"
 import MyPage from "./components/Auth/MyPage"
+
+import It from "./components/Category/IT"
+import Session from "./components/Category/Session"
+import Study from "./components/Category/Study"
+import Project from "./components/Category/Project"
+
+import Comments from "./components/comments/Comments"
+import PostCreate from "./components/Postcrud/PostCreate"
+import PostPageView from "./components/Postlist/PostPageView"
 
 function App() {
   return (
@@ -24,13 +29,17 @@ function App() {
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
+            <Route exact path="/myPage" element={<MyPage />} />
             <Route exact path="/edit" element={<Edit />} />
-            <Route exact path="/postlist" element={<PostList />} />
-            <Route exact path="/comments" element={<Comments />} />
 
+            <Route exact path="/it" element={<It />} />
+            <Route exact path="/session" element={<Session />} />
+            <Route exact path="/study" element={<Study />} />
+            <Route exact path="/project" element={<Project />} />
+
+            <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/createPost" element={<PostCreate />} />
             <Route exact path="/postPageView" element={<PostPageView />} />
-            <Route exact path="/myPage" element={<MyPage />} />
           </Routes>
         </BrowserRouter>
       </div>
