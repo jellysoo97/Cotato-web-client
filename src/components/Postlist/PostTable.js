@@ -7,7 +7,7 @@ const Table = ({ data, rowsPerPage }) => {
   const [page, setPage] = useState(1)
   const { slice, range } = useTable(data, page, rowsPerPage)
   return (
-    <div className="col-sm-9 table-responsive">
+    <div className="col-sm-12 table-responsive">
       <table className="table table-hover align-middle">
         <thead className="table-dark text-center">
           <tr>
