@@ -10,7 +10,7 @@ import Register from "./components/Auth/Register"
 import Edit from "./components/Auth/Edit"
 import MyPage from "./components/Auth/MyPage"
 
-import It from "./components/Category/IT"
+import It from "./components/Category/ITissue"
 import Session from "./components/Category/Session"
 import Study from "./components/Category/Study"
 import Project from "./components/Category/Project"
