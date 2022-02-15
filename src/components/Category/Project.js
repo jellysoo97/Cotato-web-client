@@ -1,9 +1,8 @@
 import React from "react"
-
-import PostList from "../Postlist/PostList"
+import Posts from "../Postlist/PostData"
 
 function Project() {
-  return <PostList pagename={"Project"} />
+  return <Posts pagename={"Project"} />
 }
 
 export default Project

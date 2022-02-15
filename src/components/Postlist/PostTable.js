@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 
-import useTable from "./PostState"
+import TablePageData from "./PostPagination"
 import TableFooter from "./PostTableFooter"
 
 const Table = ({ data, rowsPerPage }) => {
   const [page, setPage] = useState(1)
-  const { slice, range } = useTable(data, page, rowsPerPage)
+  const { slice, range } = TablePageData(data, page, rowsPerPage)
   return (
     <div className="col-sm-12 table-responsive">
       <table className="table table-hover align-middle">
@@ -34,12 +34,19 @@ const Table = ({ data, rowsPerPage }) => {
         <tbody>
           {slice.map((el) => (
             <tr key={el.id} className="tableRowItems">
+              {/* <tr key={el._id} className="tableRowItems"> */}
               <td className="text-center">{el.id}</td>
-              <td className="tableCell">{el.title}</td>
+              {/* 글 id : <td className="text-center">{el._id}</td> */}
+              <td className="tableCell">{el.username}</td>
+              {/* 제목 : <td className="text-center">{el.title}</td> */}
               <td className="text-center">{el.name}</td>
-              <td className="text-center">{el.date}</td>
-              <td className="text-center">{el.liked}</td>
-              <td className="text-center">{el.views}</td>
+              {/* 작성자?? : <td className="text-center">{el.??}</td> */}
+              <td className="text-center">{el.email}</td>
+              {/* 작성일 : <td className="text-center">{el.date}</td> */}
+              <td className="text-center">{el.phone}</td>
+              {/* 좋아요?? : <td className="text-center">{el.??}</td> */}
+              <td className="text-center">{el.website}</td>
+              {/* 조회수?? : <td className="text-center">{el.??}</td> */}
             </tr>
           ))}
         </tbody>

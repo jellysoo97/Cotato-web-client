@@ -1,9 +1,8 @@
 import React from "react"
-
-import PostList from "../Postlist/PostList"
+import Posts from "../Postlist/PostData"
 
 function Session() {
-  return <PostList pagename={"Session"} />
+  return <Posts pagename={"Session"} />
 }
 
 export default Session

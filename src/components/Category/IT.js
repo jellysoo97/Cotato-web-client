@@ -1,9 +1,8 @@
 import React from "react"
-
-import PostList from "../Postlist/PostList"
+import Posts from "../Postlist/PostData"
 
 function It() {
-  return <PostList pagename={"IT Issue"} />
+  return <Posts pagename={"IT Issue"} />
 }
 
 export default It
