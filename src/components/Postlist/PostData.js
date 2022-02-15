@@ -4,7 +4,7 @@ import axios from "axios"
 import PageName from "../Common/PageName"
 import Table from "./PostTable"
 
-function Posts({ pagename }) {
+function Posts({ pagename, apiAd }) {
   const [posts, setPosts] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -18,7 +18,7 @@ function Posts({ pagename }) {
         // loading 상태 : true로
         setLoading(true)
         const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
-        // "http://localhost:8080/:category"
+        // "http://localhost:8080/"+{apiAd}
         setPosts(response.data) // get data
       } catch (e) {
         setError(e)
