@@ -11,7 +11,7 @@ import NavBar from "./components/Common/NavBar"
 
 import PostCreate from "./components/Postcrud/PostCreate"
 import Footer from "./components/Common/Footer"
-import PostPageView from "./components/Postlist/PostPageView"
+import PostEach from "./components/Postlist/PostEach"
 import MyPage from "./components/Auth/MyPage"
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/comments" element={<Comments />} />
 
             <Route exact path="/createPost" element={<PostCreate />} />
-            <Route exact path="/postPageView" element={<PostPageView />} />
+            <Route exact path="/postEach" element={<PostEach />} />
             <Route exact path="/myPage" element={<MyPage />} />
           </Routes>
         </BrowserRouter>

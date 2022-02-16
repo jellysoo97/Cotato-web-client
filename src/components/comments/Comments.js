@@ -13,12 +13,6 @@ class Comments extends React.Component {
           date: "2022-01-24",
           content: "김감자 댓글입니다.",
         },
-        {
-          uuid: 2,
-          writer: "이감자",
-          date: "2022-01-25",
-          content: "이감자 댓글입니다.",
-        },
       ],
     }
     this.addTweet = this.addTweet.bind(this)
