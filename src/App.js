@@ -9,7 +9,7 @@ import PostList from "./components/Postlist/PostList"
 import Comments from "./components/comments/Comments"
 import NavBar from "./components/Common/NavBar"
 
-import PostCreate from "./components/Postcrud/PostCreate"
+import Postcrud from './components/Postcrud/Postcrud';
 import Footer from "./components/Common/Footer"
 import PostPageView from "./components/Postlist/PostPageView"
 import MyPage from "./components/Auth/MyPage"
@@ -28,7 +28,7 @@ function App() {
             <Route exact path="/postlist" element={<PostList />} />
             <Route exact path="/comments" element={<Comments />} />
 
-            <Route exact path="/createPost" element={<PostCreate />} />
+            <Route exact path="/createPost" element={<Postcrud />} />
             <Route exact path="/postPageView" element={<PostPageView />} />
             <Route exact path="/myPage" element={<MyPage />} />
           </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PageName from "../Common/PageName"
 import Category from "../Common/Category"
 import countriesData from "./PostData"

@@ -1,7 +1,7 @@
-export default [
+const postData = [
   {
     id: 1,
-    title: "테스트 게시글",
+    title: "테스트 게시글1",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -9,7 +9,7 @@ export default [
   },
   {
     id: 2,
-    title: "테스트 게시글",
+    title: "테스트 게시글2",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -17,7 +17,7 @@ export default [
   },
   {
     id: 3,
-    title: "테스트 게시글",
+    title: "테스트 게시글3",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -113,7 +113,7 @@ export default [
   },
   {
     id: 15,
-    title: "테스트 게시글",
+    title: "테스트 게시글15",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -121,7 +121,7 @@ export default [
   },
   {
     id: 16,
-    title: "테스트 게시글",
+    title: "테스트 게시글16",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -129,7 +129,7 @@ export default [
   },
   {
     id: 17,
-    title: "테스트 게시글",
+    title: "테스트 게시글17",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
@@ -137,10 +137,12 @@ export default [
   },
   {
     id: 18,
-    title: "테스트 게시글",
+    title: "테스트 게시글18",
     userid: "코테이토",
     date: "2022.01.25",
     liked: 10,
     views: 100,
   },
 ]
+
+export default postData;
