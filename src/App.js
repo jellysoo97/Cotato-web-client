@@ -17,7 +17,7 @@ import Project from "./components/Category/Project"
 
 import Comments from "./components/comments/Comments"
 import PostCreate from "./components/Postcrud/PostCreate"
-import PostPageView from "./components/Postlist/PostPageView"
+import PostEach from "./components/Postlist/PostEach"
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
 
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/createPost" element={<PostCreate />} />
-            <Route exact path="/postPageView" element={<PostPageView />} />
+            <Route exact path="/postEach" element={<PostEach />} />
           </Routes>
         </BrowserRouter>
       </div>

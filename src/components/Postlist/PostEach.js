@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import Comments from "../comments/Comments"
 
 function PostEach() {
   let [따봉, 따봉변경] = useState(0)
 
   return (
     <>
+    <div className="container">
       <div>
         <hr />
         카테고리
@@ -49,6 +51,8 @@ function PostEach() {
         <br />
         <br />
         <hr />
+        <Comments />
+      </div>
       </div>
     </>
   )
