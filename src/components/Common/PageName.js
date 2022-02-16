@@ -1,18 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
 
-function PageName() {
-  const [pagename, changeName] = useState(["IT Issue"]) //useState([newPageNameData])
-
-  function changePageName() {
-    const newPageName = [...pagename]
-    newPageName[0] = "IT Issue" // newPageNameData
-    changeName(newPageName)
-  }
-
+function PageName({ pagename }) {
   return (
-    <div className="col-sm-12" onLoad={changePageName} style={{ height: "70px", marginBottom: "20px", padding: "10px 30px 10px", fontSize: "30px", fontWeight: "bold" }}>
-      {pagename[0]}
-    </div>
+    <>
+      <div className="col-sm-9" style={{ fontSize: "30px", fontWeight: "bold" }}>
+        {pagename}
+      </div>
+      <div className="col-sm-3">
+        <a className="btn btn-warning" href="/createPost" role="button" style={{ float: "right" }}>
+          글쓰기
+        </a>
+      </div>
+    </>
   )
 }
 

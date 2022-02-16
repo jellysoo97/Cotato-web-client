@@ -1,20 +1,14 @@
-import {useState} from "react"
+import { useState } from "react"
 
 export default function CommentsForm({ tweet }) {
   const msg = "메시지";
   // const daeDat = () => {
   //   alert("대댓글!!!")
   // }
-  
+
   return (
     // 작성된 댓글모음 부분
     <div>
-      {msg}
-      <div>
-  <button onclick={()=>(
-    alert("대댓글!!!")
-  )}>버튼</button>
-  </div>
       {/* 글쓴이 + 날짜 */}
       <div>
         <h3 style={{ textAlign: "left", width: "300px", height: "50px" }}>
@@ -28,7 +22,7 @@ export default function CommentsForm({ tweet }) {
         <p>{tweet.content}</p>
         {/* <button onClick={ ()=>{ 따봉변경(따봉+1) } } type="button" className="btn btn-outline-warning">좋아요</button> {따봉} */}
         {/* <button type="button" className="btn btn-outline-warning">좋아요</button> */}
-        <button onclick={()=>(
+        <button onclick={() => (
           alert(msg)
         )} type="button" className="btn btn-outline-warning" style={{ float: "right" }}>
           답글달기

@@ -1,8 +1,8 @@
 import React from "react"
-import Category from "../Common/Category"
+
 import PostEach from "./PostEach"
 import Comments from "../comments/Comments"
-import PageName from '../Common/PageName';
+import PageName from "../Common/PageName"
 
 function PostPageView() {
   return (
@@ -12,10 +12,7 @@ function PostPageView() {
         {/* <div className="container" style={{ backgroundColor: "black"}}>  */}
         <div>
           <div className="row">
-            <div className="col-3">
-              <Category />
-            </div>
-            <div className="col-9">
+            <div className="col-12">
               {/* <div className="col-9" style={{ backgroundColor: "skyblue"}}> */}
               <PostEach />
             </div>
@@ -36,6 +33,6 @@ function PostPageView() {
         </div>
       </div>
     </>
-  );
+  )
 }
 export default PostPageView
