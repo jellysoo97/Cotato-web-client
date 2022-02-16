@@ -1,6 +1,22 @@
 import React from "react"
 
 function NavBar() {
+  const NavItem = ({ pagename, href }) => {
+    return (
+      <li className="nav-item">
+        <a className="nav-link active" aria-current="page" href={href}>
+          {pagename}
+        </a>
+      </li>
+    )
+  }
+  const NavBtn = ({ href, title }) => {
+    return (
+      <a href={href} className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
+        {title}
+      </a>
+    )
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,51 +38,16 @@ function NavBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
-                  Home
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="/postlist">
-                  IT Issue
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Session
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Study
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="/mypage">
-                  My Page
-                </a>
-              </li>
+              <NavItem pagename={"Home"} href={"/"} />
+              <NavItem pagename={"IT Issue"} href={"/it"} />
+              <NavItem pagename={"Session"} href={"/session"} />
+              <NavItem pagename={"Study"} href={"/study"} />
+              <NavItem pagename={"Project"} href={"/project"} />
+              <NavItem pagename={"My Page"} href={"/myPage"} />
             </ul>
-            <a href="/login" className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
-              Log in
-            </a>
-            <a href="/register" className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
-              Register
-            </a>
-            <a href="/edit" className="btn btn-outline-primary" style={{ padding: "0.375rem 1.5rem" }}>
-              회원정보 수정
-            </a>
-            {/* <form className="d-flex">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form> */}
+            <NavBtn href={"/login"} title={"Log in"} />
+            <NavBtn href={"/register"} title={"Register"} />
+            <NavBtn href={"/edit"} title={"회원정보 수정"} />
           </div>
         </div>
       </nav>

@@ -15,3 +15,23 @@ code {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.landing {
+  min-height: calc(100vh - 80px);
+  background: #403b4a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #403b4a, #e7e9bb); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #403b4a, #e7e9bb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+}
+
+.landingtitle {
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 70px;
+  margin-bottom: 15px;
+}
+
+.landingdesc {
+  font-size: 20px;
+  padding: 10px;
+}

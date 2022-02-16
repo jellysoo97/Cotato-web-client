@@ -5,11 +5,11 @@ export const AuthTitle = ({ title }) => {
   return (
     <div className="container">
       <div className="row mb-3">
-        <img className="col-4" src="./images/logo1.png" width={"50px"} height={"50px"} />
+        <img className="col-4" src="./images/logo1.png" width={"30px"} height={"90px"} />
         <div className="col-4 text-center mt-2" style={{ fontSize: "20px", fontWeight: "bold" }}>
           Cotato
         </div>
-        <img className="col-4" src="./images/logo2.png" width={"50px"} height={"50px"} />
+        <img className="col-4" src="./images/logo2.png" width={"30px"} height={"90px"} />
       </div>
       <h2>{title}</h2>
       <hr />

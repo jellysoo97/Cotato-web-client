@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 
 const commentsData = [
   {
@@ -33,11 +33,7 @@ function CommentsForm({ comment }) {
         <p>{comment.content}</p>
         {/* <button onClick={ ()=>{ 따봉변경(따봉+1) } } type="button" className="btn btn-outline-warning">좋아요</button> {따봉} */}
         {/* <button type="button" className="btn btn-outline-warning">좋아요</button> */}
-        <button
-          type="button"
-          className="btn btn-outline-warning"
-          style={{ float: 'right' }}
-        >
+        <button type="button" className="btn btn-outline-warning" style={{ float: "right" }}>
           답글달기
         </button>{' '}
         <br /> <br />

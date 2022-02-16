@@ -1,6 +1,17 @@
 import React from "react"
+import "../index.css"
+
+import CardRow from "./LandingCard"
 
 function LandingPage() {
+  const Img = ({ link, src }) => {
+    return (
+      <a href={link}>
+        <img src={src} alt={""} width={"50px"} height={"50px"} style={{ marginRight: "15px" }} />
+      </a>
+    )
+  }
+
   return (
     <div className="container">
       <div className="jumbotron">
