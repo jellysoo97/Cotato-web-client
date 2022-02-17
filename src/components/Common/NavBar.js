@@ -60,8 +60,8 @@ function NavBar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <NavItem navname={"Home"} href={"/"} />
               {categoryList
-                ? categoryList.map((item) => {
-                    return <NavItem navname={`${item.navname}`} href={`/${item.category}`} />
+                ? categoryList.map((item, index) => {
+                    return <NavItem key={index} navname={`${item.navname}`} href={`/${item.category}`} />
                   })
                 : ""}
               <NavItem navname={"My Page"} href={"/myPage"} />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 
 import PageName from "../Common/PageName"
-import Table from "./PostTable"
+import Table from "./Table/Table"
 
 function Posts() {
   const [posts, setPosts] = useState(null)
@@ -18,7 +18,6 @@ function Posts() {
         // loading 상태 : true로
         setLoading(true)
         const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
-        // "http://localhost:8080/${id}"
         setPosts(response.data) // get data
       } catch (e) {
         setError(e)
