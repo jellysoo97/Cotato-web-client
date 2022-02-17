@@ -10,13 +10,10 @@ import Register from "./components/Auth/Register"
 import Edit from "./components/Auth/Edit"
 import MyPage from "./components/Auth/MyPage"
 
-import It from "./components/Category/ITissue"
-import Session from "./components/Category/Session"
-import Study from "./components/Category/Study"
-import Project from "./components/Category/Project"
+import Posts from "./components/Postlist/PostList"
 
 import Comments from "./components/comments/Comments"
-import PostCreate from "./components/Postcrud/PostCreate"
+import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/Postlist/PostEach"
 
 function App() {
@@ -32,10 +29,7 @@ function App() {
             <Route exact path="/myPage" element={<MyPage />} />
             <Route exact path="/edit" element={<Edit />} />
 
-            <Route exact path="/it" element={<It />} />
-            <Route exact path="/session" element={<Session />} />
-            <Route exact path="/study" element={<Study />} />
-            <Route exact path="/project" element={<Project />} />
+            <Route exact path="/:category" element={<Posts />} />
 
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/createPost" element={<PostCreate />} />
