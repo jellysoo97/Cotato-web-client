@@ -1,11 +1,30 @@
 import React from "react"
 
+const categoryList = [
+  {
+    navname: "IT issue",
+    category: "ITissue",
+  },
+  {
+    navname: "Session",
+    category: "Session",
+  },
+  {
+    navname: "Study",
+    category: "Study",
+  },
+  {
+    navname: "Project",
+    category: "Project",
+  },
+]
+
 function NavBar() {
-  const NavItem = ({ pagename, href }) => {
+  const NavItem = ({ navname, href }) => {
     return (
       <li className="nav-item">
-        <a className="nav-link active" aria-current="page" href={href}>
-          {pagename}
+        <a className="nav-link active" aria-current="nav" href={href}>
+          {navname}
         </a>
       </li>
     )
@@ -17,6 +36,7 @@ function NavBar() {
       </a>
     )
   }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,12 +58,13 @@ function NavBar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <NavItem pagename={"Home"} href={"/"} />
-              <NavItem pagename={"IT Issue"} href={"/it"} />
-              <NavItem pagename={"Session"} href={"/session"} />
-              <NavItem pagename={"Study"} href={"/study"} />
-              <NavItem pagename={"Project"} href={"/project"} />
-              <NavItem pagename={"My Page"} href={"/myPage"} />
+              <NavItem navname={"Home"} href={"/"} />
+              {categoryList
+                ? categoryList.map((item) => {
+                    return <NavItem navname={`${item.navname}`} href={`/${item.category}`} />
+                  })
+                : ""}
+              <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
             <NavBtn href={"/login"} title={"Log in"} />
             <NavBtn href={"/register"} title={"Register"} />
