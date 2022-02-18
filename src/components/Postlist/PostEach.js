@@ -1,8 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Comments from "../comments/Comments"
+import dummyData from '../Postlist/PostData'
 
-function PostEach() {
+function PostEach(props) {
   let [따봉, 따봉변경] = useState(0)
+  console.log(props.match)
+  const [Data, setData] = useState({})
+
+
+  useEffect(() => {
+    setData(dummyData)
+  }, [])
+  
 
   return (
     <>

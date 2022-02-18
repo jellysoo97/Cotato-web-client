@@ -5,7 +5,12 @@ import countriesData from "./PostData"
 import Table from "./PostTable"
 
 function PostList() {
-  const [countries] = useState([...countriesData])
+  const [countries, setCountries] = useState([...countriesData]);
+
+  // useEffect(() => {
+  //   setCountries(Table)
+  // }, [])
+  
   return (
     <>
       <main>

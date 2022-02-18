@@ -9,20 +9,19 @@ function PostCreate(props) {
   const [PostDesc, setPostDesc] = useState('')
   const [FileName, setFileName] = useState('') //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
-  const id = props.match.params.id;
+  // const postId = props.match.params.id;
+  console.log('aaa')
+  console.log(props.match);
 
-  useEffect(() => {
-    const idInfo = {
-      id: id,
-    };
-    axios
-      .post('http://localhost:8080/getAll', idInfo)
-      .then((response) => response.json())
-      .then((data) => {
-        setPostTitle(data.title);
-        setPostDesc(data.desc);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:8080/getAll')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setPostTitle(data.title);
+  //       setPostDesc(data.desc);
+  //     });
+  // }, []);
 
   const onTitleChange = (e) => {
     setPostTitle(e.currentTarget.value)
@@ -74,38 +73,7 @@ function PostCreate(props) {
   //////////////////////////// react-quill ////////////////////////////
 
 
-  const createHandler = (e) => {
-    const variable = {
-      title: PostTitle,
-      desc: PostDesc,
-    };
-    //console.log(variable)
-
-    axios
-      .post('http://localhost:8080/createPost', variable)
-      .then((response) => {
-        console.log(response);
-        if (response.data) {
-          console.log('여기가 이프문 콘솔');
-          alert('작성 완료');
-          setTimeout(() => {
-            props.history.push('/');
-          }, 3000);
-        } else {
-          alert('게시물 등록 실패');
-        }
-      })
-      .catch(function (err) {
-        if (err.response) {
-          console.log(err.response.data);
-        } else if (err.request) {
-          //2.8 (화) request 오류. CORS때문일수도?
-          console.log(err.request);
-        }
-      });
-  };
-
-
+/*
   const updateHandler = () => {
     try {
       if (PostTitle !== '' && PostDesc !== '') {
@@ -139,10 +107,39 @@ function PostCreate(props) {
       );
     });
   };
-
+*/
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const variable = {
+      title: PostTitle,
+      desc: PostDesc,
+    };
+    //console.log(variable)
+
+    axios
+      .post('http://localhost:8080/createPost', variable)
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          console.log('여기가 이프문 콘솔');
+          alert('작성 완료');
+          setTimeout(() => {
+            props.history.push('/');
+          }, 3000);
+        } else {
+          alert('게시물 등록 실패');
+        }
+      })
+      .catch(function (err) {
+        if (err.response) {
+          console.log(err.response.data);
+        } else if (err.request) {
+          //2.8 (화) request 오류. CORS때문일수도?
+          console.log(err.request);
+        }
+      });
   };
 
 
@@ -185,11 +182,7 @@ function PostCreate(props) {
         <br />
 
         <div className="col-12">
-          <button
-            type="submit"
-            className="btn btn-warning"
-            onClick={createHandler}
-          >
+          <button type="submit" className="btn btn-warning" onClick={onSubmit}>
             등록
           </button>
         </div>
