@@ -2,6 +2,10 @@ import React from "react"
 
 const categoryList = [
   {
+    navname: "Notice",
+    category: "Notice",
+  },
+  {
     navname: "IT issue",
     category: "ITissue",
   },
