@@ -31,11 +31,13 @@ function Posts() {
   if (loading) return <div>로딩중</div>
   if (error) return <div>에러</div>
   if (!posts) return null
+  console.log(posts)
 
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
-        <PageName pagename={window.location.pathname.substring(1)} />
+        <PageName pagename={`${posts[0].userId}`} />
+        {/* `${posts[0].category}` */}
       </div>
       <div className="row m-2">
         <Table data={posts} rowsPerPage={10} />
