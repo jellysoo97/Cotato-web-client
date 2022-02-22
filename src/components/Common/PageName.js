@@ -7,7 +7,7 @@ function PageName({ pagename }) {
         {pagename}
       </div>
       <div className="col-sm-3">
-        <a className="btn btn-warning" href="/createPost" role="button" style={{ float: "right" }}>
+        <a className="btn btn-outline-secondary" href="/createPost" role="button" style={{ float: "right" }}>
           글쓰기
         </a>
       </div>
