@@ -17,7 +17,8 @@ function Posts() {
         setPosts(null)
         // loading 상태 : true로
         setLoading(true)
-        const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
+        const category = window.location.pathname.substring(1) //멋잇어보이고 좋다
+        const response = await axios.get("http://localhost:8080/" + category)
         setPosts(response.data) // get data
       } catch (e) {
         setError(e)
@@ -27,7 +28,7 @@ function Posts() {
 
     fetchPosts()
   }, [])
-
+  console.log(window.location.pathname.substring(1))
   if (loading) return <div>로딩중</div>
   if (error) return <div>에러</div>
   if (!posts) return null
@@ -36,8 +37,7 @@ function Posts() {
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
-        <PageName pagename={`${posts[0].userId}`} />
-        {/* `${posts[0].category}` */}
+        <PageName pagename={`${window.location.pathname.substring(1)}`} />
       </div>
       <div className="row m-2">
         <Table data={posts} rowsPerPage={10} />

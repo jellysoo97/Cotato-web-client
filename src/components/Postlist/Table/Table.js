@@ -55,24 +55,28 @@ const Table = ({ data, rowsPerPage }) => {
                   <td className="text-center">{index + 1}</td>
                   {/* 테이블 인덱스 */}
                   <td className="tableCell">
-                    <Link to={`${el.id}`}>{el.title}</Link>
-                    {/* `${el.postNumber}` */}
+                    <Link to={`${el.postNumber}`}>{el.title}</Link>
                     {/* 게시글 고유번호로 link */}
                   </td>
-                  <td className="text-center">{el.userId}</td>
-                  {/* 작성자 : <td className="text-center">{el.username}</td> */}
-                  <td className="text-center">{el.email}</td>
-                  {/* 작성일 : <td className="text-center">{el.date}</td> */}
-                  <td className="text-center">{el.phone}</td>
-                  {/* 좋아요 : <td className="text-center">{el.liked}</td> */}
-                  <td className="text-center">{el.phone}</td>
-                  {/* 조회수 : <td className="text-center">{el.views}</td> */}
+                  {/* <td className="text-center">{el.userId}</td> */}
+                  <td className="text-center">{el.username}</td>
+                  {/* <td className="text-center">{el.email}</td> */}
+                  <td className="text-center">{el.date}</td>
+                  {/* <td className="text-center">{el.phone}</td> */}
+                  <td className="text-center">{el.liked}</td>
+                  {/* <td className="text-center">{el.phone}</td> */}
+                  <td className="text-center">{el.views}</td>
                 </tr>
               ))
             : ""}
         </tbody>
       </table>
-      <TableFooter range={range} slice={datalist} setPage={setPage} page={page} />
+      <TableFooter
+        range={range}
+        slice={datalist}
+        setPage={setPage}
+        page={page}
+      />
     </div>
   )
 }

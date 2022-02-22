@@ -5,24 +5,24 @@ import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
 
 function PostCreate(props) {
-  const [PostTitle, setPostTitle] = useState('')
-  const [PostDesc, setPostDesc] = useState('')
-  const [FileName, setFileName] = useState('') //이미지 처리를 위한 상태
+  const [PostTitle, setPostTitle] = useState("")
+  const [PostDesc, setPostDesc] = useState("")
+  const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
-  const id = props.match.params.id;
+  // const id = props.match.params.id -> postNumber
 
-  useEffect(() => {
-    const idInfo = {
-      id: id,
-    };
-    axios
-      .post('http://localhost:8080/getAll', idInfo)
-      .then((response) => response.json())
-      .then((data) => {
-        setPostTitle(data.title);
-        setPostDesc(data.desc);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   const idInfo = {
+  //     id: id,
+  //   }
+  //   axios
+  //     .post("http://localhost:8080/getAll", idInfo)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setPostTitle(data.title)
+  //       setPostDesc(data.desc)
+  //     })
+  // }, [id])
 
   const onTitleChange = (e) => {
     setPostTitle(e.currentTarget.value)
@@ -32,7 +32,6 @@ function PostCreate(props) {
     setPostDesc(value)
   }
 
-  
   //////////////////////////// react-quill ////////////////////////////
   const imageHandler = () => {
     const input = document.createElement("input")
@@ -40,18 +39,17 @@ function PostCreate(props) {
     input.setAttribute("type", "file")
     input.setAttribute("accept", "image/*")
     input.click()
-    alert('이미지');
+    alert("이미지")
     input.onChange = async () => {
       if (input.files) {
-        var file = input.files[0];
-        var formData = new FormData();
+        var file = input.files[0]
+        var formData = new FormData()
 
-        formData.append('image', file);
+        formData.append("image", file)
 
-        var fileName = file.name;
+        var fileName = file.name
         console.log(fileName)
         console.log(formData)
-        
       }
     }
   }
@@ -68,83 +66,95 @@ function PostCreate(props) {
     }
   }, [])
 
-  const formats = ["header", "font", "size", "bold", "italic", "underline", 
-                  "list", "bullet", "align", "color", "background", "image"]
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "align",
+    "color",
+    "background",
+    "image",
+  ]
 
   //////////////////////////// react-quill ////////////////////////////
-
 
   const createHandler = (e) => {
     const variable = {
       title: PostTitle,
       desc: PostDesc,
-    };
+    }
     //console.log(variable)
 
     axios
-      .post('http://localhost:8080/createPost', variable)
+      .post(
+        `http://localhost:8080/${
+          window.location.pathname.substring(1).split("/")[0]
+        }/createPost`,
+        variable
+      )
       .then((response) => {
-        console.log(response);
+        console.log(response)
         if (response.data) {
-          console.log('여기가 이프문 콘솔');
-          alert('작성 완료');
+          console.log("여기가 이프문 콘솔")
+          alert("작성 완료")
           setTimeout(() => {
-            props.history.push('/');
-          }, 3000);
+            props.history.push("/")
+          }, 3000)
         } else {
-          alert('게시물 등록 실패');
+          alert("게시물 등록 실패")
         }
       })
       .catch(function (err) {
         if (err.response) {
-          console.log(err.response.data);
+          console.log(err.response.data)
         } else if (err.request) {
           //2.8 (화) request 오류. CORS때문일수도?
-          console.log(err.request);
+          console.log(err.request)
         }
-      });
-  };
+      })
+  }
 
+  // const updateHandler = () => {
+  //   try {
+  //     if (PostTitle !== "" && PostDesc !== "") {
+  //       let postInfo = {
+  //         id: id,
+  //         title: PostTitle,
+  //         content: PostDesc,
+  //       } // const reponse = await fetch();
 
-  const updateHandler = () => {
-    try {
-      if (PostTitle !== '' && PostDesc !== '') {
-        let postInfo = {
-          id: id,
-          title: PostTitle,
-          content: PostDesc,
-        }; // const reponse = await fetch();
+  //       axios
+  //         .post("http://localhost:8080/updatePost/:id", postInfo)
+  //         .then((response) => {
+  //           alert("수정 완료")
+  //           props.history.replace("/")
+  //         })
+  //     } else {
+  //       alert("모든 칸을 작성해야합니다!")
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
-        axios
-          .post('http://localhost:8080/updatePost/:id', postInfo)
-          .then((response) => {
-            alert('수정 완료');
-            props.history.replace('/');
-          });
-      } else {
-        alert('모든 칸을 작성해야합니다!');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const deleteHandler = (id) => {
-    axios.delete(`http://localhost:8080/deletePost/${id}`)
-    .then((response) => {
-      setPostList(
-        PostList.filter((val) => {
-          return val.id !== id;
-        })
-      );
-    });
-  };
-
+  // const deleteHandler = (id) => {
+  //   axios.delete(`http://localhost:8080/deletePost/${id}`).then((response) => {
+  //     setPostList(
+  //       PostList.filter((val) => {
+  //         return val.id !== id
+  //       })
+  //     )
+  //   })
+  // }
 
   const onSubmit = (e) => {
-    e.preventDefault();
-  };
-
+    e.preventDefault()
+  }
 
   return (
     <div className="container">
@@ -195,7 +205,7 @@ function PostCreate(props) {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
 export default PostCreate
