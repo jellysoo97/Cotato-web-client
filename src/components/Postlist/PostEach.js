@@ -4,16 +4,16 @@ import axios from "axios"
 
 import Comments from "../comments/Comments"
 
-function PostEach() {
+function PostEach(props) {
   let [liked, setLiked] = useState(0)
   const [data, setData] = useState([])
   const { postNumber } = useParams()
+  const category = props.match.params.category
 
   useEffect(() => {
     async function getData() {
       try {
         //응답 성공
-        const category = window.location.pathname.substring(1).split("/")[0]
         const response = await axios.get("http://localhost:8080/" + category + "/" + postNumber)
         setData(response.data)
         console.log(response.data)

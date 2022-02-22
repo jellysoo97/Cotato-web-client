@@ -4,9 +4,9 @@ import axios from "axios"
 import PageName from "../Common/PageName"
 import Table from "./Table/Table"
 
-function Posts() {
+function Posts(props) {
   const [posts, setPosts] = useState(null)
-  const category = window.location.pathname.substring(1)
+  const category = props.match.params.category
 
   useEffect(() => {
     async function getPosts() {
