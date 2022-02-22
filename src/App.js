@@ -30,8 +30,7 @@ function App() {
             <Route exact path="/edit" element={<Edit />} />
 
             <Route exact path="/:category" element={<Posts />} />
-            <Route exact path="/:category/:id" element={<PostEach />} />
-            {/* <Route exact path="/:category/:postNumber" element={<PostEach />} /> */}
+            <Route exact path="/:category/:postNumber" element={<PostEach />} />
 
             <Route exact path="/comments" element={<Comments />} />
             <Route exact path="/createPost" element={<PostCreate />} />
