@@ -13,17 +13,17 @@ function MyPage() {
             <div class="card-body">
               <div className="row">
                 <div className="col-6">
-                <h4 class="card-title" style={{textAlign:"center"}}>이름</h4></div>
+                  <h4 class="card-title" style={{textAlign:"center"}}>이름</h4></div>
                 <div className="col-5"><h4 style={{textAlign:"center", fontWeight:'bold'}}>김감자</h4></div>
               </div>
               <div className="row">
                 <div className="col-6">
-                <h4 class="card-title" style={{textAlign:"center"}}>아이디</h4></div>
+                  <h4 class="card-title" style={{textAlign:"center"}}>아이디</h4></div>
                 <div className="col-5"><h4 style={{textAlign:"center", fontWeight:'bold'}}>potato</h4></div>
               </div>
               <div className="row">
                 <div className="col-6">
-                <h4 class="card-title" style={{textAlign:"center"}}>이메일</h4></div>
+                  <h4 class="card-title" style={{textAlign:"center"}}>이메일</h4></div>
                 <div className="col-5" ><h5 style={{textAlign:"center", fontWeight:'bold'}}>potato@naver.com</h5></div>
               </div>
             </div>
@@ -60,7 +60,7 @@ function MyPage() {
               <button style={{display:"inline", float:"right"}} type="button" class="btn btn-outline-warning">더보기</button>
             </h3>
             <div class="card-body">
-            <div class="list-group">
+              <div class="list-group">
                 <button type="button" class="list-group-item list-group-item-action" style={{textAlign:"center"}}><p style={{fontWeight:'bold', display:"inline"}}>[IT Issue]</p>&nbsp;&nbsp;&nbsp;<p style={{display:"inline"}}>대충 이런 댓글을 썼다.</p></button>
                 <button type="button" class="list-group-item list-group-item-action" style={{textAlign:"center"}}><p style={{fontWeight:'bold', display:"inline"}}>[IT Issue]</p>&nbsp;&nbsp;&nbsp;<p style={{display:"inline"}}>대충 이런 댓글을 썼다.</p></button>
                 <button type="button" class="list-group-item list-group-item-action" style={{textAlign:"center"}}><p style={{fontWeight:'bold', display:"inline"}}>[IT Issue]</p>&nbsp;&nbsp;&nbsp;<p style={{display:"inline"}}>대충 이런 댓글을 썼다.</p></button>

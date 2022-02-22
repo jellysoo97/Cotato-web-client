@@ -1,17 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
-import ReactQuill from "react-quill"
-import "react-quill/dist/quill.snow.css"
-import CustomToolbar from "./CustomToolbar"
+import TextEditor from './TextEditor'
 
 function PostCreate(props) {
   const [PostTitle, setPostTitle] = useState('')
   const [PostDesc, setPostDesc] = useState('')
-  const [FileName, setFileName] = useState('') //이미지 처리를 위한 상태
-  const [PostList, setPostList] = useState([])
-  // const postId = props.match.params.id;
-  console.log('aaa')
-  console.log(props.match);
 
   // useEffect(() => {
   //   axios
@@ -32,45 +25,45 @@ function PostCreate(props) {
   }
 
   
-  //////////////////////////// react-quill ////////////////////////////
-  const imageHandler = () => {
-    const input = document.createElement("input")
+  // //////////////////////////// react-quill ////////////////////////////
+  // const imageHandler = () => {
+  //   const input = document.createElement("input")
 
-    input.setAttribute("type", "file")
-    input.setAttribute("accept", "image/*")
-    input.click()
-    alert('이미지');
-    input.onChange = async () => {
-      if (input.files) {
-        var file = input.files[0];
-        var formData = new FormData();
+  //   input.setAttribute("type", "file")
+  //   input.setAttribute("accept", "image/*")
+  //   input.click()
+  //   alert('이미지');
+  //   input.onChange = async () => {
+  //     if (input.files) {
+  //       var file = input.files[0];
+  //       var formData = new FormData();
 
-        formData.append('image', file);
+  //       formData.append('image', file);
 
-        var fileName = file.name;
-        console.log(fileName)
-        console.log(formData)
+  //       var fileName = file.name;
+  //       console.log(fileName)
+  //       console.log(formData)
         
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 
-  const modules = useMemo(() => {
-    return {
-      toolbar: {
-        container: "#toolbar",
-        handlers: {
-          //이미지 처리는 우리가 직접 imageHandler 함수로 처리할 것이다
-          image: imageHandler,
-        },
-      },
-    }
-  }, [])
+  // const modules = useMemo(() => {
+  //   return {
+  //     toolbar: {
+  //       container: "#toolbar",
+  //       handlers: {
+  //         //이미지 처리는 우리가 직접 imageHandler 함수로 처리할 것이다
+  //         image: imageHandler,
+  //       },
+  //     },
+  //   }
+  // }, [])
 
-  const formats = ["header", "font", "size", "bold", "italic", "underline", 
-                  "list", "bullet", "align", "color", "background", "image"]
+  // const formats = ["header", "font", "size", "bold", "italic", "underline", 
+  //                 "list", "bullet", "align", "color", "background", "image"]
 
-  //////////////////////////// react-quill ////////////////////////////
+  // //////////////////////////// react-quill ////////////////////////////
 
 
 /*
@@ -116,13 +109,13 @@ function PostCreate(props) {
       title: PostTitle,
       desc: PostDesc,
     };
-    //console.log(variable)
+    console.log(variable)
 
     axios
       .post('http://localhost:8080/createPost', variable)
       .then((response) => {
         console.log(response);
-        if (response.data) {
+        if (response.config.data) {
           console.log('여기가 이프문 콘솔');
           alert('작성 완료');
           setTimeout(() => {
@@ -160,25 +153,24 @@ function PostCreate(props) {
             name="title"
           ></input>
         </div>
+
         <div className="mb-3">
           <label for="formGroupExampleInput2" className="form-label">
             내용
           </label>
           {/* <input type="text" className="form-control" id="formGroupExampleInput2" placeholder='내용' onChange={onContentsChange} value={PostContents} name='contents'></input> */}
-
           {/* react-quill */}
-          <div className="text-editor">
-            <CustomToolbar />
-            <ReactQuill
+            {/* <CustomToolbar /> */}
+            {/* <ReactQuill
               modules={modules}
               formats={formats}
               value={PostDesc}
               onChange={onDescChange}
               name="desc"
-            />
-          </div>
+            /> */}
+          <TextEditor value={PostDesc} onChange={onDescChange} />
         </div>
-        {/* <div>image_image_image TAT</div> */}
+
         <br />
 
         <div className="col-12">

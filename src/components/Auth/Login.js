@@ -1,10 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
 
 import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
 
 function Login() {
+
+  const [signup, setSignup] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [url, setURL] = useState('');
+  const [text, setText] = useState('');
+  const [isAlert, setIsAlert] = useState(false);
+
   return (
     <div className="AuthBigBox">
       <article className="card-body">
@@ -15,9 +26,9 @@ function Login() {
           로그인
         </button>
         <div>
-          <a>아이디 찾기</a>&nbsp;&#124;&nbsp;
-          <a>비밀번호 찾기</a>&nbsp;&#124;&nbsp;
-          <a>회원가입</a>
+          <Link>아이디 찾기</Link>&nbsp;&#124;&nbsp;
+          <Link>비밀번호 찾기</Link>&nbsp;&#124;&nbsp;
+          <Link>회원가입</Link>
         </div>
       </article>
     </div>

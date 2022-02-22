@@ -34,7 +34,7 @@ function App() {
             {/* <Route exact path="/:category/:postNumber" element={<PostEach />} /> */}
 
             <Route exact path="/comments" element={<Comments />} />
-            <Route exact path="/createPost" element={<PostCreate />} />
+            <Route exact path="/:category/createPost" element={<PostCreate />} />
           </Routes>
         </BrowserRouter>
       </div>

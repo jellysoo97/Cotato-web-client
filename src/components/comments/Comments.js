@@ -92,7 +92,7 @@ function Comments(props) {
   const [CommentValue, setCommentValue] = useState('')
 
   const addComment = () => {
-    let value = document.querySelector('#new-tweet-content').value;
+    let value = document.querySelector('#new-tweet-content').value
     this.setState({
       tweets: [
         ...this.state.tweets,
@@ -107,9 +107,9 @@ function Comments(props) {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    //댓글 다는 유저 정보, 내용들로 리퀘스트를 보내야 하는데..!? 이미 했었네!
+    // 댓글 다는 유저 정보, 내용들로 리퀘스트를 보내야 하는데..!? 이미 했었네!
     const variable = {
       content: CommentValue,
       postId: props.postId,
@@ -121,15 +121,15 @@ function Comments(props) {
       .post('http://localhost:8080/board/:id/createComment ', variable)
       .then((response) => {
         if (response.data) {
-          //console.log(response.data.result);
-          setCommentValue('');
+          // console.log(response.data.result);
+          setCommentValue('')
 
-          //PostPageView(부모)의 Comments를 수정해줘야 함
-          props.refreshFunc(response.data.result);
+          // PostPageView(부모)의 Comments를 수정해줘야 함
+          props.refreshFunc(response.data.result)
         } else {
-          alert('댓글 등록 실패');
+          alert('댓글 등록 실패')
         }
-      });
+      })
   }
 
   return (
