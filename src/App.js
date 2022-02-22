@@ -16,7 +16,7 @@ import Study from "./components/Category/Study"
 import Project from "./components/Category/Project"
 
 import Comments from "./components/comments/Comments"
-import PostCreate from "./components/Postcrud/PostCreate"
+import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/Postlist/PostEach"
 
 function App() {

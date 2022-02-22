@@ -9,20 +9,20 @@ function PostCreate(props) {
   const [PostDesc, setPostDesc] = useState('')
   const [FileName, setFileName] = useState('') //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
-  const id = props.match.params.id;
+  // const id = props.match.params.id;
 
-  useEffect(() => {
-    const idInfo = {
-      id: id,
-    };
-    axios
-      .post('http://localhost:8080/getAll', idInfo)
-      .then((response) => response.json())
-      .then((data) => {
-        setPostTitle(data.title);
-        setPostDesc(data.desc);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   const idInfo = {
+  //     id: id,
+  //   };
+  //   axios
+  //     .post('http://localhost:8080/getAll', idInfo)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setPostTitle(data.title);
+  //       setPostDesc(data.desc);
+  //     });
+  // }, [id]);
 
   const onTitleChange = (e) => {
     setPostTitle(e.currentTarget.value)
@@ -106,39 +106,39 @@ function PostCreate(props) {
   };
 
 
-  const updateHandler = () => {
-    try {
-      if (PostTitle !== '' && PostDesc !== '') {
-        let postInfo = {
-          id: id,
-          title: PostTitle,
-          content: PostDesc,
-        }; // const reponse = await fetch();
+  // const updateHandler = () => {
+  //   try {
+  //     if (PostTitle !== '' && PostDesc !== '') {
+  //       let postInfo = {
+  //         id: id,
+  //         title: PostTitle,
+  //         content: PostDesc,
+  //       }; // const reponse = await fetch();
 
-        axios
-          .post('http://localhost:8080/updatePost/:id', postInfo)
-          .then((response) => {
-            alert('수정 완료');
-            props.history.replace('/');
-          });
-      } else {
-        alert('모든 칸을 작성해야합니다!');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //       axios
+  //         .post('http://localhost:8080/updatePost/:id', postInfo)
+  //         .then((response) => {
+  //           alert('수정 완료');
+  //           props.history.replace('/');
+  //         });
+  //     } else {
+  //       alert('모든 칸을 작성해야합니다!');
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const deleteHandler = (id) => {
-    axios.delete(`http://localhost:8080/deletePost/${id}`)
-    .then((response) => {
-      setPostList(
-        PostList.filter((val) => {
-          return val.id !== id;
-        })
-      );
-    });
-  };
+  // const deleteHandler = (id) => {
+  //   axios.delete(`http://localhost:8080/deletePost/${id}`)
+  //   .then((response) => {
+  //     setPostList(
+  //       PostList.filter((val) => {
+  //         return val.id !== id;
+  //       })
+  //     );
+  //   });
+  // };
 
 
   const onSubmit = (e) => {

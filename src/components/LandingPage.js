@@ -13,32 +13,32 @@ function LandingPage() {
   }
 
   return (
-    <div className="container">
-      <div className="jumbotron">
-        <h1 className="display-4">Hello, COTATO!</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr className="my-4" />
-        <img
-          src="./images/logo3.png"
-          width={'800px'}
-          height={'500px'}
-          alt="logo3"
-        ></img>
-        <p className="lead">
-          <a
-            className="btn btn-warning btn-lg my-5"
-            href="/createPost"
-            role="button"
-          >
-            글쓰기
-          </a>
-        </p>
+    <>
+      <div className="container-fluid">
+        <div className="row align-items-center landing">
+          <div className="col-6" style={{ marginLeft: "50px" }}>
+            <div className="landingtitle">
+              Cotato
+              <br />
+              코딩하는 감자들
+            </div>
+            <div className="landingdesc">대학생 연합 개발 프로젝트/스터디 동아리</div>
+            <a href="#container" style={{ textDecoration: "none", color: "white" }}>
+              <div className="landingdesc">ABOUT US -&gt;</div>
+            </a>
+            <div style={{ marginTop: "15px" }}>
+              <Img link={"https://www.instagram.com/accounts/login/?next=/cotato_official/"} src={"./images/instagram.png"} />
+              <Img link={"https://cafe.naver.com/cotato"} src={"./images/cafe.png"} />
+              <Img link={""} src={"./images/kakaotalk.png"} />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+      <div className="container my-2" id="container">
+        <CardRow />
+      </div>
+    </>
+  )
 }
 
 export default LandingPage
