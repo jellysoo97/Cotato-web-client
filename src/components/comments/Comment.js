@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+
 import CommentReply from "./CommentReply"
 
 function Comment(props) {
@@ -8,16 +9,15 @@ function Comment(props) {
   const [comments, setComments] = useState([])
   const [input, setInput] = useState()
 
-  const onSubmit = (e) => {
+  const createComment = (e) => {
     e.preventDefault()
 
-    //댓글 다는 유저 정보, 내용들로 리퀘스트를 보내야 하는데..!? 이미 했었네!
     const variable = {
       content: input,
       postId: postNumber,
     }
 
-    axios.post("http://localhost:8080/board/:id/createComment ", variable).then((response) => {
+    axios.post("http://localhost:8080/comment/" + postNumber + "/createComment ", variable).then((response) => {
       if (response.data) {
         //console.log(response.data.result);
         setComments("")
@@ -30,6 +30,42 @@ function Comment(props) {
     })
   }
 
+  const updateComment = (e) => {
+    e.preventDefault()
+
+    const variable = {
+      content: input,
+    }
+
+    axios.put("http://localhost:8080/comment/" + postNumber + "/updateComment ", variable).then((response) => {
+      if (response.data) {
+        //console.log(response.data.result);
+        setComments("")
+
+        //PostPageView(부모)의 Comments를 수정해줘야 함
+        props.refreshFunc(response.data.result)
+      } else {
+        alert("댓글 수정 실패")
+      }
+    })
+  }
+
+  const deleteComment = (e) => {
+    e.preventDefault()
+
+    axios.put("http://localhost:8080/comment/" + postNumber + "/createComment ").then((response) => {
+      if (response.data) {
+        //console.log(response.data.result);
+        setComments("")
+
+        //PostPageView(부모)의 Comments를 수정해줘야 함
+        props.refreshFunc(response.data.result)
+      } else {
+        alert("댓글 삭제 실패")
+      }
+    })
+  }
+
   const onChange = (e) => {
     setInput(e.target.value)
   }
@@ -37,7 +73,7 @@ function Comment(props) {
   useEffect(() => {
     async function getComments() {
       try {
-        const response = await axios.get("https://jsonplaceholder.typicode.com/comments/")
+        const response = await axios.get("http://localhost:8080/comment/" + postNumber + "/getComment")
         setComments(response.data)
       } catch (error) {
         console.log(error)
@@ -57,25 +93,28 @@ function Comment(props) {
       })
     )
     setInput("")
-    onSubmit()
+    createComment()
   }
 
-  const removeComment = (index) => {
-    return setComments(comments.filter((comment) => comment.index !== index))
+  const removeComment = (id) => {
+    setComments(comments.filter((comment) => comment.id !== id))
+    deleteComment()
   }
 
-  const changeContent = (index, inputWord) => {
-    return setComments(
+  const changeComment = (id, inputWord) => {
+    setComments(
       comments.map((comment) => {
-        if (comment.index === index) {
+        if (comment.id === id) {
           return {
             ...comment,
-            text: inputWord,
+            content: inputWord,
           }
         }
         return comment
       })
     )
+    setInput("")
+    updateComment()
   }
 
   return (
@@ -86,19 +125,19 @@ function Comment(props) {
       {comments.map((comment, index) => {
         return (
           <div className="row mb-4 border-bottom border-secondary">
-            <div className="col-4 p-2 fw-bold">{comment.name}</div>
+            <div className="col-3 p-2 fw-bold">{comment.name}</div>
             <div className="col-3 p-2">{comment.date}</div>
-            <div key={index} className="col-5 d-grid gap-2 d-flex justify-content-end">
+            <div key={index} className="col-6 d-grid gap-2 d-flex justify-content-end">
               <button className="btn btn-outline-warning">좋아요</button>
-              <button className="btn btn-outline-warning" onClick={() => changeContent(comment.index, input)}>
+              <button className="btn btn-outline-warning" onClick={() => changeComment(comment.id, input)}>
                 수정
               </button>
-              <button className="btn btn-outline-warning" onClick={() => removeComment(comment.index)}>
+              <button className="btn btn-outline-warning" onClick={() => removeComment(comment.id)}>
                 삭제
               </button>
               <CommentReply />
             </div>
-            <div className="col-12 p-3 mb-3">{comment.body}</div>
+            <div className="col-12 p-3 mb-3">{comment.content}</div>
           </div>
         )
       })}
