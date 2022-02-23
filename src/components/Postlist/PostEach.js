@@ -4,23 +4,22 @@ import axios from "axios"
 
 import Comment from "../comments/Comment"
 
-function PostEach(props) {
+function PostEach() {
   let [liked, setLiked] = useState(0)
   const [data, setData] = useState([])
   const [comments, setComments] = useState([])
-  const { postNumber } = useParams()
+  const params = useParams()
+  console.log(params)
 
   useEffect(() => {
     async function getData() {
       try {
         //응답 성공
-        // const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
-        // const response = await axios.get("http://localhost:8080/" + window.location.pathname.substring(1).split("/")[0] + "/" + postNumber)
-        const response = await axios.get("http://localhost:8080/" + props.category + "/" + postNumber)
+        const response = await axios.get("http://localhost:8080/" + params.category + "/" + params.postNumber)
         setData(response.data)
-        console.log(response.data)
+        console.log(response.data._id)
 
-        const responseC = await axios.get("http://localhost:8080/comment/" + data.id + "/getComment")
+        const responseC = await axios.get("http://localhost:8080/comment/" + response.data._id + "/getComment")
         setComments(responseC.data)
       } catch (error) {
         //응답 실패
@@ -28,7 +27,7 @@ function PostEach(props) {
       }
     }
     getData()
-  }, [postNumber]) //postNumber
+  }, [params.postNumber])
 
   const refreshFunction = (newComment) => {
     //부모의 Comments state값을 업데이트하기위한 함수
@@ -40,12 +39,11 @@ function PostEach(props) {
       <div className="container mt-5">
         <div className="row border-top border-3 border-dark">
           <div className="col-11 p-3" style={{ fontSize: "20px", fontWeight: "bold" }}>
-            {data.userId}
-            {/* {data.category} */}
+            {data.category}
           </div>
           <div className="col-1 p-3 d-grid gap-2 d-flex justify-content-end">
             <button type="button" className="btn btn-outline-secondary">
-              <Link to={"/createPost"}>글쓰기</Link>
+              <Link to={"/" + params.category + "/createPost"}>글쓰기</Link>
             </button>
           </div>
         </div>
@@ -63,26 +61,13 @@ function PostEach(props) {
           </div>
         </div>
         <div className="row border-top border-dark">
-          <div className="col-md-1 p-2">
-            {data.userId}
-            {/* 작성자 {data.username} */}
-          </div>
-          <div className="col-md-2 p-2">
-            {data.id}
-            {/* 날짜 {data.date} */}
-          </div>
-          <div className="col-1 offset-7 p-2 text-end">
-            {/* 조회수&nbsp;&#124;&nbsp;{data.views} */}
-            {data.views}
-          </div>
-          <div className="col-1 p-2 text-end">
-            {/* 좋아요&nbsp;&#124;&nbsp;{data.liked} */}
-            {data.liked}
-          </div>
+          <div className="col-md-1 p-2">{data.username}</div>
+          <div className="col-md-2 p-2">{data.date}</div>
+          <div className="col-1 offset-7 p-2 text-end">조회수&nbsp;&#124;&nbsp;{data.views}</div>
+          <div className="col-1 p-2 text-end">좋아요&nbsp;&#124;&nbsp;{data.liked}</div>
         </div>
         <div className="row border-top border-dark">
           <div className="col-12 p-4 mt-3 mb-5 min-vh" style={{ fontSize: "18px" }}>
-            {/* {data.body} */}
             {data.desc}
           </div>
         </div>
@@ -110,7 +95,7 @@ function PostEach(props) {
             </button>
           </div>
         </div>
-        <Comment postId={data.id} commentList={comments} refreshFunction={refreshFunction} />
+        <Comment postId={data._id} username={data.username} commentList={comments} refreshFunction={refreshFunction} />
       </div>
     </>
   )

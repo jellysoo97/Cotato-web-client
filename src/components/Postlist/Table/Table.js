@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import TablePageData from "./TableData"
 import TableFooter from "./TableFooter"
 
-const Table = ({ data, rowsPerPage }) => {
+const Table = ({ data, rowsPerPage }, props) => {
   const header = [
     {
       header: "번호",
@@ -54,9 +54,7 @@ const Table = ({ data, rowsPerPage }) => {
                 <tr key={index} className="tableRowItems">
                   <td className="text-center">{index + 1}</td>
                   <td className="tableCell">
-                    <Link to={`${el.postNumber}`} category={el.category}>
-                      {el.title}
-                    </Link>
+                    <Link to={`${el.postNumber}`}>{el.title}</Link>
                   </td>
                   <td className="text-center">{el.username}</td>
                   <td className="text-center">{el.date}</td>
