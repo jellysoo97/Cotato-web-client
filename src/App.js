@@ -12,7 +12,6 @@ import MyPage from "./components/Auth/MyPage"
 
 import Posts from "./components/Postlist/PostList"
 
-import Comments from "./components/comments/Comments"
 import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/Postlist/PostEach"
 
@@ -26,14 +25,13 @@ function App() {
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/myPage" element={<MyPage />} />
+            <Route exact path="/mypage" element={<MyPage />} />
             <Route exact path="/edit" element={<Edit />} />
 
             <Route exact path="/:category" element={<Posts />} />
             <Route exact path="/:category/:postNumber" element={<PostEach />} />
 
-            <Route exact path="/comments" element={<Comments />} />
-            <Route exact path="/createPost" element={<PostCreate />} />
+            <Route exact path="/:category/createPost" element={<PostCreate />} />
           </Routes>
         </BrowserRouter>
       </div>
