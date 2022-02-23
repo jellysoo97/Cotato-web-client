@@ -6,7 +6,7 @@ import Table from "./Table/Table"
 
 function Posts(props) {
   const [posts, setPosts] = useState(null)
-  const category = props.match.params.category
+  const category = props.category
 
   useEffect(() => {
     async function getPosts() {

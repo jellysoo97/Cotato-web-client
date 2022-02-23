@@ -65,14 +65,14 @@ function NavBar() {
               <NavItem navname={"Home"} href={"/"} />
               {categoryList
                 ? categoryList.map((item, index) => {
-                    return <NavItem key={index} navname={`${item.navname}`} href={`/${item.category}`} />
+                    return <NavItem key={index} navname={`${item.navname}`} href={`/${item.category}`} category={item.category} />
                   })
                 : ""}
-              <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
             <NavBtn href={"/login"} title={"Log in"} />
             <NavBtn href={"/register"} title={"Register"} />
             <NavBtn href={"/edit"} title={"회원정보 수정"} />
+            <NavBtn href={"/mypage"} title={"마이페이지"} />
           </div>
         </div>
       </nav>
