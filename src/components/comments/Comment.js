@@ -34,12 +34,17 @@ function Comment(props) {
 
   return (
     <div className="container mt-4 p-4 border-top border-dark">
+      <div className="row">
+        <div className="col-12 fw-bold">댓글 {props.commentList.length} 개</div>
+      </div>
+
       {/* Comment Lists */}
       <div className="row">
         {props.commentList &&
           props.commentList.map(
             (comment, index) =>
-              !comment.id && ( //대댓글은 우선 숨기겠다는 의미
+              !comment.id && (
+                // 대댓글은 우선 숨기겠다는 의미
                 <Fragment key={index}>
                   <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={props.postId} key={index} />
                   <CommentReply refreshFunction={props.refreshFunction} commentList={props.commentList} parentCommentId={comment._id} postId={props.postId} key={index} />
