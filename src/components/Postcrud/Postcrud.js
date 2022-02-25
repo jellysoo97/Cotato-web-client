@@ -9,20 +9,20 @@ function PostCreate(props) {
   const [PostDesc, setPostDesc] = useState("")
   const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
-  // const id = props.match.params.id -> postNumber
 
   // useEffect(() => {
   //   const idInfo = {
   //     id: id,
-  //   }
+
+  //   };
   //   axios
-  //     .post("http://localhost:8080/getAll", idInfo)
+  //     .post('http://localhost:8080/getAll', idInfo)
   //     .then((response) => response.json())
   //     .then((data) => {
-  //       setPostTitle(data.title)
-  //       setPostDesc(data.desc)
-  //     })
-  // }, [id])
+  //       setPostTitle(data.title);
+  //       setPostDesc(data.desc);
+  //     });
+  // }, [id]);
 
   const onTitleChange = (e) => {
     setPostTitle(e.currentTarget.value)
@@ -39,7 +39,6 @@ function PostCreate(props) {
     input.setAttribute("type", "file")
     input.setAttribute("accept", "image/*")
     input.click()
-    alert("이미지")
     input.onChange = async () => {
       if (input.files) {
         var file = input.files[0]
@@ -99,7 +98,7 @@ function PostCreate(props) {
       )
       .then((response) => {
         console.log(response)
-        if (response.data) {
+        if (response.config.data) {
           console.log("여기가 이프문 콘솔")
           alert("작성 완료")
           setTimeout(() => {
@@ -118,6 +117,40 @@ function PostCreate(props) {
         }
       })
   }
+
+  // const updateHandler = () => {
+  //   try {
+  //     if (PostTitle !== '' && PostDesc !== '') {
+  //       let postInfo = {
+  //         id: id,
+  //         title: PostTitle,
+  //         content: PostDesc,
+  //       }; // const reponse = await fetch();
+
+  //       axios
+  //         .post('http://localhost:8080/updatePost/:id', postInfo)
+  //         .then((response) => {
+  //           alert('수정 완료');
+  //           props.history.replace('/');
+  //         });
+  //     } else {
+  //       alert('모든 칸을 작성해야합니다!');
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const deleteHandler = (id) => {
+  //   axios.delete(`http://localhost:8080/deletePost/${id}`)
+  //   .then((response) => {
+  //     setPostList(
+  //       PostList.filter((val) => {
+  //         return val.id !== id;
+  //       })
+  //     );
+  //   });
+  // };
 
   // const updateHandler = () => {
   //   try {

@@ -45,5 +45,7 @@ function Posts() {
     </div>
   )
 }
+export async function nextPost() {}
+export async function prevPost() {}
 
 export default Posts

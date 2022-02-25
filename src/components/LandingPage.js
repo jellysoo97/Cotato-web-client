@@ -64,6 +64,7 @@ function LandingPage() {
             </div>
           </div>
         </div>
+
       </div>
       <div className="container my-2" id="container">
         <CardRow />
