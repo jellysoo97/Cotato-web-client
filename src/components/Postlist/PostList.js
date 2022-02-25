@@ -8,16 +8,14 @@ import Table from "./Table/Table"
 function Posts() {
   const [posts, setPosts] = useState([])
   const category = useParams()
-  console.log(category.category)
 
+  // 해당 카테고리의 게시글 데이터 받아서 posts에 저장
   useEffect(() => {
     async function getPosts() {
       try {
         const response = await axios.get("http://localhost:8080/" + category.category)
-        console.log("http://localhost:8080/" + category.category)
         console.log(response.data)
         setPosts(response.data) // get data
-        console.log(posts)
       } catch (error) {
         console.log(error)
       }
@@ -25,13 +23,16 @@ function Posts() {
     getPosts()
   }, [])
 
+  console.log(posts)
+
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
         <PageName pagename={category.category} />
       </div>
       <div className="row m-2">
-        <Table data={posts} rowsPerPage={10} category={category.category} />
+        {/* Table(자식 컴포넌트)에 props 전달 */}
+        <Table data={posts} rowsPerPage={10} />
       </div>
     </div>
   )

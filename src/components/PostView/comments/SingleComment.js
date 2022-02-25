@@ -3,7 +3,6 @@ import axios from "axios"
 
 function SingleComment(props) {
   const postId = props.postId
-  const user = "username"
   const [OpenReply, setOpenReply] = useState(false)
   const [commentValue, setcommentValue] = useState("")
 
@@ -11,11 +10,8 @@ function SingleComment(props) {
     e.preventDefault()
 
     const variable = {
-      username: user,
       text: commentValue,
-      createdAt: new Date().toISOString().slice(0, 10),
-      postId: props.postId,
-      id: props.comment._id,
+      post: props.postId,
     }
 
     axios.post("http://localhost:8080/comment/" + postId + "/createComment", variable).then((response) => {

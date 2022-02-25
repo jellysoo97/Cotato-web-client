@@ -5,10 +5,11 @@ import axios from "axios"
 import SingleComment from "./SingleComment"
 import CommentReply from "./CommentReply"
 
+// props: postId, username, comments, refreshFunc
 function Comment(props) {
   const postId = props.postId
+  const username = props.username
   const [commentValue, setcommentValue] = useState("")
-  const user = "userID"
 
   const handleChange = (e) => {
     setcommentValue(e.target.value)
@@ -18,12 +19,11 @@ function Comment(props) {
     e.preventDefault()
 
     const variable = {
-      postId: postId,
-      username: user,
+      post: postId,
       text: commentValue,
     }
 
-    axios.post("http://localhost:8080/comment/" + postId + "/getComment", variable).then((response) => {
+    axios.post("http://localhost:8080/comment/" + postId + "/createComment", variable).then((response) => {
       if (response.data) {
         console.log(response.data)
       } else {

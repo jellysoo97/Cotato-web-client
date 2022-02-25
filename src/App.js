@@ -13,7 +13,7 @@ import MyPage from "./components/Auth/MyPage"
 import Posts from "./components/Postlist/PostList"
 
 import PostCreate from "./components/Postcrud/Postcrud"
-import PostEach from "./components/Postlist/PostEach"
+import PostEach from "./components/PostView/PostEach"
 
 function App() {
   return (

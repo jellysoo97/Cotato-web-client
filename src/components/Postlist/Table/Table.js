@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import TablePageData from "./TableData"
 import TableFooter from "./TableFooter"
 
-const Table = ({ data, rowsPerPage }, props) => {
+// 부모로부터 data, rowsPerPage 전달받음
+const Table = ({ data, rowsPerPage }) => {
   const header = [
     {
       header: "번호",
@@ -33,6 +34,7 @@ const Table = ({ data, rowsPerPage }, props) => {
   ]
   const [page, setPage] = useState(1)
   const { datalist, range } = TablePageData(data, page, rowsPerPage)
+  // datalist: 테이블 한 페이지에 들어가는 데이터 리스트, range: 전체 테이블 페이지 수
 
   return (
     <div className="col-sm-12 table-responsive">
@@ -54,7 +56,9 @@ const Table = ({ data, rowsPerPage }, props) => {
                 <tr key={index} className="tableRowItems">
                   <td className="text-center">{index + 1}</td>
                   <td className="tableCell">
-                    <Link to={`${el.postNumber}`}>{el.title}</Link>
+                    <Link to={`/${el.category}/${el.postNumber}`} style={{ color: "inherit", textDecoration: "inherit" }}>
+                      {el.title}
+                    </Link>
                   </td>
                   <td className="text-center">{el.username}</td>
                   <td className="text-center">{el.date}</td>
@@ -65,6 +69,7 @@ const Table = ({ data, rowsPerPage }, props) => {
             : ""}
         </tbody>
       </table>
+      {/* range(전체 테이블 페이지 수), slice(슬라이스된 데이터), setPage(페이지 상태 함수), page(현재 페이지) */}
       <TableFooter range={range} slice={datalist} setPage={setPage} page={page} />
     </div>
   )
