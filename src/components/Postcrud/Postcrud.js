@@ -1,31 +1,37 @@
 import React, { useState, useEffect, useMemo } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
 
-function PostCreate(props) {
+function PostCreate() {
   const [PostTitle, setPostTitle] = useState("")
   const [PostDesc, setPostDesc] = useState("")
   const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
 
+  const category = useParams()
+  const navigate = useNavigate()
+
+  console.log(category.category)
+
   // useEffect(() => {
   //   const idInfo = {
   //     id: id,
 
-  //   };
+  //   }
   //   axios
-  //     .post('http://localhost:8080/getAll', idInfo)
+  //     .post("http://localhost:8080/getAll", idInfo)
   //     .then((response) => response.json())
   //     .then((data) => {
-  //       setPostTitle(data.title);
-  //       setPostDesc(data.desc);
-  //     });
-  // }, [id]);
+  //       setPostTitle(data.title)
+  //       setPostDesc(data.desc)
+  //     })
+  // }, [id])
 
   const onTitleChange = (e) => {
-    setPostTitle(e.currentTarget.value)
+    setPostTitle(e.target.value)
   }
 
   const onDescChange = (value) => {
@@ -39,6 +45,8 @@ function PostCreate(props) {
     input.setAttribute("type", "file")
     input.setAttribute("accept", "image/*")
     input.click()
+    alert("이미지")
+
     input.onChange = async () => {
       if (input.files) {
         var file = input.files[0]
@@ -82,27 +90,27 @@ function PostCreate(props) {
 
   //////////////////////////// react-quill ////////////////////////////
 
-  const createHandler = (e) => {
+  const createHandler = () => {
     const variable = {
       title: PostTitle,
       desc: PostDesc,
     }
-    //console.log(variable)
+
+    console.log(variable)
 
     axios
       .post(
-        `http://localhost:8080/${
-          window.location.pathname.substring(1).split("/")[0]
-        }/createPost`,
+        "http://localhost:8080/" + category.category + "/createPost",
         variable
       )
       .then((response) => {
-        console.log(response)
+        console.log(response.config.data)
+
         if (response.config.data) {
           console.log("여기가 이프문 콘솔")
           alert("작성 완료")
           setTimeout(() => {
-            props.history.push("/")
+            navigate("/" + category.category)
           }, 3000)
         } else {
           alert("게시물 등록 실패")
@@ -118,41 +126,8 @@ function PostCreate(props) {
       })
   }
 
-  // const updateHandler = () => {
-  //   try {
-  //     if (PostTitle !== '' && PostDesc !== '') {
-  //       let postInfo = {
-  //         id: id,
-  //         title: PostTitle,
-  //         content: PostDesc,
-  //       }; // const reponse = await fetch();
+  // const updateHandler = ({ history }) => {
 
-  //       axios
-  //         .post('http://localhost:8080/updatePost/:id', postInfo)
-  //         .then((response) => {
-  //           alert('수정 완료');
-  //           props.history.replace('/');
-  //         });
-  //     } else {
-  //       alert('모든 칸을 작성해야합니다!');
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const deleteHandler = (id) => {
-  //   axios.delete(`http://localhost:8080/deletePost/${id}`)
-  //   .then((response) => {
-  //     setPostList(
-  //       PostList.filter((val) => {
-  //         return val.id !== id;
-  //       })
-  //     );
-  //   });
-  // };
-
-  // const updateHandler = () => {
   //   try {
   //     if (PostTitle !== "" && PostDesc !== "") {
   //       let postInfo = {
@@ -161,12 +136,11 @@ function PostCreate(props) {
   //         content: PostDesc,
   //       } // const reponse = await fetch();
 
-  //       axios
-  //         .post("http://localhost:8080/updatePost/:id", postInfo)
-  //         .then((response) => {
-  //           alert("수정 완료")
-  //           props.history.replace("/")
-  //         })
+  //       axios.post("http://localhost:8080/updatePost/:id", postInfo).then((response) => {
+  //         alert("수정 완료")
+  //         history.replace("/")
+  //       })
+
   //     } else {
   //       alert("모든 칸을 작성해야합니다!")
   //     }

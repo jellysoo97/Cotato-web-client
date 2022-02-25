@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import axios from "axios"
 
 import PageName from "../Common/PageName"
 import Table from "./Table/Table"
 
 function Posts() {
-  const [posts, setPosts] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const [posts, setPosts] = useState([])
+  const category = useParams()
+
+  // 해당 카테고리의 게시글 데이터 받아서 posts에 저장
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -17,11 +21,14 @@ function Posts() {
         setPosts(null)
         // loading 상태 : true로
         setLoading(true)
-        const category = window.location.pathname.substring(1) //멋잇어보이고 좋다
-        const response = await axios.get("http://localhost:8080/" + category)
+
+        const response = await axios.get(
+          "http://localhost:8080/" + category.category
+        )
+        console.log(response.data)
         setPosts(response.data) // get data
-      } catch (e) {
-        setError(e)
+      } catch (error) {
+        console.log(error)
       }
       setLoading(false)
     }
@@ -34,12 +41,15 @@ function Posts() {
   if (!posts) return null
   console.log(posts)
 
+  console.log(posts)
+
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
-        <PageName pagename={`${window.location.pathname.substring(1)}`} />
+        <PageName pagename={category.category} />
       </div>
       <div className="row m-2">
+        {/* Table(자식 컴포넌트)에 props 전달 */}
         <Table data={posts} rowsPerPage={10} />
       </div>
     </div>

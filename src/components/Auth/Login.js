@@ -6,7 +6,7 @@ import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
 
 function Login() {
   return (
-    <div className="AuthBigBox">
+    <div className="AuthBigBox position-absolute top-50 start-50 translate-middle">
       <article className="card-body">
         <AuthTitle title={"로그인"} />
         <AuthBox label={"id"} text={"아이디"} warning={"아이디를 입력해주세요"} icon={faUser} placeholder={"아이디"} />
@@ -17,7 +17,7 @@ function Login() {
         <div>
           <a>아이디 찾기</a>&nbsp;&#124;&nbsp;
           <a>비밀번호 찾기</a>&nbsp;&#124;&nbsp;
-          <a>회원가입</a>
+          <a href="/register">회원가입</a>
         </div>
       </article>
     </div>

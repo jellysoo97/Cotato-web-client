@@ -6,7 +6,7 @@ import { AuthTitle, AuthBox, AuthBox2, AuthButton } from "./AuthCommon"
 
 function Edit() {
   return (
-    <div className="AuthBigBox">
+    <div className="AuthBigBox position-absolute top-50 start-50 translate-middle">
       <article className="card-body">
         <AuthTitle title={"회원정보 수정"} />
         <AuthBox label={"id"} text={"아이디"} warning={"아이디를 입력해주세요"} icon={faUser} placeholder={"아이디"} />
