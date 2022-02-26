@@ -20,11 +20,15 @@ function PostEach() {
     async function getData() {
       try {
         // get 게시글
-        const response = await axios.get("http://localhost:8080/" + category + "/" + postNumber)
+        const response = await axios.get(
+          "http://localhost:8080/cotato/" + category + "/" + postNumber
+        )
         setData(response.data)
 
         // get 댓글
-        const responseC = await axios.get("http://localhost:8080/comment/" + response.data._id + "/getComment")
+        const responseC = await axios.get(
+          "http://localhost:8080/comment/" + response.data._id + "/getComments"
+        )
         setComments(responseC.data)
       } catch (error) {
         console.log(error)
@@ -37,7 +41,13 @@ function PostEach() {
   // get 이전글
   async function getPrev() {
     try {
-      const response = await axios.get("http://localhost:8080/" + category + "/" + postNumber + "/prevPost")
+      const response = await axios.get(
+        "http://localhost:8080/cotato/" +
+          category +
+          "/" +
+          postNumber +
+          "/prevPost"
+      )
       navigate(`/${response.data[0].category}/${response.data[0].postNumber}`)
     } catch (error) {
       console.log(error)
@@ -48,7 +58,13 @@ function PostEach() {
   // get 다음글
   async function getNext() {
     try {
-      const response = await axios.get("http://localhost:8080/" + category + "/" + postNumber + "/nextPost")
+      const response = await axios.get(
+        "http://localhost:8080/cotato/" +
+          category +
+          "/" +
+          postNumber +
+          "/nextPost"
+      )
       navigate(`/${response.data[0].category}/${response.data[0].postNumber}`)
     } catch (error) {
       console.log(error)
@@ -86,7 +102,15 @@ function PostEach() {
     setComments(comments.concat(newComment)) //자식들한테 값을 전달받아 Comments값 업데이트
   }
 
-  return <PostEachView data={data} comments={comments} getPrev={getPrev} getNext={getNext} refreshFunction={refreshFunction} />
+  return (
+    <PostEachView
+      data={data}
+      comments={comments}
+      getPrev={getPrev}
+      getNext={getNext}
+      refreshFunction={refreshFunction}
+    />
+  )
 }
 
 export default PostEach

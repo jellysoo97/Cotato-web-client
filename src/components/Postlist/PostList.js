@@ -21,9 +21,9 @@ function Posts() {
         setPosts(null)
         // loading 상태 : true로
         setLoading(true)
-
+        console.log(category)
         const response = await axios.get(
-          "http://localhost:8080/" + category.category
+          "http://localhost:8080/cotato/" + category.category
         )
         console.log(response.data)
         setPosts(response.data) // get data

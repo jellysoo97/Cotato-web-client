@@ -23,13 +23,18 @@ function Comment(props) {
       text: commentValue,
     }
 
-    axios.post("http://localhost:8080/comment/" + postId + "/createComment", variable).then((response) => {
-      if (response.data) {
-        console.log(response.data)
-      } else {
-        alert("댓글 저장 실패")
-      }
-    })
+    axios
+      .post(
+        "http://localhost:8080/comment/" + postId + "/createComment",
+        variable
+      )
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data)
+        } else {
+          alert("댓글 저장 실패")
+        }
+      })
   }
 
   return (
@@ -46,8 +51,19 @@ function Comment(props) {
               !comment.id && (
                 // 대댓글은 우선 숨기겠다는 의미
                 <Fragment key={index}>
-                  <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={props.postId} key={index} />
-                  <CommentReply refreshFunction={props.refreshFunction} commentList={props.commentList} parentCommentId={comment._id} postId={props.postId} key={index} />
+                  <SingleComment
+                    refreshFunction={props.refreshFunction}
+                    comment={comment}
+                    postId={props.postId}
+                    key={index}
+                  />
+                  <CommentReply
+                    refreshFunction={props.refreshFunction}
+                    commentList={props.commentList}
+                    parentCommentId={comment._id}
+                    postId={props.postId}
+                    key={index}
+                  />
                 </Fragment>
               )
           )}
@@ -57,7 +73,13 @@ function Comment(props) {
       <form>
         <div className="row">
           <div className="col-10">
-            <textarea className="form-control" value={commentValue} onChange={handleChange} placeholder={"댓글을 입력하세요"} rows="3"></textarea>
+            <textarea
+              className="form-control"
+              value={commentValue}
+              onChange={handleChange}
+              placeholder={"댓글을 입력하세요"}
+              rows="3"
+            ></textarea>
           </div>
           <div className="col-2 p-2 text-center">
             <button className="btn btn-outline-warning p-4" onClick={onSubmit}>

@@ -17,12 +17,18 @@ function PostEachView(props) {
     <div className="container mt-5">
       {/* ---------------------------- 카테고리, 글쓰기 ---------------------------- */}
       <div className="row border-top border-3 border-dark">
-        <div className="col-11 p-3" style={{ fontSize: "20px", fontWeight: "bold" }}>
+        <div
+          className="col-11 p-3"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
           {category}
         </div>
         <div className="col-1 p-3 d-grid gap-2 d-flex justify-content-end">
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={"/" + category + "/createPost"} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={"/cotato/" + category + "/createPost"}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               글쓰기
             </Link>
           </button>
@@ -31,17 +37,26 @@ function PostEachView(props) {
 
       {/* ---------------------------- 제목, 수정, 삭제 ---------------------------- */}
       <div className="row border-top border-dark">
-        <div className="col-10 p-3" style={{ fontSize: "25px", fontWeight: "bolder" }}>
+        <div
+          className="col-10 p-3"
+          style={{ fontSize: "25px", fontWeight: "bolder" }}
+        >
           {data.title}
         </div>
         <div className="col-2 p-3 d-grid gap-2 d-flex justify-content-end">
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={"/" + category + "/createPost"} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={"/cotato/" + category + "/createPost"}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               수정
             </Link>
           </button>
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={"/" + category + "/createPost"} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={"/cotato/" + category + "/createPost"}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               삭제
             </Link>
           </button>
@@ -52,13 +67,20 @@ function PostEachView(props) {
       <div className="row border-top border-dark">
         <div className="col-md-1 p-2">{data.username}</div>
         <div className="col-md-2 p-2">{data.date}</div>
-        <div className="col-1 offset-7 p-2 text-end">조회수&nbsp;&#124;&nbsp;{data.views}</div>
-        <div className="col-1 p-2 text-end">좋아요&nbsp;&#124;&nbsp;{data.liked}</div>
+        <div className="col-1 offset-7 p-2 text-end">
+          조회수&nbsp;&#124;&nbsp;{data.views}
+        </div>
+        <div className="col-1 p-2 text-end">
+          좋아요&nbsp;&#124;&nbsp;{data.liked}
+        </div>
       </div>
 
       {/* ---------------------------- 내용 ---------------------------- */}
       <div className="row border-top border-dark">
-        <div className="col-12 p-4 mt-3 mb-5 min-vh" style={{ fontSize: "18px" }}>
+        <div
+          className="col-12 p-4 mt-3 mb-5 min-vh"
+          style={{ fontSize: "18px" }}
+        >
           {data.desc}
         </div>
       </div>
@@ -76,17 +98,28 @@ function PostEachView(props) {
         </div>
         <div className="col-10 p-2 d-grid gap-2 d-flex justify-content-end">
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={`/${data.category}`} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={`/cotato/${data.category}`}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               목록
             </Link>
           </button>
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={`/${data.category}/${data.postNumber}`} onClick={getPrev} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={`/cotato/${data.category}/${data.postNumber}`}
+              onClick={getPrev}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               이전글
             </Link>
           </button>
           <button type="button" className="btn btn-outline-secondary">
-            <Link to={`/${category}/${postNumber}`} onClick={getNext} style={{ color: "inherit", textDecoration: "inherit" }}>
+            <Link
+              to={`/cotato/${category}/${postNumber}`}
+              onClick={getNext}
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               다음글
             </Link>
           </button>
@@ -94,7 +127,12 @@ function PostEachView(props) {
       </div>
 
       {/* ---------------------------- 댓글 ---------------------------- */}
-      <Comment postId={data._id} username={data.username} commentList={comments} refreshFunction={refreshFunction} />
+      <Comment
+        postId={data._id}
+        username={data.username}
+        commentList={comments}
+        refreshFunction={refreshFunction}
+      />
     </div>
   )
 }

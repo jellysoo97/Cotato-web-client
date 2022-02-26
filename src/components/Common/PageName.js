@@ -12,7 +12,7 @@ function PageName({ pagename }) {
       <div className="col-sm-3">
         <a
           className="btn btn-outline-secondary"
-          href={"/" + `${pagename}` + "/createPost"}
+          href={"/cotato/" + `${pagename}` + "/createPost"}
           role="button"
           style={{ float: "right" }}
         >

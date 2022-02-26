@@ -58,7 +58,7 @@ const Table = ({ data, rowsPerPage }) => {
                   {/* 테이블 인덱스 */}
                   <td className="tableCell">
                     <Link
-                      to={`/${el.category}/${el.postNumber}`}
+                      to={`/cotato/${el.category}/${el.postNumber}`}
                       style={{ color: "inherit", textDecoration: "inherit" }}
                     >
                       {el.title}
