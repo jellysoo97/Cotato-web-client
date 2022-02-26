@@ -100,7 +100,7 @@ function PostCreate() {
 
     axios
       .post(
-        "http://localhost:8080/" + category.category + "/createPost",
+        "http://localhost:8080/cotato/" + category.category + "/createPost",
         variable
       )
       .then((response) => {
