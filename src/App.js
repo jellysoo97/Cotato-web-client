@@ -24,11 +24,19 @@ function App() {
           <Route exact path="/mypage" element={<MyPage />} />
           <Route exact path="/edit" element={<Edit />} />
 
-          <Route exact path="/:category" element={<Posts />} />
+          <Route exact path="/cotato/:category" element={<Posts />} />
           {/* <Route exact path="/:category/:id" element={<PostEach />} /> */}
-          <Route exact path="/:category/:postNumber" element={<PostEach />} />
+          <Route
+            exact
+            path="/cotato/:category/:postNumber"
+            element={<PostEach />}
+          />
 
-          <Route exact path="/:category/createPost" element={<PostCreate />} />
+          <Route
+            exact
+            path="/cotato/:category/createPost"
+            element={<PostCreate />}
+          />
         </Routes>
       </div>
 
