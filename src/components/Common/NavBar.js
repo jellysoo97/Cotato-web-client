@@ -71,7 +71,7 @@ function NavBar() {
               <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
             <NavBtn href={"/login"} title={"Log in"} />
-            <NavBtn href={"/register"} title={"Register"} />
+            <NavBtn href={"/signup"} title={"Sign up"} />
             <NavBtn href={"/edit"} title={"회원정보 수정"} />
           </div>
         </div>

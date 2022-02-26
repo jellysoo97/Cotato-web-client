@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { useState, Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import LandingPage from "./components/LandingPage"
@@ -6,7 +6,7 @@ import NavBar from "./components/Common/NavBar"
 import Footer from "./components/Common/Footer"
 
 import Login from "./components/Auth/Login"
-import Register from "./components/Auth/Register"
+import SignUp from './components/Auth/SignUp'
 import Edit from "./components/Auth/Edit"
 import MyPage from "./components/Auth/MyPage"
 
@@ -16,7 +16,24 @@ import Comments from "./components/comments/Comments"
 import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/Postlist/PostEach"
 
+// const LOGIN = 1
+// const MAIN = 2
+
 function App() {
+  // const [mode, setMode] = useState(LOGIN)
+  // const [id, setId] = useState("")
+
+  // const onLogin = (userId) => {
+  //   alert(`${userId} 님 환영합니다`)
+  //   setMode(MAIN)
+  //   setId(userId)
+  // }
+
+  // const onLogout = () => {
+  //   alert(`로그아웃`);
+  //   setMode(LOGIN);
+  // };
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
@@ -25,7 +42,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/myPage" element={<MyPage />} />
             <Route exact path="/edit" element={<Edit />} />
 
@@ -34,7 +51,11 @@ function App() {
             {/* <Route exact path="/:category/:postNumber" element={<PostEach />} /> */}
 
             <Route exact path="/comments" element={<Comments />} />
-            <Route exact path="/:category/createPost" element={<PostCreate />} />
+            <Route
+              exact
+              path="/:category/createPost"
+              element={<PostCreate />}
+            />
           </Routes>
         </BrowserRouter>
       </div>

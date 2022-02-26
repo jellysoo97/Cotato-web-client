@@ -1,44 +1,74 @@
-import React from "react"
+import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const AuthTitle = ({ title }) => {
   return (
     <div className="container">
       <div className="row mb-3">
-        <img className="col-4" src="./images/logo1.png" width={"30px"} height={"90px"} />
-        <div className="col-4 text-center mt-2" style={{ fontSize: "20px", fontWeight: "bold" }}>
+        <img
+          className="col-4"
+          src="./images/logo1.png"
+          width={'30px'}
+          height={'90px'}
+          alt="logo1"
+        />
+        <div
+          className="col-4 text-center mt-2"
+          style={{ fontSize: '20px', fontWeight: 'bold' }}
+        >
           Cotato
         </div>
-        <img className="col-4" src="./images/logo2.png" width={"30px"} height={"90px"} />
+        <img
+          className="col-4"
+          src="./images/logo2.png"
+          width={'30px'}
+          height={'90px'}
+          alt="logo2"
+        />
       </div>
       <h2>{title}</h2>
       <hr />
     </div>
-  )
+  );
 }
-export const AuthBox = ({ label, text, warning, icon, placeholder }) => {
+
+
+
+
+
+export const AuthBox = (props) => {
+
+
+
   return (
     <div className="container mb-3">
       <div className="row">
         <form>
           <div className="col-2 mb-2">
-            <label for={label}>{text}</label>
+            <label for={props.label}>{props.text}</label>
           </div>
-          <span className="invalid-feedback">{warning}</span>
+          <span className="invalid-feedback">{props.warning}</span>
           <div className="form-group">
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text">
-                  <FontAwesomeIcon icon={icon} size="2x" />
+                  <FontAwesomeIcon icon={props.icon} size="2x" />
                 </span>
               </div>
-              <input type="text" name="" id={label} className="form-control" placeholder={placeholder} required />
+              <input
+                type="text"
+                name=""
+                id={props.label}
+                className="form-control"
+                placeholder={props.placeholder}
+                required
+              />
             </div>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }
 export const AuthBox2 = ({ label, text, warning, icon, placeholder }) => {
   return (

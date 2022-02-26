@@ -31,7 +31,7 @@ function Posts() {
   if (loading) return <div>로딩중</div>
   if (error) return <div>에러</div>
   if (!posts) return null
-  console.log(posts)
+  console.log('post: '+posts)
 
   return (
     <div className="container">
