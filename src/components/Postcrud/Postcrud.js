@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect, useRef, useMemo } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
+import { applyMiddleware } from "redux"
 
 function PostCreate() {
   const [PostTitle, setPostTitle] = useState("")
   const [PostDesc, setPostDesc] = useState("")
   const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
+  const quillRef = useRef()
 
   const category = useParams()
   const navigate = useNavigate()
-
-  console.log(category.category)
 
   // useEffect(() => {
   //   const idInfo = {
@@ -45,20 +45,27 @@ function PostCreate() {
     input.setAttribute("type", "file")
     input.setAttribute("accept", "image/*")
     input.click()
-    alert("이미지")
 
-    input.onChange = async () => {
-      if (input.files) {
-        var file = input.files[0]
-        var formData = new FormData()
+    input.addEventListener("change", async () => {
+      var file = input.files[0]
+      var formData = new FormData()
 
-        formData.append("image", file)
+      formData.append("img", file)
 
-        var fileName = file.name
-        console.log(fileName)
-        console.log(formData)
-      }
-    }
+      console.log(formData)
+      var filename = file.name
+      console.log(filename)
+
+      const result = await axios.post("http://localhost:8080/img", formData)
+      console.log(result)
+
+      // console.log("성공 시, 백엔드가 보내주는 데이터", result.data.url)
+      // const IMG_URL = result.data.url
+
+      // const editor = quillRef.current.getEditor()
+      // const range = editor.getSelection()
+      // editor.insertEmbed(range.index, "img", IMG_URL)
+    })
   }
 
   const modules = useMemo(() => {
@@ -192,6 +199,7 @@ function PostCreate() {
             <ReactQuill
               modules={modules}
               formats={formats}
+              ref={quillRef}
               value={PostDesc}
               onChange={onDescChange}
               name="desc"
