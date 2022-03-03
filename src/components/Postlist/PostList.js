@@ -14,7 +14,6 @@ function Posts() {
     async function getPosts() {
       try {
         const response = await axios.get("http://localhost:8080/" + category.category)
-        console.log(response.data)
         setPosts(response.data) // get data
       } catch (error) {
         console.log(error)
@@ -22,8 +21,6 @@ function Posts() {
     }
     getPosts()
   }, [])
-
-  console.log(posts)
 
   return (
     <div className="container">

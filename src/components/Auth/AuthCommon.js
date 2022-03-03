@@ -1,5 +1,6 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState, useEffect } from "react"
 
 export const AuthTitle = ({ title }) => {
   return (
@@ -16,7 +17,18 @@ export const AuthTitle = ({ title }) => {
     </div>
   )
 }
-export const AuthBox = ({ label, text, warning, icon, placeholder }) => {
+function AuthBox({ setValue, label, text, warning, icon, placeholder }) {
+  const [newValue, setnewValue] = useState("")
+
+  const handleOnChange = (e) => {
+    setnewValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setnewValue(newValue)
+    setValue(newValue)
+  })
+
   return (
     <div className="container mb-3">
       <div className="row">
@@ -32,7 +44,7 @@ export const AuthBox = ({ label, text, warning, icon, placeholder }) => {
                   <FontAwesomeIcon icon={icon} size="2x" />
                 </span>
               </div>
-              <input type="text" name="" id={label} className="form-control" placeholder={placeholder} required />
+              <input value={newValue} onChange={handleOnChange} type="text" name="" id={label} className="form-control" placeholder={placeholder} required />
             </div>
           </div>
         </form>
@@ -40,7 +52,17 @@ export const AuthBox = ({ label, text, warning, icon, placeholder }) => {
     </div>
   )
 }
-export const AuthBox2 = ({ label, text, warning, icon, placeholder }) => {
+function AuthBox2({ setValue2, label, text, warning, icon, placeholder }) {
+  const [newValue, setnewValue] = useState("")
+
+  const handleOnChange = (e) => {
+    setnewValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setnewValue(newValue)
+    setValue2(newValue)
+  })
   return (
     <div className="container mb-3">
       <div className="row">
@@ -56,7 +78,7 @@ export const AuthBox2 = ({ label, text, warning, icon, placeholder }) => {
                   <FontAwesomeIcon icon={icon} size="2x" />
                 </span>
               </div>
-              <input type="password" name="" id={label} className="form-control" placeholder={placeholder} required />
+              <input value={newValue} onChange={handleOnChange} type="password" id={label} className="form-control" placeholder={placeholder} required />
             </div>
           </div>
         </form>
@@ -76,3 +98,5 @@ export const AuthButton = ({ confirm, cancel }) => {
     </div>
   )
 }
+
+export { AuthBox, AuthBox2 }

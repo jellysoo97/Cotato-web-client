@@ -13,8 +13,6 @@ function PostCreate() {
   const category = useParams()
   const navigate = useNavigate()
 
-  console.log(category.category)
-
   // useEffect(() => {
   //   const idInfo = {
   //     id: id,
@@ -70,7 +68,20 @@ function PostCreate() {
     }
   }, [])
 
-  const formats = ["header", "font", "size", "bold", "italic", "underline", "list", "bullet", "align", "color", "background", "image"]
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "align",
+    "color",
+    "background",
+    "image",
+  ]
 
   //////////////////////////// react-quill ////////////////////////////
 
@@ -82,15 +93,21 @@ function PostCreate() {
     console.log(variable)
 
     axios
-      .post("http://localhost:8080/" + category.category + "/createPost", variable)
+      .post(
+        "http://localhost:8080/" + category.category + "/createPost",
+        variable
+      )
       .then((response) => {
-        console.log(response.config.data)
+        console.log(
+          "http://localhost:8080/" + category.category + "/createPost"
+        )
+        console.log(response)
         if (response.config.data) {
           console.log("여기가 이프문 콘솔")
           alert("작성 완료")
           setTimeout(() => {
             navigate("/" + category.category)
-          }, 3000)
+          }, 1000)
         } else {
           alert("게시물 등록 실패")
         }
@@ -147,7 +164,15 @@ function PostCreate() {
           <label for="formGroupExampleInput" className="form-label">
             제목
           </label>
-          <input type="text" className="form-control" id="formGroupExampleInput" placeholder="제목" onChange={onTitleChange} value={PostTitle} name="title"></input>
+          <input
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput"
+            placeholder="제목"
+            onChange={onTitleChange}
+            value={PostTitle}
+            name="title"
+          ></input>
         </div>
         <div className="mb-3">
           <label for="formGroupExampleInput2" className="form-label">
@@ -158,14 +183,24 @@ function PostCreate() {
           {/* react-quill */}
           <div className="text-editor">
             <CustomToolbar />
-            <ReactQuill modules={modules} formats={formats} value={PostDesc} onChange={onDescChange} name="desc" />
+            <ReactQuill
+              modules={modules}
+              formats={formats}
+              value={PostDesc}
+              onChange={onDescChange}
+              name="desc"
+            />
           </div>
         </div>
         {/* <div>image_image_image TAT</div> */}
         <br />
 
         <div className="col-12">
-          <button type="submit" className="btn btn-warning" onClick={createHandler}>
+          <button
+            type="submit"
+            className="btn btn-warning"
+            onClick={createHandler}
+          >
             등록
           </button>
         </div>

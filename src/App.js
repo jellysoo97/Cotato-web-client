@@ -12,8 +12,8 @@ import MyPage from "./components/Auth/MyPage"
 
 import Posts from "./components/Postlist/PostList"
 
-import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/PostView/PostEach"
+import CreateUpdatePost from "./components/Postcrud/CreateUpdatePost"
 
 function App() {
   return (
@@ -31,7 +31,16 @@ function App() {
             <Route exact path="/:category" element={<Posts />} />
             <Route exact path="/:category/:postNumber" element={<PostEach />} />
 
-            <Route exact path="/:category/createPost" element={<PostCreate />} />
+            <Route
+              exact
+              path="/:category/createPost"
+              element={<CreateUpdatePost />}
+            />
+            <Route
+              exact
+              path="/:category/:postNumber/createPost"
+              element={<CreateUpdatePost />}
+            />
           </Routes>
         </BrowserRouter>
       </div>
