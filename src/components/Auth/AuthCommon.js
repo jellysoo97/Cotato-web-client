@@ -32,13 +32,7 @@ export const AuthTitle = ({ title }) => {
   );
 }
 
-
-
-
-
 export const AuthBox = (props) => {
-
-
 
   return (
     <div className="container mb-3">
@@ -62,6 +56,9 @@ export const AuthBox = (props) => {
                 className="form-control"
                 placeholder={props.placeholder}
                 required
+                onChange={props.onChange}
+                
+
               />
             </div>
           </div>
@@ -70,6 +67,8 @@ export const AuthBox = (props) => {
     </div>
   );
 }
+
+
 export const AuthBox2 = ({ label, text, warning, icon, placeholder }) => {
   return (
     <div className="container mb-3">
