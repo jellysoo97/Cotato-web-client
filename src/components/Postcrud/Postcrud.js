@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
-import ReactQuill from "react-quill"
+import ReactQuill, { Quill } from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
 import { applyMiddleware } from "redux"
+import ImageResize from "quill-image-resize"
+Quill.register("modules/ImageResize", ImageResize)
 
 function PostCreate() {
   const [PostTitle, setPostTitle] = useState("")
@@ -55,16 +57,22 @@ function PostCreate() {
       console.log(formData)
       var filename = file.name
       console.log(filename)
+      try {
+        const result = await axios.post(
+          "http://localhost:8080/cotato/img",
+          formData
+        )
+        console.log(result)
 
-      const result = await axios.post("http://localhost:8080/img", formData)
-      console.log(result)
+        console.log("성공 시, 백엔드가 보내주는 데이터", result.data.url)
+        const IMG_URL = result.data.url
 
-      // console.log("성공 시, 백엔드가 보내주는 데이터", result.data.url)
-      // const IMG_URL = result.data.url
-
-      // const editor = quillRef.current.getEditor()
-      // const range = editor.getSelection()
-      // editor.insertEmbed(range.index, "img", IMG_URL)
+        const editor = quillRef.current.getEditor()
+        const range = editor.getSelection()
+        editor.insertEmbed(range.index, "image", IMG_URL)
+      } catch (error) {
+        console.log("실패했어요ㅠ")
+      }
     })
   }
 
@@ -76,6 +84,9 @@ function PostCreate() {
           //이미지 처리는 우리가 직접 imageHandler 함수로 처리할 것이다
           image: imageHandler,
         },
+      },
+      ImageResize: {
+        parchment: Quill.import("parchment"),
       },
     }
   }, [])
@@ -117,8 +128,8 @@ function PostCreate() {
           console.log("여기가 이프문 콘솔")
           alert("작성 완료")
           setTimeout(() => {
-            navigate("/" + category.category)
-          }, 3000)
+            navigate("/cotato/" + category.category)
+          }, 500)
         } else {
           alert("게시물 등록 실패")
         }
@@ -203,6 +214,7 @@ function PostCreate() {
               value={PostDesc}
               onChange={onDescChange}
               name="desc"
+              theme="snow"
             />
           </div>
         </div>

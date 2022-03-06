@@ -10,7 +10,7 @@ import { AuthErrorEventBus } from "./context/AuthContext"
 import HttpClient from "./network/http"
 import TokenStorage from "./db/token"
 import AuthService from "./service/auth"
-
+import Parser from "html-react-parser"
 const baseURL = process.env.REACT_APP_BASE_URL
 const tokenStorage = new TokenStorage()
 const httpClient = new HttpClient(baseURL)

@@ -4,6 +4,7 @@ import axios from "axios"
 
 // import { LikeBtn } from "./Like"
 import PostEachView from "./PostEachView"
+import parse from "html-react-parser"
 
 function PostEach() {
   // const [liked, setLiked] = useState(false)

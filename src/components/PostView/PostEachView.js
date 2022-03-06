@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import Comment from "./comments/Comment"
+import parse from "html-react-parser"
+import { stringify } from "postcss"
 
 // props: data, comments, getPrev, getNext, refreshFunc
 function PostEachView(props) {
@@ -76,12 +78,13 @@ function PostEachView(props) {
       </div>
 
       {/* ---------------------------- 내용 ---------------------------- */}
+
       <div className="row border-top border-dark">
         <div
           className="col-12 p-4 mt-3 mb-5 min-vh"
           style={{ fontSize: "18px" }}
         >
-          {data.desc}
+          {parse("" + data.desc)}
         </div>
       </div>
 
