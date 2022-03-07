@@ -35,7 +35,11 @@ function NavBar() {
   }
   const NavBtn = ({ href, title }) => {
     return (
-      <a href={href} className="btn btn-outline-primary" style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}>
+      <a
+        href={href}
+        className="btn btn-outline-primary"
+        style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}
+      >
         {title}
       </a>
     )
@@ -45,7 +49,7 @@ function NavBar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             {/* <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" /> */}
             <i className="bi bi-cloud"></i>
           </a>
@@ -65,13 +69,19 @@ function NavBar() {
               <NavItem navname={"Home"} href={"/"} />
               {categoryList
                 ? categoryList.map((item, index) => {
-                    return <NavItem key={index} navname={`${item.navname}`} href={`/${item.category}`} />
+                    return (
+                      <NavItem
+                        key={index}
+                        navname={`${item.navname}`}
+                        href={`/cotato/${item.category}`}
+                      />
+                    )
                   })
                 : ""}
               <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
-            <NavBtn href={"/login"} title={"Log in"} />
-            <NavBtn href={"/signup"} title={"Sign up"} />
+            <NavBtn href={"/users/signin"} title={"Login"} />
+            <NavBtn href={"/users/signup"} title={"Register"} />
             <NavBtn href={"/edit"} title={"회원정보 수정"} />
           </div>
         </div>
