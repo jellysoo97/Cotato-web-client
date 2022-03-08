@@ -8,7 +8,7 @@ import { applyMiddleware } from "redux"
 import ImageResize from "quill-image-resize"
 Quill.register("modules/ImageResize", ImageResize)
 
-function PostCreate() {
+const PostCreate = ({ postService }) => {
   const [PostTitle, setPostTitle] = useState("")
   const [PostDesc, setPostDesc] = useState("")
   const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
@@ -17,20 +17,6 @@ function PostCreate() {
 
   const category = useParams()
   const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   const idInfo = {
-  //     id: id,
-
-  //   }
-  //   axios
-  //     .post("http://localhost:8080/getAll", idInfo)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setPostTitle(data.title)
-  //       setPostDesc(data.desc)
-  //     })
-  // }, [id])
 
   const onTitleChange = (e) => {
     setPostTitle(e.target.value)
@@ -108,77 +94,47 @@ function PostCreate() {
 
   //////////////////////////// react-quill ////////////////////////////
 
-  const createHandler = () => {
-    const variable = {
-      title: PostTitle,
-      desc: PostDesc,
-    }
-
-    console.log(variable)
-
-    axios
-      .post(
-        "http://localhost:8080/cotato/" + category.category + "/createPost",
-        variable
-      )
-      .then((response) => {
-        console.log(response.config.data)
-
-        if (response.config.data) {
-          console.log("여기가 이프문 콘솔")
-          alert("작성 완료")
-          setTimeout(() => {
-            navigate("/cotato/" + category.category)
-          }, 500)
-        } else {
-          alert("게시물 등록 실패")
-        }
-      })
-      .catch(function (err) {
-        if (err.response) {
-          console.log(err.response.data)
-        } else if (err.request) {
-          //2.8 (화) request 오류. CORS때문일수도?
-          console.log(err.request)
-        }
-      })
-  }
-
-  // const updateHandler = ({ history }) => {
-
-  //   try {
-  //     if (PostTitle !== "" && PostDesc !== "") {
-  //       let postInfo = {
-  //         id: id,
-  //         title: PostTitle,
-  //         content: PostDesc,
-  //       } // const reponse = await fetch();
-
-  //       axios.post("http://localhost:8080/updatePost/:id", postInfo).then((response) => {
-  //         alert("수정 완료")
-  //         history.replace("/")
-  //       })
-
-  //     } else {
-  //       alert("모든 칸을 작성해야합니다!")
-  //     }
-  //   } catch (err) {
-  //     console.log(err)
+  // const createHandler = () => {
+  //   const variable = {
+  //     title: PostTitle,
+  //     desc: PostDesc,
   //   }
-  // }
 
-  // const deleteHandler = (id) => {
-  //   axios.delete(`http://localhost:8080/deletePost/${id}`).then((response) => {
-  //     setPostList(
-  //       PostList.filter((val) => {
-  //         return val.id !== id
-  //       })
+  //   console.log(variable)
+
+  //   axios
+  //     .post(
+  //       "http://localhost:8080/cotato/" + category.category + "/createPost",
+  //       variable
   //     )
-  //   })
+  //     .then((response) => {
+  //       console.log(response.config.data)
+  //       if (response.config.data) {
+  //         console.log("여기가 이프문 콘솔")
+  //         alert("작성 완료")
+  //         setTimeout(() => {
+  //           navigate("/cotato/" + category.category)
+  //         }, 500)
+  //       } else {
+  //         alert("게시물 등록 실패")
+  //       }
+  //     })
+  //     .catch(function (err) {
+  //       if (err.response) {
+  //         console.log(err.response.data)
+  //       } else if (err.request) {
+  //         //2.8 (화) request 오류. CORS때문일수도?
+  //         console.log(err.request)
+  //       }
+  //     })
   // }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
+    postService.createPost(PostTitle, PostDesc, category)
+    setTimeout(() => {
+      navigate("/cotato/" + category.category)
+    }, 500)
   }
 
   return (
@@ -225,7 +181,7 @@ function PostCreate() {
           <button
             type="submit"
             className="btn btn-warning"
-            onClick={createHandler}
+            // onClick={createHandler}
           >
             등록
           </button>
