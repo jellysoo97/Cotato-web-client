@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const AuthTitle = ({ title }) => {
@@ -109,17 +109,17 @@ export const AuthButton = ({ confirm, cancel }) => {
       <button
         type="button"
         className="btn btn-primary"
-        style={{ width: "90px", marginRight: "20px" }}
+        style={{ width: '90px', height: '40px', marginRight: '20px' }}
       >
         {confirm}
       </button>
       <button
         type="button"
         className="btn btn-outline-primary"
-        style={{ width: "90px" }}
+        style={{ width: '90px' }}
       >
         {cancel}
       </button>
     </div>
-  )
+  );
 }

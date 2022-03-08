@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
 
@@ -81,7 +82,7 @@ const Login = ({ onLogin }) => {
           <div>
             <a>아이디 찾기</a>&nbsp;&#124;&nbsp;
             <a>비밀번호 찾기</a>&nbsp;&#124;&nbsp;
-            <a href="/register">회원가입</a>
+            <Link to="/signup">회원가입</Link>
           </div>
         </article>
       </form>

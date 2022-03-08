@@ -10,6 +10,7 @@ import {
 } from "react"
 
 import Login from "../components/Auth/Login"
+import SignUp from '../components/Auth/SignUp'
 
 const AuthContext = createContext({})
 
@@ -32,9 +33,9 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
   }, [authService])
 
   const signUp = useCallback(
-    async (username, password, name, email) =>
+    async (name, id, pwd, email) =>
       authService
-        .signup(username, password, name, email)
+        .signup(name, id, pwd, email)
         .then((user) => setUser(user)),
     [authService]
   )
@@ -66,9 +67,15 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
         children
       ) : (
         <div className="app">
-          <Login onSignUp={signUp} onLogin={logIn} />
+          <Login onLogin={logIn} />
+          <SignUp onSignUp={signUp} />
         </div>
       )}
+
+      {/* <div className="app">
+          <Login onLogin={logIn} />
+          <SignUp onSignUp={signUp} />
+        </div> */}
     </AuthContext.Provider>
   )
 }
