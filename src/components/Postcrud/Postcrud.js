@@ -10,12 +10,14 @@ function PostCreate() {
   const [PostDesc, setPostDesc] = useState("")
   const [FileName, setFileName] = useState("") //이미지 처리를 위한 상태
   const [PostList, setPostList] = useState([])
+
   const category = useParams()
   const navigate = useNavigate()
 
   // useEffect(() => {
   //   const idInfo = {
   //     id: id,
+
   //   }
   //   axios
   //     .post("http://localhost:8080/getAll", idInfo)
@@ -42,6 +44,7 @@ function PostCreate() {
     input.setAttribute("accept", "image/*")
     input.click()
     alert("이미지")
+
     input.onChange = async () => {
       if (input.files) {
         var file = input.files[0]
@@ -90,18 +93,17 @@ function PostCreate() {
       title: PostTitle,
       desc: PostDesc,
     }
+
     console.log(variable)
 
     axios
       .post(
-        "http://localhost:8080/" + category.category + "/createPost",
+        "http://localhost:8080/cotato/" + category.category + "/createPost",
         variable
       )
       .then((response) => {
-        console.log(
-          "http://localhost:8080/" + category.category + "/createPost"
-        )
-        console.log(response)
+        console.log(response.config.data)
+
         if (response.config.data) {
           console.log("여기가 이프문 콘솔")
           alert("작성 완료")
@@ -123,6 +125,7 @@ function PostCreate() {
   }
 
   // const updateHandler = ({ history }) => {
+
   //   try {
   //     if (PostTitle !== "" && PostDesc !== "") {
   //       let postInfo = {
@@ -135,6 +138,7 @@ function PostCreate() {
   //         alert("수정 완료")
   //         history.replace("/")
   //       })
+
   //     } else {
   //       alert("모든 칸을 작성해야합니다!")
   //     }

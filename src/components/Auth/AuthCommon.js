@@ -6,18 +6,39 @@ export const AuthTitle = ({ title }) => {
   return (
     <div className="container">
       <div className="row mb-3">
-        <img className="col-4" src="./images/logo1.png" width={"30px"} height={"90px"} />
-        <div className="col-4 text-center mt-2" style={{ fontSize: "20px", fontWeight: "bold" }}>
+        <img
+          className="col-4"
+          src="./images/logo1.png"
+          width={"30px"}
+          height={"90px"}
+        />
+        <div
+          className="col-4 text-center mt-4"
+          style={{ fontSize: "30px", fontWeight: "bold" }}
+        >
           Cotato
         </div>
-        <img className="col-4" src="./images/logo2.png" width={"30px"} height={"90px"} />
+        <img
+          className="col-4"
+          src="./images/logo2.png"
+          width={"30px"}
+          height={"90px"}
+        />
       </div>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <hr />
     </div>
   )
 }
-function AuthBox({ setValue, label, text, warning, icon, placeholder }) {
+export const AuthBox = ({
+  label,
+  text,
+  warning,
+  icon,
+  placeholder,
+  name,
+  getValue,
+}) => {
   const [newValue, setnewValue] = useState("")
 
   const handleOnChange = (e) => {
@@ -26,7 +47,7 @@ function AuthBox({ setValue, label, text, warning, icon, placeholder }) {
 
   useEffect(() => {
     setnewValue(newValue)
-    setValue(newValue)
+    getValue(newValue)
   })
 
   return (
@@ -44,7 +65,16 @@ function AuthBox({ setValue, label, text, warning, icon, placeholder }) {
                   <FontAwesomeIcon icon={icon} size="2x" />
                 </span>
               </div>
-              <input value={newValue} onChange={handleOnChange} type="text" name="" id={label} className="form-control" placeholder={placeholder} required />
+              <input
+                type="text"
+                id={label}
+                name={name}
+                value={newValue}
+                onChange={handleOnChange}
+                className="form-control"
+                placeholder={placeholder}
+                required
+              />
             </div>
           </div>
         </form>
@@ -52,7 +82,15 @@ function AuthBox({ setValue, label, text, warning, icon, placeholder }) {
     </div>
   )
 }
-function AuthBox2({ setValue2, label, text, warning, icon, placeholder }) {
+export const AuthBox2 = ({
+  label,
+  text,
+  warning,
+  icon,
+  placeholder,
+  name,
+  getPassword,
+}) => {
   const [newValue, setnewValue] = useState("")
 
   const handleOnChange = (e) => {
@@ -61,8 +99,9 @@ function AuthBox2({ setValue2, label, text, warning, icon, placeholder }) {
 
   useEffect(() => {
     setnewValue(newValue)
-    setValue2(newValue)
+    getPassword(newValue)
   })
+
   return (
     <div className="container mb-3">
       <div className="row">
@@ -78,7 +117,16 @@ function AuthBox2({ setValue2, label, text, warning, icon, placeholder }) {
                   <FontAwesomeIcon icon={icon} size="2x" />
                 </span>
               </div>
-              <input value={newValue} onChange={handleOnChange} type="password" id={label} className="form-control" placeholder={placeholder} required />
+              <input
+                type="password"
+                id={label}
+                className="form-control"
+                placeholder={placeholder}
+                name={name}
+                value={newValue}
+                onChange={handleOnChange}
+                required
+              />
             </div>
           </div>
         </form>
@@ -89,14 +137,20 @@ function AuthBox2({ setValue2, label, text, warning, icon, placeholder }) {
 export const AuthButton = ({ confirm, cancel }) => {
   return (
     <div className="mt-4">
-      <button type="button" className="btn btn-primary" style={{ width: "90px", marginRight: "20px" }}>
+      <button
+        type="button"
+        className="btn btn-primary"
+        style={{ width: "90px", marginRight: "20px" }}
+      >
         {confirm}
       </button>
-      <button type="button" className="btn btn-outline-primary" style={{ width: "90px" }}>
+      <button
+        type="button"
+        className="btn btn-outline-primary"
+        style={{ width: "90px" }}
+      >
         {cancel}
       </button>
     </div>
   )
 }
-
-export { AuthBox, AuthBox2 }
