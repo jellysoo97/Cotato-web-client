@@ -6,21 +6,39 @@ import PageName from "../Common/PageName"
 import Table from "./Table/Table"
 
 function Posts() {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
   const [posts, setPosts] = useState([])
   const category = useParams()
 
   // 해당 카테고리의 게시글 데이터 받아서 posts에 저장
   useEffect(() => {
-    async function getPosts() {
+    const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/" + category.category)
+        // 요청 시작 : error 와 posts 를 초기화
+        setError(null)
+        setPosts(null)
+        // loading 상태 : true로
+        setLoading(true)
+
+        const response = await axios.get(
+          "http://localhost:8080/cotato/" + category.category
+        )
+
         setPosts(response.data) // get data
       } catch (error) {
         console.log(error)
       }
+      setLoading(false)
     }
-    getPosts()
+
+    fetchPosts()
   }, [])
+  // console.log(window.location.pathname.substring(1))
+  if (loading) return <div>로딩중</div>
+  if (error) return <div>에러</div>
+  if (!posts) return null
 
   return (
     <div className="container">
@@ -34,5 +52,7 @@ function Posts() {
     </div>
   )
 }
+export async function nextPost() {}
+export async function prevPost() {}
 
 export default Posts

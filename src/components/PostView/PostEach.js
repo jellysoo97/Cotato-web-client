@@ -21,7 +21,7 @@ function PostEach() {
       try {
         // get 게시글
         const response = await axios.get(
-          "http://localhost:8080/" + category + "/" + postNumber
+          "http://localhost:8080/cotato/" + category + "/" + postNumber
         )
         setData(response.data)
 
@@ -42,7 +42,11 @@ function PostEach() {
   async function getPrev() {
     try {
       const response = await axios.get(
-        "http://localhost:8080/" + category + "/" + postNumber + "/prevPost"
+        "http://localhost:8080/cotato/" +
+          category +
+          "/" +
+          postNumber +
+          "/prevPost"
       )
       navigate(`/${response.data[0].category}/${response.data[0].postNumber}`)
     } catch (error) {
@@ -55,7 +59,11 @@ function PostEach() {
   async function getNext() {
     try {
       const response = await axios.get(
-        "http://localhost:8080/" + category + "/" + postNumber + "/nextPost"
+        "http://localhost:8080/cotato/" +
+          category +
+          "/" +
+          postNumber +
+          "/nextPost"
       )
       navigate(`/${response.data[0].category}/${response.data[0].postNumber}`)
     } catch (error) {

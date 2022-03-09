@@ -21,8 +21,17 @@ function CommentReply(props) {
       <Fragment key={index}>
         {comment.id === parentCommentId && (
           <div style={{ width: "80%", marginLeft: "40px" }}>
-            <SingleComment refreshFunction={props.refreshFunction} comment={comment} postId={props.postId} />
-            <CommentReply refreshFunction={props.refreshFunction} commentList={props.commentList} postId={props.postId} parentCommentId={comment._id} />
+            <SingleComment
+              refreshFunction={props.refreshFunction}
+              comment={comment}
+              postId={props.postId}
+            />
+            <CommentReply
+              refreshFunction={props.refreshFunction}
+              commentList={props.commentList}
+              postId={props.postId}
+              parentCommentId={comment._id}
+            />
           </div>
         )}
       </Fragment>
@@ -34,7 +43,10 @@ function CommentReply(props) {
   return (
     <div>
       {ChildCommentNumber > 0 && (
-        <p style={{ fontSize: "14px", margin: "0", color: "gray" }} onClick={onHandleChange}>
+        <p
+          style={{ fontSize: "14px", margin: "0", color: "gray" }}
+          onClick={onHandleChange}
+        >
           대댓글 {ChildCommentNumber} 개
         </p>
       )}
