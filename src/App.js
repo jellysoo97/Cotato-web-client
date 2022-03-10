@@ -13,7 +13,7 @@ import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/PostView/PostEach"
 // import CreateUpdatePost from "./components/Postcrud/CreateUpdatePost"
 
-function App() {
+function App({ postService }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
@@ -30,7 +30,7 @@ function App() {
           <Route
             exact
             path="/cotato/:category/:postNumber"
-            element={<PostEach />}
+            element={<PostEach postService={postService} />}
           />
 
           {/* //     <Route
@@ -48,7 +48,12 @@ function App() {
           <Route
             exact
             path="/cotato/:category/createPost"
-            element={<PostCreate />}
+            element={<PostCreate postService={postService} />}
+          />
+          <Route
+            exact
+            path="/cotato/:category/:postNumber/createPost"
+            element={<PostCreate postService={postService} />}
           />
         </Routes>
       </div>

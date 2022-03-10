@@ -4,8 +4,9 @@ import axios from "axios"
 
 // import { LikeBtn } from "./Like"
 import PostEachView from "./PostEachView"
+import parse from "html-react-parser"
 
-function PostEach() {
+function PostEach({ postService }) {
   // const [liked, setLiked] = useState(false)
   // const [likedNum, setLikedNum] = useState(0)
   const [data, setData] = useState([])
@@ -72,25 +73,25 @@ function PostEach() {
     }
   }
 
-  function handleDelete() {
-    alert("게시글을 삭제하시겠습니까?")
+  // function handleDelete() {
+  //   alert("게시글을 삭제하시겠습니까?")
 
-    async function deletePost() {
-      try {
-        const response = await axios.delete(
-          "http://localhost:8080/deletePost/" + data._id
-        )
-        if (response) {
-          console.log(response)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    deletePost()
-    alert("삭제 완료")
-    navigate("/" + category)
-  }
+  //   async function deletePost() {
+  //     try {
+  //       const response = await axios.delete(
+  //         "http://localhost:8080/deletePost/" + data._id
+  //       )
+  //       if (response) {
+  //         console.log(response)
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   deletePost()
+  //   alert("삭제 완료")
+  //   navigate("/" + category)
+  // }
 
   // async function putLike() {
   //   setLiked(!liked)
@@ -111,10 +112,19 @@ function PostEach() {
   //     })
   // }
 
+  const deletePost = async (e) => {
+    e.preventDefault()
+    postService.deletePost(data._id)
+    setTimeout(() => {
+      alert("해당 게시글 삭제 완료")
+      navigate("/cotato/" + category)
+    }, 500)
+  }
+
   // 해당 게시글이 없는 에러 핸들링 함수
   function handlePrePost() {
     alert("해당 게시글이 없습니다.")
-    navigate(`/${category}`)
+    navigate(`/cotato/${category}`)
   }
 
   //부모의 Comments state값을 업데이트하기 위한 함수
@@ -129,7 +139,7 @@ function PostEach() {
       comments={comments}
       getPrev={getPrev}
       getNext={getNext}
-      handleDelete={handleDelete}
+      deletePost={deletePost}
       refreshFunction={refreshFunction}
     />
   )

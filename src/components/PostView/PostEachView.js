@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
-import CreateUpdatePost from "../Postcrud/CreateUpdatePost"
 import Comment from "./comments/Comment"
+import parse from "html-react-parser"
+import { stringify } from "postcss"
 
 // props: data, comments, getPrev, getNext, getComment, refreshFunc
 function PostEachView(props) {
@@ -11,7 +12,7 @@ function PostEachView(props) {
   const postNumber = props.data.postNumber
   const getPrev = props.getPrev
   const getNext = props.getNext
-  const handleDelete = props.handleDelete
+  const deletePost = props.deletePost
   const comments = props.comments
   const refreshFunction = props.refreshFunction
 
@@ -48,19 +49,18 @@ function PostEachView(props) {
         <div className="col-2 p-3 d-grid gap-2 d-flex justify-content-end">
           <button type="button" className="btn btn-outline-secondary">
             <Link
-              to={"/cotato/" + category + "/createPost"}
+              to={"/cotato/" + category + "/" + postNumber + "/createPost"}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               수정
             </Link>
           </button>
-          <button type="button" className="btn btn-outline-secondary">
-            <Link
-              to={"/cotato/" + category + "/createPost"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              삭제
-            </Link>
+          <button
+            type="button"
+            className="btn btn-outline-secondary"
+            onClick={deletePost}
+          >
+            삭제
           </button>
         </div>
       </div>
@@ -78,12 +78,13 @@ function PostEachView(props) {
       </div>
 
       {/* ---------------------------- 내용 ---------------------------- */}
+
       <div className="row border-top border-dark">
         <div
           className="col-12 p-4 mt-3 mb-5 min-vh"
           style={{ fontSize: "18px" }}
         >
-          {data.desc}
+          {parse("" + data.desc)}
         </div>
       </div>
 

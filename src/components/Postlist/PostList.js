@@ -5,7 +5,7 @@ import axios from "axios"
 import PageName from "../Common/PageName"
 import Table from "./Table/Table"
 
-function Posts() {
+const Posts = ({ postService }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -43,7 +43,7 @@ function Posts() {
   return (
     <div className="container">
       <div className="row m-2 p-2 align-items-center">
-        <PageName pagename={category.category} />
+        <PageName pagename={category.category} postService={postService} />
       </div>
       <div className="row m-2">
         {/* Table(자식 컴포넌트)에 props 전달 */}
