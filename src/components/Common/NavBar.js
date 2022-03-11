@@ -80,8 +80,8 @@ function NavBar() {
                 : ""}
               <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
-            <NavBtn href={"/users/signin"} title={"Login"} />
-            <NavBtn href={"/users/signup"} title={"Register"} />
+            <NavBtn href={"/signin"} title={"Login"} />
+            <NavBtn href={"/signup"} title={"Sign Up"} />
             <NavBtn href={"/edit"} title={"회원정보 수정"} />
           </div>
         </div>

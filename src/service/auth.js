@@ -6,7 +6,7 @@ export default class AuthService {
 
   async signup(username, password, name, email) {
     console.log(this.http)
-    const data = await this.http.fetch("/users/signup", {
+    const data = await this.http.fetch("/signup", {
       method: "POST",
       body: JSON.stringify({
         username,
@@ -16,11 +16,12 @@ export default class AuthService {
       }),
     })
     this.tokenStorage.saveToken(data.token)
+    console.log('data: '+data.token)
     return data
   }
 
   async login(username, password) {
-    const data = await this.http.fetch("/users/signin", {
+    const data = await this.http.fetch("/signin", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     })

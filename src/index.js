@@ -20,12 +20,12 @@ const authService = new AuthService(httpClient, tokenStorage)
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <AuthProvider
+      <AuthProvider
         authService={authService}
         authErrorEventBus={authErrorEventBus}
-      > */}
+      >
         <App />
-      {/* </AuthProvider> */}
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
