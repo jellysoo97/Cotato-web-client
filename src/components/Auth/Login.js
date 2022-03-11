@@ -91,7 +91,7 @@ const Login = ({ onLogin }) => {
             <a>아이디 찾기</a>&nbsp;&#124;&nbsp;
             <a>비밀번호 찾기</a>&nbsp;&#124;&nbsp;
             <Link
-              to="users/signup"
+              to="/users/signup"
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
               회원가입
