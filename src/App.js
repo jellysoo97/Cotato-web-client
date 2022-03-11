@@ -12,18 +12,18 @@ import MyPage from "./components/Auth/MyPage"
 import Posts from "./components/Postlist/PostList"
 import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/PostView/PostEach"
+// import CreateUpdatePost from "./components/Postcrud/CreateUpdatePost"
 
-function App() {
-
+function App({ postService }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
-      <div style={{ minHeight: "calc(100vh - 80px)" }}>
+      <div style={{ minHeight: 'calc(100vh - 80px)' }}>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/signin" element={<Login />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/mypage" element={<MyPage />} />
+          <Route exact path="/users/signin" element={<Login />} />
+          <Route exact path="/users/signup" element={<SignUp />} />
+          <Route exact path="/myPage" element={<MyPage />} />
           <Route exact path="/edit" element={<Edit />} />
 
           <Route exact path="/cotato/:category" element={<Posts />} />
@@ -31,13 +31,30 @@ function App() {
           <Route
             exact
             path="/cotato/:category/:postNumber"
-            element={<PostEach />}
+            element={<PostEach postService={postService} />}
           />
 
+          {/* //     <Route
+        //       exact
+        //       path="/:category/createPost"
+        //       element={<CreateUpdatePost />}
+        //     />
+        //     <Route
+        //       exact
+        //       path="/:category/:postNumber/createPost"
+        //       element={<CreateUpdatePost />}
+        //     />
+        //   </Routes>
+        // </BrowserRouter> */}
           <Route
             exact
             path="/cotato/:category/createPost"
-            element={<PostCreate />}
+            element={<PostCreate postService={postService} />}
+          />
+          <Route
+            exact
+            path="/cotato/:category/:postNumber/createPost"
+            element={<PostCreate postService={postService} />}
           />
         </Routes>
       </div>

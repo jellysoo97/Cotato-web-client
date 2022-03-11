@@ -15,7 +15,7 @@ function Comment(props) {
     setcommentValue(e.target.value)
   }
 
-  const onSubmit = (e) => {
+  async function onSubmit(e) {
     e.preventDefault()
 
     const variable = {
@@ -23,7 +23,7 @@ function Comment(props) {
       text: commentValue,
     }
 
-    axios
+    await axios
       .post(
         "http://localhost:8080/comment/" + postId + "/createComment",
         variable
@@ -31,6 +31,8 @@ function Comment(props) {
       .then((response) => {
         if (response.data) {
           console.log(response.data)
+          props.refreshFunction(response.data)
+          setcommentValue("")
         } else {
           alert("댓글 저장 실패")
         }
@@ -54,14 +56,14 @@ function Comment(props) {
                   <SingleComment
                     refreshFunction={props.refreshFunction}
                     comment={comment}
-                    postId={props.postId}
-                    key={index}
+                    postId={postId}
+                    parentCommentId={comment._id}
                   />
                   <CommentReply
                     refreshFunction={props.refreshFunction}
                     commentList={props.commentList}
                     parentCommentId={comment._id}
-                    postId={props.postId}
+                    postId={postId}
                     key={index}
                   />
                 </Fragment>

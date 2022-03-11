@@ -1,5 +1,6 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState, useEffect } from "react"
 
 export const AuthTitle = ({ title }) => {
   return (
@@ -13,8 +14,8 @@ export const AuthTitle = ({ title }) => {
           alt=""
         />
         <div
-          className="col-4 text-center mt-2"
-          style={{ fontSize: '20px', fontWeight: 'bold' }}
+          className="col-4 text-center mt-4"
+          style={{ fontSize: "30px", fontWeight: "bold" }}
         >
           Cotato
         </div>
@@ -26,34 +27,54 @@ export const AuthTitle = ({ title }) => {
           alt=""
         />
       </div>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <hr />
     </div>
   );
 }
-export const AuthBox = (props) => {
+export const AuthBox = ({
+  label,
+  text,
+  warning,
+  icon,
+  placeholder,
+  name,
+  getValue,
+}) => {
+  const [newValue, setnewValue] = useState("")
+
+  const handleOnChange = (e) => {
+    setnewValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setnewValue(newValue)
+    getValue(newValue)
+  })
+
   return (
     <div className="container mb-3">
       <div className="row">
         <form>
           <div className="col-2 mb-2">
-            <label for={props.label}>{props.text}</label>
+            <label for={label}>{text}</label>
           </div>
-          <span className="invalid-feedback">{props.warning}</span>
+          <span className="invalid-feedback">{warning}</span>
           <div className="form-group">
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text">
-                  <FontAwesomeIcon icon={props.icon} size="2x" />
+                  <FontAwesomeIcon icon={icon} size="2x" />
                 </span>
               </div>
               <input
                 type="text"
-                id={props.label}
-                name={props.name}
-                value={props.value}
+                id={label}
+                name={name}
+                value={newValue}
+                onChange={handleOnChange}
                 className="form-control"
-                placeholder={props.placeholder}
+                placeholder={placeholder}
                 required
               />
             </div>
@@ -70,8 +91,19 @@ export const AuthBox2 = ({
   icon,
   placeholder,
   name,
-  value,
+  getPassword,
 }) => {
+  const [newValue, setnewValue] = useState("")
+
+  const handleOnChange = (e) => {
+    setnewValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setnewValue(newValue)
+    getPassword(newValue)
+  })
+
   return (
     <div className="container mb-3">
       <div className="row">
@@ -93,7 +125,8 @@ export const AuthBox2 = ({
                 className="form-control"
                 placeholder={placeholder}
                 name={name}
-                value={value}
+                value={newValue}
+                onChange={handleOnChange}
                 required
               />
             </div>

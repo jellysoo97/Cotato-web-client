@@ -2,47 +2,56 @@ import React, { useState } from "react"
 import { Link } from 'react-router-dom'
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
-
 import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
+
+// dlrjs0506
+// ab3670
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+
+  const getValue = (value) => {
+    setUsername(value)
+  }
+
+  const getPassword = (value) => {
+    setPassword(value)
+  }
 
   const onSubmit = (event) => {
     event.preventDefault()
     onLogin(username, password)
   }
 
-  const onChange = (event) => {
-    const {
-      target: { name, value },
-    } = event
-    switch (name) {
-      case "username":
-        return setUsername(value)
-      case "password":
-        return setPassword(value)
-      default:
-    }
-  }
+  // const onChange = (event) => {
+  //   const {
+  //     target: { name, value },
+  //   } = event
+  //   switch (name) {
+  //     case "username":
+  //       return setUsername(value)
+  //     case "password":
+  //       return setPassword(value)
+  //     default:
+  //   }
+  // }
 
   return (
     <div className="AuthBigBox position-absolute top-50 start-50 translate-middle">
       <form className="auth-form" onSubmit={onSubmit}>
         <article className="card-body">
           <AuthTitle title={"로그인"} />
-          {/* <AuthBox
+          <AuthBox
             label={"id"}
             text={"아이디"}
             warning={"아이디를 입력해주세요"}
             icon={faUser}
-            value={username}
+            getValue={getValue}
             name="username"
-            onChange={onChange}
             placeholder={"아이디"}
-          /> */}
-          <input
+          />
+          {/* <input
             name="username"
             type="text"
             id={"id"}
@@ -61,17 +70,16 @@ const Login = ({ onLogin }) => {
             onChange={onChange}
             value={password}
             required
-          />
-          {/* <AuthBox2
+          /> */}
+          <AuthBox2
             label={"pw"}
             text={"비밀번호"}
             warning={"비밀번호를 입력해주세요"}
             icon={faLock}
-            value={password}
+            getPassword={getPassword}
             name="password"
-            onChange={onChange}
             placeholder={"비밀번호"}
-          /> */}
+          />
           <button
             type="submit"
             className="btn btn-primary mt-3 mb-3"
@@ -82,7 +90,12 @@ const Login = ({ onLogin }) => {
           <div>
             <a>아이디 찾기</a>&nbsp;&#124;&nbsp;
             <a>비밀번호 찾기</a>&nbsp;&#124;&nbsp;
-            <Link to="/signup">회원가입</Link>
+            <Link
+              to="users/signup"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              회원가입
+            </Link>
           </div>
         </article>
       </form>

@@ -11,11 +11,13 @@ import HttpClient from "./network/http"
 import TokenStorage from "./db/token"
 import AuthService from "./service/auth"
 
+import PostService from "./service/post"
 const baseURL = process.env.REACT_APP_BASE_URL
 const tokenStorage = new TokenStorage()
 const httpClient = new HttpClient(baseURL)
 const authErrorEventBus = new AuthErrorEventBus()
 const authService = new AuthService(httpClient, tokenStorage)
+const postService = new PostService(httpClient, tokenStorage)
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +26,7 @@ ReactDOM.render(
         authService={authService}
         authErrorEventBus={authErrorEventBus}
       >
-        <App />
+        <App postService={postService} />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
