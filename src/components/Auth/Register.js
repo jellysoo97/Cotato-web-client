@@ -6,7 +6,7 @@ import { AuthTitle, AuthBox, AuthBox2, AuthButton } from "./AuthCommon"
 
 function Register() {
   return (
-    <div className="AuthBigBox">
+    <div className="AuthBigBox position-absolute top-50 start-50 translate-middle">
       <article className="card-body">
         <AuthTitle title={"회원가입"} />
         <AuthBox label={"name"} text={"이름"} warning={"이름을 입력해주세요"} icon={faUser} placeholder={"이름"} />
@@ -20,3 +20,4 @@ function Register() {
 }
 
 export default Register
+  

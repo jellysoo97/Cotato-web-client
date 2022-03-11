@@ -4,6 +4,7 @@ import axios from "axios"
 
 import Comments from "../comments/Comments"
 
+
 function PostEach() {
   let [liked, setLiked] = useState(0)
   const [data, setData] = useState([])
