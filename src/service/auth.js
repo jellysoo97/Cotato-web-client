@@ -15,13 +15,13 @@ export default class AuthService {
         email,
       }),
     })
-    this.tokenStorage.saveToken(data.token)
-    console.log('data: '+data.token)
+    // this.tokenStorage.saveToken(data.token)
+    console.log("data: " + data.token)
     return data
   }
 
   async login(username, password) {
-    const data = await this.http.fetch("/signin", {
+    const data = await this.http.fetch("/users/signin", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     })

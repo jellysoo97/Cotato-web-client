@@ -15,6 +15,7 @@ function PostEachView(props) {
   const deletePost = props.deletePost
   const comments = props.comments
   const refreshFunction = props.refreshFunction
+  const user = props.user
 
   return (
     <div className="container mt-5">
@@ -26,16 +27,20 @@ function PostEachView(props) {
         >
           {category}
         </div>
-        <div className="col-3 p-3 d-grid gap-2 d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-secondary">
-            <Link
-              to={"/cotato/" + category + "/createPost"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              글쓰기
-            </Link>
-          </button>
-        </div>
+        {user ? (
+          <div className="col-3 p-3 d-grid gap-2 d-flex justify-content-end">
+            <button type="button" className="btn btn-outline-secondary">
+              <Link
+                to={"/cotato/" + category + "/createPost"}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                글쓰기
+              </Link>
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {/* ---------------------------- 제목, 수정, 삭제 ---------------------------- */}
@@ -46,23 +51,27 @@ function PostEachView(props) {
         >
           {data.title}
         </div>
-        <div className="col-2 p-3 d-grid gap-2 d-flex justify-content-end">
-          <button type="button" className="btn btn-outline-secondary">
-            <Link
-              to={"/cotato/" + category + "/" + postNumber + "/createPost"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
+        {user ? (
+          <div className="col-2 p-3 d-grid gap-2 d-flex justify-content-end">
+            <button type="button" className="btn btn-outline-secondary">
+              <Link
+                to={"/cotato/" + category + "/" + postNumber + "/createPost"}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                수정
+              </Link>
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={deletePost}
             >
-              수정
-            </Link>
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={deletePost}
-          >
-            삭제
-          </button>
-        </div>
+              삭제
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {/* ---------------------------- 아이디, 날짜, 조회수, 좋아요 ---------------------------- */}
@@ -135,6 +144,7 @@ function PostEachView(props) {
         username={data.username}
         commentList={comments}
         refreshFunction={refreshFunction}
+        user={user}
       />
     </div>
   )

@@ -6,7 +6,7 @@ import axios from "axios"
 import PostEachView from "./PostEachView"
 import parse from "html-react-parser"
 
-function PostEach({ postService }) {
+function PostEach({ authService, authErrorEventBus, postService }) {
   // const [liked, setLiked] = useState(false)
   // const [likedNum, setLikedNum] = useState(0)
   const [data, setData] = useState([])
@@ -15,6 +15,18 @@ function PostEach({ postService }) {
   const category = params.category
   const postNumber = Number(params.postNumber)
   const navigate = useNavigate()
+  const [user, setUser] = useState(undefined)
+
+  // 인증
+  useEffect(() => {
+    authErrorEventBus.listen((err) => {
+      console.log(err)
+      setUser(undefined)
+    })
+  }, [authErrorEventBus])
+  useEffect(() => {
+    authService.me().then(setUser).catch(console.error)
+  }, [authService])
 
   // postNumber 바뀔때마다 리렌더링
   useEffect(() => {
@@ -141,6 +153,7 @@ function PostEach({ postService }) {
       getNext={getNext}
       deletePost={deletePost}
       refreshFunction={refreshFunction}
+      user={user}
     />
   )
 }

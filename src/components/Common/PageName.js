@@ -1,6 +1,6 @@
 import React from "react"
 
-function PageName({ pagename }) {
+function PageName({ pagename, user }) {
   return (
     <>
       <div
@@ -9,16 +9,20 @@ function PageName({ pagename }) {
       >
         {pagename}
       </div>
-      <div className="col-sm-3">
-        <a
-          className="btn btn-outline-secondary"
-          href={"/cotato/" + `${pagename}` + "/createPost"}
-          role="button"
-          style={{ float: "right" }}
-        >
-          글쓰기
-        </a>
-      </div>
+      {user ? (
+        <div className="col-sm-3">
+          <a
+            className="btn btn-outline-secondary"
+            href={"/cotato/" + `${pagename}` + "/createPost"}
+            role="button"
+            style={{ float: "right" }}
+          >
+            글쓰기
+          </a>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   )
 }

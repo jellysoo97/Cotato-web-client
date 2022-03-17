@@ -8,12 +8,12 @@ import {
   useMemo,
   useState,
 } from "react"
+import App from "../App"
 
 import Login from "../components/Auth/Login"
-import SignUp from '../components/Auth/SignUp'
+import SignUp from "../components/Auth/SignUp"
 
 const AuthContext = createContext({})
-
 const contextRef = createRef()
 
 export function AuthProvider({ authService, authErrorEventBus, children }) {
@@ -21,24 +21,25 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
 
   useImperativeHandle(contextRef, () => (user ? user.token : undefined))
 
-  useEffect(() => {
-    authErrorEventBus.listen((err) => {
-      console.log(err)
-      setUser(undefined)
-    })
-  }, [authErrorEventBus])
+  // useEffect(() => {
+  //   authErrorEventBus.listen((err) => {
+  //     console.log(err)
+  //     setUser(undefined)
+  //   })
+  // }, [authErrorEventBus])
 
-  useEffect(() => {
-    authService.me().then(setUser).catch(console.error)
-  }, [authService])
+  // useEffect(() => {
+  //   authService.me().then(setUser).catch(console.error)
+  // }, [authService])
 
-  const signUp = useCallback(
-    async (name, id, pwd, email) =>
-      authService
-        .signup(name, id, pwd, email)
-        .then((user) => setUser(user)),
-    [authService]
-  )
+  // const signUp = useCallback(
+  //   async (name, id, pwd, email) =>
+  //     authService
+  //       .signup(name, id, pwd, email)
+  //       .then((user) => setUser(user))
+  //       .then(console.log(user)),
+  //   [authService]
+  // )
 
   const logIn = useCallback(
     async (username, password) =>
@@ -54,11 +55,12 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
   const context = useMemo(
     () => ({
       user,
-      signUp,
+      // signUp,
       logIn,
       logout,
     }),
-    [user, signUp, logIn, logout]
+    [user, logIn, logout]
+    // [user, signUp, logIn, logout]
   )
 
   return (
@@ -67,15 +69,9 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
         children
       ) : (
         <div className="app">
-          <Login onLogin={logIn} onSignUp={signUp}/>
-          {/* <SignUp  /> */}
+          <Login onLogin={logIn} user={user} />
         </div>
       )}
-
-      {/* <div className="app">
-          <Login onLogin={logIn} />
-          <SignUp onSignUp={signUp} />
-        </div> */}
     </AuthContext.Provider>
   )
 }

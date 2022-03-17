@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 const categoryList = [
   {
@@ -23,7 +23,19 @@ const categoryList = [
   },
 ]
 
-function NavBar() {
+function NavBar({ authService, authErrorEventBus }) {
+  const [user, setUser] = useState(undefined)
+
+  useEffect(() => {
+    authErrorEventBus.listen((err) => {
+      console.log(err)
+      setUser(undefined)
+    })
+  }, [authErrorEventBus])
+  useEffect(() => {
+    authService.me().then(setUser).catch(console.error)
+  }, [authService])
+
   const NavItem = ({ navname, href }) => {
     return (
       <li className="nav-item">
@@ -78,11 +90,17 @@ function NavBar() {
                     )
                   })
                 : ""}
-              <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
-            <NavBtn href={"/users/signin"} title={"Login"} />
-            <NavBtn href={"/users/signup"} title={"Sign Up"} />
-            <NavBtn href={"/edit"} title={"회원정보 수정"} />
+            {user ? (
+              <>
+                <NavBtn href={"/myPage"} title={"마이페이지"} />
+                <NavBtn href={"/edit"} title={"회원정보 수정"} />
+              </>
+            ) : (
+              <>
+                <NavBtn href={"/users/signin"} title={"Login"} />
+              </>
+            )}
           </div>
         </div>
       </nav>
