@@ -11,6 +11,7 @@ export const AuthTitle = ({ title }) => {
           src="./images/logo1.png"
           width={"30px"}
           height={"90px"}
+          alt=""
         />
         <div
           className="col-4 text-center mt-4"
@@ -23,6 +24,7 @@ export const AuthTitle = ({ title }) => {
           src="./images/logo2.png"
           width={"30px"}
           height={"90px"}
+          alt=""
         />
       </div>
       <h3>{title}</h3>
@@ -33,6 +35,7 @@ export const AuthTitle = ({ title }) => {
 export const AuthBox = ({
   label,
   text,
+  type,
   warning,
   icon,
   placeholder,
@@ -48,7 +51,7 @@ export const AuthBox = ({
   useEffect(() => {
     setnewValue(newValue)
     getValue(newValue)
-  })
+  }, [newValue])
 
   return (
     <div className="container mb-3">
@@ -66,7 +69,7 @@ export const AuthBox = ({
                 </span>
               </div>
               <input
-                type="text"
+                type={type}
                 id={label}
                 name={name}
                 value={newValue}
@@ -100,7 +103,7 @@ export const AuthBox2 = ({
   useEffect(() => {
     setnewValue(newValue)
     getPassword(newValue)
-  })
+  }, [newValue])
 
   return (
     <div className="container mb-3">
@@ -131,26 +134,6 @@ export const AuthBox2 = ({
           </div>
         </form>
       </div>
-    </div>
-  )
-}
-export const AuthButton = ({ confirm, cancel }) => {
-  return (
-    <div className="mt-4">
-      <button
-        type="button"
-        className="btn btn-primary"
-        style={{ width: "90px", marginRight: "20px" }}
-      >
-        {confirm}
-      </button>
-      <button
-        type="button"
-        className="btn btn-outline-primary"
-        style={{ width: "90px" }}
-      >
-        {cancel}
-      </button>
     </div>
   )
 }

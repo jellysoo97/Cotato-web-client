@@ -15,7 +15,8 @@ export default class AuthService {
         email,
       }),
     })
-    this.tokenStorage.saveToken(data.token)
+    // this.tokenStorage.saveToken(data.token)
+    console.log("data: " + data.token)
     return data
   }
 

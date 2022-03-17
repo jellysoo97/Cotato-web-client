@@ -10,6 +10,7 @@ function Comment(props) {
   const postId = props.postId
   const username = props.username
   const [commentValue, setcommentValue] = useState("")
+  const user = props.user
 
   const handleChange = (e) => {
     setcommentValue(e.target.value)
@@ -72,24 +73,31 @@ function Comment(props) {
       </div>
 
       {/* Comment Form */}
-      <form>
-        <div className="row">
-          <div className="col-10">
-            <textarea
-              className="form-control"
-              value={commentValue}
-              onChange={handleChange}
-              placeholder={"댓글을 입력하세요"}
-              rows="3"
-            ></textarea>
+      {user ? (
+        <form>
+          <div className="row">
+            <div className="col-10">
+              <textarea
+                className="form-control"
+                value={commentValue}
+                onChange={handleChange}
+                placeholder={"댓글을 입력하세요"}
+                rows="3"
+              ></textarea>
+            </div>
+            <div className="col-2 p-2 text-center">
+              <button
+                className="btn btn-outline-warning p-4"
+                onClick={onSubmit}
+              >
+                댓글달기
+              </button>
+            </div>
           </div>
-          <div className="col-2 p-2 text-center">
-            <button className="btn btn-outline-warning p-4" onClick={onSubmit}>
-              댓글달기
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }

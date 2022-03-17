@@ -1,5 +1,5 @@
-import React from "react"
-import "../index.css"
+import React from 'react';
+import '../index.css';
 
 const CardRow = () => {
   const Row = ({ src, title, desc1, desc2 }) => {
@@ -75,8 +75,8 @@ function LandingPage() {
           style={{ marginRight: "15px" }}
         />
       </a>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -120,4 +120,4 @@ function LandingPage() {
   )
 }
 
-export default LandingPage
+export default LandingPage;
