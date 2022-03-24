@@ -1,17 +1,20 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import Comment from "./comments/Comment"
 import parse from "html-react-parser"
 import { stringify } from "postcss"
+import axios from "axios"
 
 // props: data, comments, getPrev, getNext, getComment, refreshFunc
 function PostEachView(props) {
   const data = props.data
-  const category = props.data.category
-  const postNumber = props.data.postNumber
+  const category = props.category
+  const postNumber = props.postNumber
   const getPrev = props.getPrev
   const getNext = props.getNext
+  const likeBtn = props.likeBtn
+  const like = props.like
   const deletePost = props.deletePost
   const comments = props.comments
   const refreshFunction = props.refreshFunction
@@ -100,13 +103,13 @@ function PostEachView(props) {
       {/* ---------------------------- 좋아요, 목록, 이전글, 다음글 ---------------------------- */}
       <div className="row border-top border-dark">
         <div className="col-2 p-2">
-          <img src="public/images/heartfilled.png" alt={"엑박"} />
-          {/* <LikeBtn
-              like={liked}
-              onClick={() => {
-                putLike()
-              }}
-            /> */}
+          {/* <img src="public/images/heartfilled.png" alt={"엑박"} /> */}
+          <button type="button" className={likeBtn} onClick={like}>
+            좋아요
+          </button>
+          {/* <button type="button" className="btn btn-outline-secondary">
+            좋아요
+          </button> */}
         </div>
         <div className="col-10 p-2 d-grid gap-2 d-flex justify-content-end">
           <button type="button" className="btn btn-outline-secondary">
