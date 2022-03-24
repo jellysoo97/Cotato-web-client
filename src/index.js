@@ -26,7 +26,11 @@ ReactDOM.render(
         authService={authService}
         authErrorEventBus={authErrorEventBus}
       >
-        <App postService={postService} />
+        <App
+          authService={authService}
+          authErrorEventBus={authErrorEventBus}
+          postService={postService}
+        />
       </AuthProvider> */}
       <App
         authService={authService}

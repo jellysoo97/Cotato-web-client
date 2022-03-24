@@ -28,9 +28,9 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
   //   })
   // }, [authErrorEventBus])
 
-  // useEffect(() => {
-  //   authService.me().then(setUser).catch(console.error)
-  // }, [authService])
+  useEffect(() => {
+    authService.me().then(setUser).catch(console.error)
+  }, [authService])
 
   // const signUp = useCallback(
   //   async (name, id, pwd, email) =>
@@ -62,16 +62,12 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
     [user, logIn, logout]
     // [user, signUp, logIn, logout]
   )
+  console.log(context)
 
   return (
     <AuthContext.Provider value={context}>
-      {user ? (
-        children
-      ) : (
-        <div className="app">
-          <Login onLogin={logIn} user={user} />
-        </div>
-      )}
+      {user ? children : <Login onLogin={logIn} user={user} />}
+      {/* {user ? <App /> : <Login onLogin={logIn} user={user} />} */}
     </AuthContext.Provider>
   )
 }

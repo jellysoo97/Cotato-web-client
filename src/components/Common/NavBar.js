@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import TokenStorage from "../../db/token"
 
 const categoryList = [
   {
@@ -94,11 +95,19 @@ function NavBar({ authService, authErrorEventBus }) {
             {user ? (
               <>
                 <NavBtn href={"/myPage"} title={"마이페이지"} />
-                <NavBtn href={"/edit"} title={"회원정보 수정"} />
+                <a
+                  href={"/"}
+                  onClick={authService.logout()}
+                  className="btn btn-outline-primary"
+                  style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}
+                >
+                  로그아웃
+                </a>
               </>
             ) : (
               <>
-                <NavBtn href={"/users/signin"} title={"Login"} />
+                <NavBtn href={"/users/signin"} title={"로그인"} />
+                <NavBtn href={"/users/signup"} title={"회원가입"} />
               </>
             )}
           </div>

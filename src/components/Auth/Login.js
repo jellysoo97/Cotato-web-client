@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -12,7 +12,7 @@ const Login = ({ onLogin, user }) => {
   const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
-  ///////////////////////////setValue////////////////////////////////////
+  ///////////////////////////getValue////////////////////////////////////
   const getValue = (value) => {
     setUsername(value)
   }
@@ -23,15 +23,17 @@ const Login = ({ onLogin, user }) => {
 
   ///////////////////////////onSubmit////////////////////////////////////
   const onSubmit = (event) => {
-    // event.preventDefault()
+    event.preventDefault()
+    //async await
+    // authService.login(username, password) -> fetch & save token
     onLogin(username, password)
-    // setTimeout(() => {
-    //   if (user) {
-    //     navigate("/")
-    //   } else {
-    //     alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요")
-    //   }
-    // }, 500)
+    // navigate("/")
+    console.log(user)
+    // if (user) {
+    //   navigate("/")
+    // } else {
+    //   alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
+    // }
   }
 
   return (
