@@ -117,7 +117,7 @@ function PostEachView(props) {
               to={`/cotato/${data.category}`}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
-              목록
+              목 록
             </Link>
           </button>
           <button type="button" className="btn btn-outline-secondary">
