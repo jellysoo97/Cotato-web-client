@@ -29,11 +29,11 @@ const Login = ({ onLogin, user }) => {
     onLogin(username, password)
     // navigate("/")
     console.log(user)
-    // if (user) {
-    //   navigate("/")
-    // } else {
-    //   alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
-    // }
+    if (user) {
+      navigate("/")
+    } else {
+      alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
+    }
   }
 
   return (
