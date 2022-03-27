@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import TokenStorage from "../../db/token"
+import React, { useState, useContext } from "react"
+import AuthContext from "../../context/AuthContext"
 
 const categoryList = [
   {
@@ -25,17 +25,20 @@ const categoryList = [
 ]
 
 function NavBar({ authService, authErrorEventBus }) {
-  const [user, setUser] = useState(undefined)
+  const value = useContext(AuthContext)
+  const user = value.user
+  // const [user, setUser] = useState(value.user)
+  // const [user, setUser] = useState(undefined)
 
-  useEffect(() => {
-    authErrorEventBus.listen((err) => {
-      console.log(err)
-      setUser(undefined)
-    })
-  }, [authErrorEventBus])
-  useEffect(() => {
-    authService.me().then(setUser).catch(console.error)
-  }, [authService])
+  // useEffect(() => {
+  //   authErrorEventBus.listen((err) => {
+  //     console.log(err)
+  //     setUser(undefined)
+  //   })
+  // }, [authErrorEventBus])
+  // useEffect(() => {
+  //   authService.me().then(setUser).catch(console.error)
+  // }, [authService])
 
   const NavItem = ({ navname, href }) => {
     return (
@@ -56,6 +59,11 @@ function NavBar({ authService, authErrorEventBus }) {
         {title}
       </a>
     )
+  }
+
+  function logOut(event) {
+    event.preventDefault()
+    authService.logout()
   }
 
   return (
@@ -92,12 +100,14 @@ function NavBar({ authService, authErrorEventBus }) {
                   })
                 : ""}
             </ul>
-            {user ? (
+            {/* <NavBtn href={"/users/signin"} title={"로그인"} />
+            <NavBtn href={"/users/signup"} title={"회원가입"} /> */}
+            {typeof user == "string" ? (
               <>
                 <NavBtn href={"/myPage"} title={"마이페이지"} />
                 <a
                   href={"/"}
-                  onClick={authService.logout()}
+                  onClick={logOut}
                   className="btn btn-outline-primary"
                   style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}
                 >

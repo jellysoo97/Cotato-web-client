@@ -2,13 +2,16 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState, useEffect } from "react"
 
+const cotatoImage1 = require("../../images/logo1.png")
+const cotatoImage2 = require("../../images/logo2.png")
+
 export const AuthTitle = ({ title }) => {
   return (
     <div className="container">
       <div className="row mb-3">
         <img
           className="col-4"
-          src="./images/logo1.png"
+          src={cotatoImage1}
           width={"30px"}
           height={"90px"}
           alt=""
@@ -21,7 +24,7 @@ export const AuthTitle = ({ title }) => {
         </div>
         <img
           className="col-4"
-          src="./images/logo2.png"
+          src={cotatoImage2}
           width={"30px"}
           height={"90px"}
           alt=""

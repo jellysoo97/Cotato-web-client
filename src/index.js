@@ -22,6 +22,13 @@ const postService = new PostService(httpClient, tokenStorage)
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <AuthProvider
+        authService={authService}
+        authErrorEventBus={authErrorEventBus}
+        postService={postService}
+      >
+        <App />
+      </AuthProvider>
       {/* <AuthProvider
         authService={authService}
         authErrorEventBus={authErrorEventBus}
@@ -32,11 +39,11 @@ ReactDOM.render(
           postService={postService}
         />
       </AuthProvider> */}
-      <App
+      {/* <App
         authService={authService}
         authErrorEventBus={authErrorEventBus}
         postService={postService}
-      />
+      /> */}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
