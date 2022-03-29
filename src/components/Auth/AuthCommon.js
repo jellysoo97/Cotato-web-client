@@ -1,8 +1,6 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState, useEffect } from "react"
-import cotatoImage1 from "../../images/logo1.png"
-import cotatoImage2 from "../../images/logo2.png"
 
 const cotatoImage1 = require("../../images/logo1.png")
 const cotatoImage2 = require("../../images/logo2.png")
