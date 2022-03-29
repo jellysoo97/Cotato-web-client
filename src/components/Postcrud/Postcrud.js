@@ -5,21 +5,43 @@ import ReactQuill, { Quill } from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import CustomToolbar from "./CustomToolbar"
 import { applyMiddleware } from "redux"
-import ImageResize from "quill-image-resize-module-react"
+import ImageResize from "quill-image-resize"
 Quill.register("modules/ImageResize", ImageResize)
 
 const PostCreate = ({ postService }) => {
   const [PostTitle, setPostTitle] = useState("")
   const [PostDesc, setPostDesc] = useState("")
+  const [PostId, setPostId] = useState("")
+  const quillRef = useRef()
+
+  const navigate = useNavigate()
+  const params = useParams()
+  const category = params.category
+  const postNumber = params.postNumber
 
   //파일
   // var attachment = useState("")
   const [AttachmentName, setAttachmentName] = useState([])
 
-  const quillRef = useRef()
+  useEffect(() => {
+    if (postNumber) {
+      async function getPost() {
+        try {
+          const response = await axios.get(
+            "http://localhost:8080/cotato/" + category + "/" + postNumber
+          )
+          setPostId(response.data._id)
+          setPostTitle(response.data.title)
+          setPostDesc(response.data.desc)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      getPost()
+    }
+  }, [])
 
-  const category = useParams()
-  const navigate = useNavigate()
+  ////////////////////////////////////onChange////////////////////////////////////
 
   const onTitleChange = (e) => {
     setPostTitle(e.target.value)
@@ -29,7 +51,7 @@ const PostCreate = ({ postService }) => {
     setPostDesc(value)
   }
 
-  //////////////////////////// react-quill ////////////////////////////
+  //////////////////////////// image ////////////////////////////
   const imageHandler = () => {
     const input = document.createElement("input")
 
@@ -94,44 +116,7 @@ const PostCreate = ({ postService }) => {
     "background",
     "image",
   ]
-
-  //////////////////////////// react-quill ////////////////////////////
-
-  // const createHandler = () => {
-  //   const variable = {
-  //     title: PostTitle,
-  //     desc: PostDesc,
-  //   }
-
-  //   console.log(variable)
-
-  //   axios
-  //     .post(
-  //       "http://localhost:8080/cotato/" + category.category + "/createPost",
-  //       variable
-  //     )
-  //     .then((response) => {
-  //       console.log(response.config.data)
-  //       if (response.config.data) {
-  //         console.log("여기가 이프문 콘솔")
-  //         alert("작성 완료")
-  //         setTimeout(() => {
-  //           navigate("/cotato/" + category.category)
-  //         }, 500)
-  //       } else {
-  //         alert("게시물 등록 실패")
-  //       }
-  //     })
-  //     .catch(function (err) {
-  //       if (err.response) {
-  //         console.log(err.response.data)
-  //       } else if (err.request) {
-  //         //2.8 (화) request 오류. CORS때문일수도?
-  //         console.log(err.request)
-  //       }
-  //     })
-  // }
-
+  ////////////////////////////////////////////////////////////////////
   const attachmentHandler = () => {
     const input = document.createElement("input")
     input.setAttribute("type", "file")
@@ -168,70 +153,82 @@ const PostCreate = ({ postService }) => {
     })
   }
 
+  ////////////////////////////////////등록////////////////////////////////////
   const onSubmit = async (e) => {
     e.preventDefault()
-    postService.createPost(PostTitle, PostDesc, category, AttachmentName)
+    if (postNumber) {
+      postService.updatePost(PostId, PostTitle, PostDesc)
+      setTimeout(() => {
+        alert("게시글 수정 완료")
+        navigate("/cotato/" + category)
+      }, 500)
+    }
+    if (!postNumber) {
+      postService.createPost(PostTitle, PostDesc, category)
+      setTimeout(() => {
+        alert("게시글 등록 완료")
+        navigate("/cotato/" + category)
+      }, 500)
+    }
+  }
 
-    setTimeout(() => {
-      navigate("/cotato/" + category.category)
-    }, 500)
+  ////////////////////////////////////취소////////////////////////////////////
+  const gotoList = () => {
+    alert("글쓰기를 취소하시겠습니까?")
+    navigate("/cotato/" + category)
   }
 
   return (
-    <div className="container">
-      <form name="desc" onSubmit={onSubmit}>
-        <div className="mb-3">
-          <label for="formGroupExampleInput" className="form-label">
-            제목
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput"
-            placeholder="제목"
-            onChange={onTitleChange}
-            value={PostTitle}
-            name="title"
-          ></input>
-        </div>
-        <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
-            내용
-          </label>
-          {/* <input type="text" className="form-control" id="formGroupExampleInput2" placeholder='내용' onChange={onContentsChange} value={PostContents} name='contents'></input> */}
-
-          {/* react-quill */}
-          <div className="text-editor">
-            <CustomToolbar />
-            <ReactQuill
-              modules={modules}
-              formats={formats}
-              ref={quillRef}
-              value={PostDesc}
-              onChange={onDescChange}
-              name="desc"
-              theme="snow"
-            />
+    <div className="container mt-5">
+      <form onSubmit={onSubmit}>
+        {/* ////////////////////////////////////카테고리//////////////////////////////////// */}
+        <div className="row border-top border-bottom border-3 border-dark">
+          <div
+            className="col-12 p-3"
+            style={{ fontSize: "20px", fontWeight: "bold" }}
+          >
+            {category}
           </div>
+        </div>
 
-          {/* <div class="form-group">
-            <label for="attachment">Attachment</label>
+        {/* ////////////////////////////////////제목//////////////////////////////////// */}
+        <div className="row mt-4">
+          <div className="col-1 mt-2 text-center fw-bold fs-5">제목</div>
+          <div className="col-11">
             <input
-              type="file"
-              name="attachment"
-              class="form-control-file"
-              id="attachment"
+              type="text"
+              className="form-control form-control-lg p-2"
+              id="formGroupExampleInput"
+              value={PostTitle}
+              onChange={onTitleChange}
+              name="title"
             ></input>
-          </div> */}
+          </div>
+        </div>
 
-          {/* 파일 업로드 */}
-          <div>
-            <button type="button" onClick={attachmentHandler}>
-              {" "}
-              첨부파일
-            </button>{" "}
-            <span> {AttachmentName}</span>
-            {/* <input
+        {/* ////////////////////////////////////Quill//////////////////////////////////// */}
+        <div className="text-editor mt-4">
+          <CustomToolbar />
+          <ReactQuill
+            modules={modules}
+            formats={formats}
+            ref={quillRef}
+            value={PostDesc}
+            onChange={onDescChange}
+            name="desc"
+            theme="snow"
+            style={{ height: "350px" }}
+          />
+        </div>
+
+        {/* ////////////////////////////////////////파일 업로드///////////////////////// */}
+        <div>
+          <button type="button" onClick={attachmentHandler}>
+            {" "}
+            첨부파일
+          </button>{" "}
+          <span> {AttachmentName}</span>
+          {/* <input
               type="hidden"
               id="attachment"
               name="attachment"
@@ -239,19 +236,30 @@ const PostCreate = ({ postService }) => {
               value={AttachmentName}
               onChange={onAttachChange}
             ></input> */}
-          </div>
         </div>
 
-        <br />
-
-        <div className="col-12">
-          <button
-            type="submit"
-            className="btn btn-warning"
-            // onClick={createHandler}
-          >
-            등록
-          </button>
+        {/* ////////////////////////////////////버튼//////////////////////////////////// */}
+        <div className="row mt-2 text-center justify-content-center">
+          <div className="col-2">
+            <button
+              type="submit"
+              onSubmit={onSubmit}
+              className="btn btn-lg btn-secondary p-2"
+              style={{ width: "100px" }}
+            >
+              등록
+            </button>
+          </div>
+          <div className="col-2">
+            <button
+              type="button"
+              onClick={gotoList}
+              className="btn btn-lg btn-secondary p-2"
+              style={{ width: "100px" }}
+            >
+              취소
+            </button>
+          </div>
         </div>
       </form>
     </div>
