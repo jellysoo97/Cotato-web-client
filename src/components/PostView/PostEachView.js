@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 
 import Comment from "./comments/Comment"
 import parse from "html-react-parser"
-import { stringify } from "postcss"
-import axios from "axios"
 
-// props: data, comments, getPrev, getNext, getComment, refreshFunc
 function PostEachView(props) {
   const data = props.data
   const category = props.category
@@ -15,6 +12,7 @@ function PostEachView(props) {
   const getNext = props.getNext
   const likeBtn = props.likeBtn
   const like = props.like
+  const likedNum = props.likedNum
   const deletePost = props.deletePost
   const comments = props.comments
   const refreshFunction = props.refreshFunction
@@ -85,7 +83,7 @@ function PostEachView(props) {
           조회수&nbsp;&#124;&nbsp;{data.views}
         </div>
         <div className="col-1 p-2 text-end">
-          좋아요&nbsp;&#124;&nbsp;{data.liked}
+          좋아요&nbsp;&#124;&nbsp;{likedNum}
         </div>
       </div>
 
@@ -117,7 +115,7 @@ function PostEachView(props) {
               to={`/cotato/${data.category}`}
               style={{ color: "inherit", textDecoration: "inherit" }}
             >
-              목록
+              목 록
             </Link>
           </button>
           <button type="button" className="btn btn-outline-secondary">

@@ -36,7 +36,11 @@ function App({ onLogin, postService, authService, authErrorEventBus }) {
             path="/users/signup"
             element={<SignUp authService={authService} />}
           />
-          <Route exact path="/myPage" element={<MyPage />} />
+          <Route
+            exact
+            path="/users/myPage"
+            element={<MyPage authService={authService} />}
+          />
           <Route exact path="/edit" element={<Edit />} />
 
           <Route

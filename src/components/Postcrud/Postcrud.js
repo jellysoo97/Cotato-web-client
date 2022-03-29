@@ -19,6 +19,10 @@ const PostCreate = ({ postService }) => {
   const category = params.category
   const postNumber = params.postNumber
 
+  //파일
+  // var attachment = useState("")
+  const [AttachmentName, setAttachmentName] = useState([])
+
   useEffect(() => {
     if (postNumber) {
       async function getPost() {
@@ -46,42 +50,6 @@ const PostCreate = ({ postService }) => {
   const onDescChange = (value) => {
     setPostDesc(value)
   }
-
-  ////////////////////////// react-quill ////////////////////////////
-
-  // const createHandler = () => {
-  //   const variable = {
-  //     title: PostTitle,
-  //     desc: PostDesc,
-  //   }
-
-  //   console.log(variable)
-
-  //   axios
-  //     .post(
-  //       "http://localhost:8080/cotato/" + category.category + "/createPost",
-  //       variable
-  //     )
-  //     .then((response) => {
-  //       console.log(response.config.data)
-  //       if (response.config.data) {
-  //         console.log("여기가 이프문 콘솔")
-  //         alert("작성 완료")
-  //         setTimeout(() => {
-  //           navigate("/cotato/" + category.category)
-  //         }, 500)
-  //       } else {
-  //         alert("게시물 등록 실패")
-  //       }
-  //     })
-  //     .catch(function (err) {
-  //       if (err.response) {
-  //         console.log(err.response.data)
-  //       } else if (err.request) {
-  //         console.log(err.request)
-  //       }
-  //     })
-  // }
 
   //////////////////////////// image ////////////////////////////
   const imageHandler = () => {
@@ -148,6 +116,42 @@ const PostCreate = ({ postService }) => {
     "background",
     "image",
   ]
+  ////////////////////////////////////////////////////////////////////
+  const attachmentHandler = () => {
+    const input = document.createElement("input")
+    input.setAttribute("type", "file")
+    input.setAttribute("multiple", "true")
+    // input.setAttribute("accept", "image/*")
+    input.click()
+
+    input.addEventListener("change", async (e) => {
+      const file = input.files
+      console.log(file)
+      const formData = new FormData()
+      for (var i = 0; i < file.length; i++) {
+        formData.append("attachment", file[i])
+        console.log(file[i])
+      }
+
+      try {
+        const result = await axios.post(
+          "http://localhost:8080/cotato/attachment",
+          formData
+        )
+        console.log(result)
+        const attachment = result.data.attachmentName
+        setAttachmentName(attachment)
+        // console.log("성공 시, 백엔드가 보내주는 데이터", result.data.url)
+        // const IMG_URL = result.data.url
+
+        // const editor = quillRef.current.getEditor()
+        // const range = editor.getSelection()
+        // editor.insertEmbed(range.index, "image", IMG_URL)
+      } catch (error) {
+        console.log("실패했어요ㅠ", error)
+      }
+    })
+  }
 
   ////////////////////////////////////등록////////////////////////////////////
   const onSubmit = async (e) => {
@@ -217,8 +221,25 @@ const PostCreate = ({ postService }) => {
           />
         </div>
 
+        {/* ////////////////////////////////////////파일 업로드///////////////////////// */}
+        <div>
+          <button type="button" onClick={attachmentHandler}>
+            {" "}
+            첨부파일
+          </button>{" "}
+          <span> {AttachmentName}</span>
+          {/* <input
+              type="hidden"
+              id="attachment"
+              name="attachment"
+              onClick={attachmentHandler}
+              value={AttachmentName}
+              onChange={onAttachChange}
+            ></input> */}
+        </div>
+
         {/* ////////////////////////////////////버튼//////////////////////////////////// */}
-        <div className="row mt-3 text-center justify-content-center">
+        <div className="row mt-2 text-center justify-content-center">
           <div className="col-2">
             <button
               type="submit"

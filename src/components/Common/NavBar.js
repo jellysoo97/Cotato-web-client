@@ -104,7 +104,7 @@ function NavBar({ authService, authErrorEventBus }) {
             <NavBtn href={"/users/signup"} title={"회원가입"} /> */}
             {typeof user == "string" ? (
               <>
-                <NavBtn href={"/myPage"} title={"마이페이지"} />
+                <NavBtn href={"/users/myPage"} title={"마이페이지"} />
                 <a
                   href={"/"}
                   onClick={logOut}

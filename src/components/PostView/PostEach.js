@@ -16,17 +16,21 @@ function PostEach({ authService, authErrorEventBus, postService }) {
   const postNumber = Number(params.postNumber)
   const navigate = useNavigate()
   const [user, setUser] = useState(undefined)
+  const [likedNum, setlikedNum] = useState(0)
 
-  // 인증
-  // useEffect(() => {
-  //   authErrorEventBus.listen((err) => {
-  //     console.log(err)
-  //     setUser(undefined)
-  //   })
-  // }, [authErrorEventBus])
-  // useEffect(() => {
-  //   authService.me().then(setUser).catch(console.error)
-  // }, [authService])
+  //인증
+  useEffect(() => {
+    authErrorEventBus.listen((err) => {
+      console.log(err)
+      setUser(undefined)
+    })
+  }, [authErrorEventBus])
+  useEffect(() => {
+    authService
+      .me()
+      .then((user) => setUser(user))
+      .catch(console.error)
+  })
 
   // postNumber 바뀔때마다 리렌더링
   useEffect(() => {
@@ -56,7 +60,8 @@ function PostEach({ authService, authErrorEventBus, postService }) {
       try {
         const response = await axios.get("http://localhost:8080/cotato/getLike")
         console.log(response.data.result)
-        if (response.data.result.length == 0) {
+        setlikedNum(response.data.result)
+        if (response.data.result == 0) {
           setLiked(false)
         } else {
           setLiked(true)
@@ -66,6 +71,7 @@ function PostEach({ authService, authErrorEventBus, postService }) {
       }
     }
     getLike()
+    console.log("liked: ", liked)
     liked == false
       ? setlikeBtn("btn btn-outline-secondary")
       : setlikeBtn("btn btn-secondary")
@@ -112,6 +118,7 @@ function PostEach({ authService, authErrorEventBus, postService }) {
     liked == false ? upLike() : unLike()
     async function upLike() {
       setLiked(true)
+      // setlikedNum(data.liked + 1)
       const variable = {
         userId: data.userId,
         postId: data.postId,
@@ -120,7 +127,7 @@ function PostEach({ authService, authErrorEventBus, postService }) {
       await axios
         .post("http://localhost:8080/cotato/upLike", variable)
         .then((response) => {
-          console.log(response.data.result)
+          console.log("uplike: ", response.data.result)
         })
         .catch((err) => {
           console.log(err)
@@ -177,6 +184,7 @@ function PostEach({ authService, authErrorEventBus, postService }) {
       getNext={getNext}
       likeBtn={likeBtn}
       like={like}
+      likedNum={likedNum}
       deletePost={deletePost}
       refreshFunction={refreshFunction}
       user={user}
