@@ -15,26 +15,27 @@ export default class AuthService {
         email,
       }),
     })
-    this.tokenStorage.saveToken(data.token)
-    console.log('data: '+data.token)
+    // this.tokenStorage.saveToken(data.token)
+    console.log("data: " + data.token)
     return data
   }
 
   async login(username, password) {
-    const data = await this.http.fetch("/signin", {
+    const data = await this.http.fetch("/users/signin", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     })
     this.tokenStorage.saveToken(data.token)
-    return data
+    return data.username
   }
 
   async me() {
     const token = this.tokenStorage.getToken()
-    return this.http.fetch("/users/me", {
+    const data = await this.http.fetch("/users/me", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
+    return data.username
   }
 
   async logout() {

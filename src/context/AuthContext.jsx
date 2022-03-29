@@ -2,21 +2,18 @@ import {
   createContext,
   createRef,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
   useState,
 } from "react"
-
-import Login from "../components/Auth/Login"
-import SignUp from '../components/Auth/SignUp'
+import { Navigate } from "react-router-dom"
+import App from "../App"
 
 const AuthContext = createContext({})
-
 const contextRef = createRef()
 
-export function AuthProvider({ authService, authErrorEventBus, children }) {
+export function AuthProvider({ authService, authErrorEventBus, postService }) {
   const [user, setUser] = useState(undefined)
 
   useImperativeHandle(contextRef, () => (user ? user.token : undefined))
@@ -29,20 +26,24 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
   }, [authErrorEventBus])
 
   useEffect(() => {
-    authService.me().then(setUser).catch(console.error)
+    authService
+      .me()
+      .then((user) => setUser(user))
+      .catch(console.error)
   }, [authService])
 
   const signUp = useCallback(
     async (name, id, pwd, email) =>
-      authService
-        .signup(name, id, pwd, email)
-        .then((user) => setUser(user)),
+      authService.signup(name, id, pwd, email).then(console.log(user)),
     [authService]
   )
 
   const logIn = useCallback(
     async (username, password) =>
-      authService.login(username, password).then((user) => setUser(user)),
+      authService
+        .login(username, password)
+        .then(setUser(username))
+        .catch(console.error),
     [authService]
   )
 
@@ -59,23 +60,20 @@ export function AuthProvider({ authService, authErrorEventBus, children }) {
       logout,
     }),
     [user, signUp, logIn, logout]
+    // [user, signUp, logIn, logout]
   )
 
   return (
     <AuthContext.Provider value={context}>
-      {user ? (
-        children
-      ) : (
-        <div className="app">
-          <Login onLogin={logIn} onSignUp={signUp}/>
-          {/* <SignUp  /> */}
-        </div>
-      )}
-
-      {/* <div className="app">
-          <Login onLogin={logIn} />
-          <SignUp onSignUp={signUp} />
-        </div> */}
+      <App
+        onLogin={logIn}
+        authService={authService}
+        authErrorEventBus={authErrorEventBus}
+        postService={postService}
+      />
+      {/* {children} */}
+      {/* {user ? children : <Login onLogin={logIn} user={user} />} */}
+      {/* {user ? <App /> : <Login onLogin={logIn} user={user} />} */}
     </AuthContext.Provider>
   )
 }
@@ -91,4 +89,3 @@ export class AuthErrorEventBus {
 
 export default AuthContext
 export const fetchToken = () => contextRef.current
-export const useAuth = () => useContext(AuthContext)

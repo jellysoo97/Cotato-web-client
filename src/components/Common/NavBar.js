@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useState, useContext } from "react"
+import AuthContext from "../../context/AuthContext"
 
 const categoryList = [
   {
@@ -23,7 +24,22 @@ const categoryList = [
   },
 ]
 
-function NavBar() {
+function NavBar({ authService, authErrorEventBus }) {
+  const value = useContext(AuthContext)
+  const user = value.user
+  // const [user, setUser] = useState(value.user)
+  // const [user, setUser] = useState(undefined)
+
+  // useEffect(() => {
+  //   authErrorEventBus.listen((err) => {
+  //     console.log(err)
+  //     setUser(undefined)
+  //   })
+  // }, [authErrorEventBus])
+  // useEffect(() => {
+  //   authService.me().then(setUser).catch(console.error)
+  // }, [authService])
+
   const NavItem = ({ navname, href }) => {
     return (
       <li className="nav-item">
@@ -43,6 +59,11 @@ function NavBar() {
         {title}
       </a>
     )
+  }
+
+  function logOut(event) {
+    event.preventDefault()
+    authService.logout()
   }
 
   return (
@@ -78,11 +99,27 @@ function NavBar() {
                     )
                   })
                 : ""}
-              <NavItem navname={"My Page"} href={"/myPage"} />
             </ul>
-            <NavBtn href={"/users/signin"} title={"Login"} />
-            <NavBtn href={"/users/signup"} title={"Sign Up"} />
-            <NavBtn href={"/edit"} title={"회원정보 수정"} />
+            {/* <NavBtn href={"/users/signin"} title={"로그인"} />
+            <NavBtn href={"/users/signup"} title={"회원가입"} /> */}
+            {typeof user == "string" ? (
+              <>
+                <NavBtn href={"/myPage"} title={"마이페이지"} />
+                <a
+                  href={"/"}
+                  onClick={logOut}
+                  className="btn btn-outline-primary"
+                  style={{ marginRight: "12px", padding: "0.375rem 1.5rem" }}
+                >
+                  로그아웃
+                </a>
+              </>
+            ) : (
+              <>
+                <NavBtn href={"/users/signin"} title={"로그인"} />
+                <NavBtn href={"/users/signup"} title={"회원가입"} />
+              </>
+            )}
           </div>
         </div>
       </nav>

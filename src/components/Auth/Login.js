@@ -1,8 +1,10 @@
-import React, { useState } from "react"
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
 import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
+import AuthContext from "../../context/AuthContext"
+import TokenStorage from "../../db/token"
 
 // dlrjs0506
 // ab3670
@@ -10,7 +12,11 @@ import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const value = useContext(AuthContext)
+  const user = value.user
+  const navigate = useNavigate()
 
+  ///////////////////////////getValue////////////////////////////////////
   const getValue = (value) => {
     setUsername(value)
   }
@@ -19,23 +25,21 @@ const Login = ({ onLogin }) => {
     setPassword(value)
   }
 
+  ///////////////////////////onSubmit////////////////////////////////////
   const onSubmit = (event) => {
     event.preventDefault()
+    //async await
+    // authService.login(username, password) -> fetch & save token
     onLogin(username, password)
-  }
 
-  // const onChange = (event) => {
-  //   const {
-  //     target: { name, value },
-  //   } = event
-  //   switch (name) {
-  //     case "username":
-  //       return setUsername(value)
-  //     case "password":
-  //       return setPassword(value)
-  //     default:
-  //   }
-  // }
+    setTimeout(() => {
+      if (user != undefined) {
+        navigate("/")
+      } else {
+        alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
+      }
+    }, 1000)
+  }
 
   return (
     <div className="AuthBigBox position-absolute top-50 start-50 translate-middle">
@@ -45,32 +49,13 @@ const Login = ({ onLogin }) => {
           <AuthBox
             label={"id"}
             text={"아이디"}
+            type={"text"}
             warning={"아이디를 입력해주세요"}
             icon={faUser}
             getValue={getValue}
             name="username"
             placeholder={"아이디"}
           />
-          {/* <input
-            name="username"
-            type="text"
-            id={"id"}
-            className="form-control"
-            placeholder="아이디"
-            onChange={onChange}
-            value={username}
-            required
-          />
-          <input
-            name="password"
-            type="password"
-            id={"pw"}
-            className="form-control"
-            placeholder="비밀번호"
-            onChange={onChange}
-            value={password}
-            required
-          /> */}
           <AuthBox2
             label={"pw"}
             text={"비밀번호"}

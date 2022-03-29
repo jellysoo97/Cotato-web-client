@@ -6,15 +6,27 @@ import axios from "axios"
 import PostEachView from "./PostEachView"
 import parse from "html-react-parser"
 
-function PostEach({ postService }) {
-  // const [liked, setLiked] = useState(false)
-  // const [likedNum, setLikedNum] = useState(0)
+function PostEach({ authService, authErrorEventBus, postService }) {
+  const [liked, setLiked] = useState(false)
+  const [likeBtn, setlikeBtn] = useState("")
   const [data, setData] = useState([])
   const [comments, setComments] = useState([])
   const params = useParams()
   const category = params.category
   const postNumber = Number(params.postNumber)
   const navigate = useNavigate()
+  const [user, setUser] = useState(undefined)
+
+  // 인증
+  // useEffect(() => {
+  //   authErrorEventBus.listen((err) => {
+  //     console.log(err)
+  //     setUser(undefined)
+  //   })
+  // }, [authErrorEventBus])
+  // useEffect(() => {
+  //   authService.me().then(setUser).catch(console.error)
+  // }, [authService])
 
   // postNumber 바뀔때마다 리렌더링
   useEffect(() => {
@@ -38,6 +50,26 @@ function PostEach({ postService }) {
     }
     getData()
   }, [postNumber])
+
+  useEffect(() => {
+    async function getLike() {
+      try {
+        const response = await axios.get("http://localhost:8080/cotato/getLike")
+        console.log(response.data.result)
+        if (response.data.result.length == 0) {
+          setLiked(false)
+        } else {
+          setLiked(true)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getLike()
+    liked == false
+      ? setlikeBtn("btn btn-outline-secondary")
+      : setlikeBtn("btn btn-secondary")
+  }, [liked])
 
   // get 이전글
   async function getPrev() {
@@ -73,45 +105,47 @@ function PostEach({ postService }) {
     }
   }
 
-  // function handleDelete() {
-  //   alert("게시글을 삭제하시겠습니까?")
+  // 좋아요
 
-  //   async function deletePost() {
-  //     try {
-  //       const response = await axios.delete(
-  //         "http://localhost:8080/deletePost/" + data._id
-  //       )
-  //       if (response) {
-  //         console.log(response)
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   deletePost()
-  //   alert("삭제 완료")
-  //   navigate("/" + category)
-  // }
+  async function like() {
+    // liked == false ? setLiked(true) : setLiked(false)
+    liked == false ? upLike() : unLike()
+    async function upLike() {
+      setLiked(true)
+      const variable = {
+        userId: data.userId,
+        postId: data.postId,
+      }
 
-  // async function putLike() {
-  //   setLiked(!liked)
-  //   setLikedNum(1)
-  //   const variable = {
-  //     liked: likedNum,
-  //   }
+      await axios
+        .post("http://localhost:8080/cotato/upLike", variable)
+        .then((response) => {
+          console.log(response.data.result)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
 
-  //   axios
-  //     .put("http://localhost:8080/postLike/" + postNumber, variable)
-  //     .then((response) => {
-  //       console.log(response.config.data)
-  //       setLikedNum(0)
-  //       console.log(likedNum)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
+    async function unLike() {
+      setLiked(false)
+      const variable = {
+        userId: data.userId,
+        postId: data.postId,
+      }
 
+      await axios
+        .post("http://localhost:8080/cotato/unLike", variable)
+        .then((response) => {
+          console.log("un response: ", response.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
+
+  // 게시글 삭제
   const deletePost = async (e) => {
     e.preventDefault()
     postService.deletePost(data._id)
@@ -136,11 +170,16 @@ function PostEach({ postService }) {
   return (
     <PostEachView
       data={data}
+      category={category}
+      postNumber={postNumber}
       comments={comments}
       getPrev={getPrev}
       getNext={getNext}
+      likeBtn={likeBtn}
+      like={like}
       deletePost={deletePost}
       refreshFunction={refreshFunction}
+      user={user}
     />
   )
 }
