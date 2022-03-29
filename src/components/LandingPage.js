@@ -1,5 +1,13 @@
-import React from 'react';
-import '../index.css';
+import React from "react"
+import "../index.css"
+
+const cafeImg = require("../images/cafe.png")
+const clubImg = require("../images/club.png")
+const devImg = require("../images/development.png")
+const chatImg = require("../images/group-chat.png")
+const groupImg = require("../images/group.png")
+const instaImg = require("../images/instagram.png")
+const kakaoImg = require("../images/kakaotalk.png")
 
 const CardRow = () => {
   const Row = ({ src, title, desc1, desc2 }) => {
@@ -32,13 +40,13 @@ const CardRow = () => {
       <div className="row text-center">
         <div className="col-3"></div>
         <Row
-          src={"./images/group-chat.png"}
+          src={chatImg}
           title={"정기세션"}
           desc1={"- IT 이슈 소개"}
           desc2={"- 스터디/프로젝트 브리핑"}
         />
         <Row
-          src={"./images/club.png"}
+          src={clubImg}
           title={"스터디"}
           desc1={"- 원하는 분야 스터디"}
           desc2={"- 스프링, js, 알고리즘 등등"}
@@ -47,13 +55,13 @@ const CardRow = () => {
       <div className="row text-center">
         <div className="col-3"></div>
         <Row
-          src={"./images/development.png"}
+          src={devImg}
           title={"프로젝트"}
           desc1={"- 원하는 프로젝트 진행"}
           desc2={"- 웹개발, 안드로이드 등등"}
         />
         <Row
-          src={"./images/group.png"}
+          src={groupImg}
           title={"네트워크 형성"}
           desc1={"- 개발 분야 친목 다지기"}
           desc2={"- 자유로운 소모임"}
@@ -75,8 +83,8 @@ function LandingPage() {
           style={{ marginRight: "15px" }}
         />
       </a>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -102,13 +110,10 @@ function LandingPage() {
                 link={
                   "https://www.instagram.com/accounts/login/?next=/cotato_official/"
                 }
-                src={"./images/instagram.png"}
+                src={instaImg}
               />
-              <Img
-                link={"https://cafe.naver.com/cotato"}
-                src={"./images/cafe.png"}
-              />
-              <Img link={""} src={"./images/kakaotalk.png"} />
+              <Img link={"https://cafe.naver.com/cotato"} src={cafeImg} />
+              <Img link={""} src={kakaoImg} />
             </div>
           </div>
         </div>
@@ -120,4 +125,4 @@ function LandingPage() {
   )
 }
 
-export default LandingPage;
+export default LandingPage

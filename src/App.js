@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom"
 import LandingPage from "./components/LandingPage"
 import NavBar from "./components/Common/NavBar"
 import Footer from "./components/Common/Footer"
+import Login from "./components/Auth/Login"
 import SignUp from "./components/Auth/SignUp"
 import Edit from "./components/Auth/Edit"
 import MyPage from "./components/Auth/MyPage"
@@ -12,7 +13,7 @@ import PostCreate from "./components/Postcrud/Postcrud"
 import PostEach from "./components/PostView/PostEach"
 import { AuthProvider } from "./context/AuthContext"
 
-function App({ postService, authService, authErrorEventBus }) {
+function App({ onLogin, postService, authService, authErrorEventBus }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar authService={authService} authErrorEventBus={authErrorEventBus} />
@@ -23,10 +24,11 @@ function App({ postService, authService, authErrorEventBus }) {
             exact
             path="/users/signin"
             element={
-              <AuthProvider
-                authService={authService}
-                authErrorEventBus={authErrorEventBus}
-              />
+              <Login onLogin={onLogin} />
+              // <AuthProvider
+              //   authService={authService}
+              //   authErrorEventBus={authErrorEventBus}
+              // />
             }
           />
           <Route

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
+import AuthContext from "../../context/AuthContext"
 
 import PageName from "../Common/PageName"
 import Table from "./Table/Table"
@@ -9,21 +10,32 @@ const Posts = ({ authService, authErrorEventBus, postService }) => {
   const [posts, setPosts] = useState([])
   const category = useParams()
   const navigate = useNavigate()
-  const [user, setUser] = useState(undefined)
+  const value = useContext(AuthContext)
+  const user = value.user
 
   useEffect(() => {
-    authErrorEventBus.listen((err) => {
-      console.log(err)
-      setUser(undefined)
-    })
-  }, [authErrorEventBus])
-  useEffect(() => {
-    authService.me().then(setUser).catch(console.error)
-    if (!user) {
+    console.log(user)
+    if (typeof user != "string") {
       alert("로그인 후 이용해주세요.")
       navigate("/users/signin")
     }
-  }, [authService])
+  })
+  // console.log(user)
+  // const [user, setUser] = useState(undefined)
+
+  // useEffect(() => {
+  //   authErrorEventBus.listen((err) => {
+  //     console.log(err)
+  //     setUser(undefined)
+  //   })
+  // }, [authErrorEventBus])
+  // useEffect(() => {
+  //   authService.me().then(setUser).catch(console.error)
+  //   if (!user) {
+  //     alert("로그인 후 이용해주세요.")
+  //     navigate("/users/signin")
+  //   }
+  // }, [authService])
 
   // 해당 카테고리의 게시글 데이터 받아서 posts에 저장
   useEffect(() => {

@@ -25,17 +25,17 @@ export default class AuthService {
       method: "POST",
       body: JSON.stringify({ username, password }),
     })
-    console.log(data)
     this.tokenStorage.saveToken(data.token)
-    return data
+    return data.username
   }
 
   async me() {
     const token = this.tokenStorage.getToken()
-    return this.http.fetch("/users/me", {
+    const data = await this.http.fetch("/users/me", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
+    return data.username
   }
 
   async logout() {

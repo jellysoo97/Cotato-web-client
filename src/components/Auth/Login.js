@@ -1,15 +1,19 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Auth.css"
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons"
 import { AuthTitle, AuthBox, AuthBox2 } from "./AuthCommon"
+import AuthContext from "../../context/AuthContext"
+import TokenStorage from "../../db/token"
 
 // dlrjs0506
 // ab3670
 
-const Login = ({ onLogin, user }) => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const value = useContext(AuthContext)
+  const user = value.user
   const navigate = useNavigate()
 
   ///////////////////////////getValue////////////////////////////////////
@@ -27,13 +31,14 @@ const Login = ({ onLogin, user }) => {
     //async await
     // authService.login(username, password) -> fetch & save token
     onLogin(username, password)
-    // navigate("/")
-    console.log(user)
-    if (user) {
-      navigate("/")
-    } else {
-      alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
-    }
+
+    setTimeout(() => {
+      if (user != undefined) {
+        navigate("/")
+      } else {
+        alert("아이디 또는 비밀번호를 잘못 입력했습니다. 다시 입력해주세요.")
+      }
+    }, 1000)
   }
 
   return (

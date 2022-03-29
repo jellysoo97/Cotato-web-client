@@ -4,7 +4,6 @@ export default class HttpClient {
   }
 
   async fetch(url, options) {
-    console.log(this.baseURL)
     console.log(url)
     const response = await fetch(`${this.baseURL}${url}`, {
       ...options,
@@ -17,7 +16,7 @@ export default class HttpClient {
     let data
     try {
       data = await response.json()
-      console.log(data)
+      return data
     } catch (error) {
       console.error(error)
     }
